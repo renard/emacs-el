@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2010-12-09 11:08:33
+;; Last changed: 2010-12-09 16:16:03
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -26,13 +26,23 @@
  '(el-get
    color-theme
    color-theme-tango
+   (:name chezwam
+	  :type git
+	  :url "git@github.com:renard/chezwam-el.git"
+	  :features (chezwam-emacs chezwam-macros))
    bbdb
    (:name magit
 	  :features magit
 	  :after (lambda ()
 		   (setq magit-commit-signoff t)
 		   (global-set-key (kbd "C-x C-z") 'magit-status)
-		   (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)))))
+		   (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)))
+   (:name buffer-move
+	  :after (lambda()
+		   (global-set-key (kbd "<C-S-up>")     'buf-move-up)
+		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
+		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
+		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))))
  
 
 
