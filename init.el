@@ -26,7 +26,14 @@
  '(el-get
    color-theme
    color-theme-tango
-   bbdb))
+   bbdb
+   (:name magit
+	  :features magit
+	  :after (lambda ()
+		   (setq magit-commit-signoff t)
+		   (global-set-key (kbd "C-x C-z") 'magit-status)
+		   (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)))))
+ 
 
 
 (defun bootstrap-el-get()
