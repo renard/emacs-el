@@ -83,6 +83,18 @@
   "Load el-get environment."
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
   (require 'el-get)
+
+  ;; Setup load-path BEFORE anything else, so cyclic dependencies could be
+  ;; properly handeled.
+  (mapc (lambda(package)
+  	  (message (format "Adding source for package %s" package))
+  	  (let* ((source (el-get-package-def package))
+		 (el-path (or (plist-get source :load-path) '("."))))
+  	    (mapc (lambda (path)
+  		    (message (format "\t adding %s" path))
+  		    (el-get-add-path-to-list package 'load-path path))
+  		  (if (stringp el-path) (list el-path) el-path))))
+  	(el-get-package-name-list))
   (el-get))
 
 ;; Load el-get
