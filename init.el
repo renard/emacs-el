@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2010-12-09 16:16:03
+;; Last changed: 2010-12-14 15:37:13
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -17,20 +17,36 @@
 ;;; Code:
 
 (setq backup-directory-alist
-      `((".*" .  "~/.emacs.d/.backup")))
-(setq auto-save-list-file-prefix "~/.emacs.d/.auto-save-list/.saves-")
-
+      `((".*" .  "~/.emacs.d/.tmp/.backup")))
+(setq auto-save-list-file-prefix "~/.emacs.d/.tmp/.auto-save-list/.saves-")
+;; (setq debug-on-error t)
 ;; el-get packages definition
 (setq
  el-get-sources
  '(el-get
    color-theme
    color-theme-tango
+
    (:name chezwam
 	  :type git
 	  :url "git@github.com:renard/chezwam-el.git"
-	  :features (chezwam-emacs chezwam-macros))
-   bbdb
+	  :features chezwam)
+   (:name chezwam-private-emacs-el
+	  :type git
+	  :url "git.private.cw:git/chezwam-emacs-el.git"
+	  :after (lambda() (require 'chezwam-erc-conf)))
+   (:name ssh-config
+	  :url "git@github.com:renard/ssh-config-el.git"
+	  :after (lambda()
+		   (setq sc:ssh-file "~/.emacs.d/el-get/chezwam-private-emacs-el/hosts.org")))
+   (:name escreen
+	  :type git
+	  :url "git@github.com:renard/escreen-el.git"
+	  :after (lambda() (require 'chezwam-escreen)))
+   (:name gnus-identities
+	  :url "git@github.com:renard/gnus-identities.git")
+   (:name bbdb
+	  :after (lambda() (require 'chezwam-bbdb)))
    (:name magit
 	  :features magit
 	  :after (lambda ()
@@ -42,7 +58,49 @@
 		   (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))))
+		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
+   (:name nognus
+	  :after (lambda()
+		   (setq gnus-init-file "~/.emacs.d/el-get/chezwam/gnus-init")))
+   (:name string-template
+	  :url "git@github.com:renard/string-template-el.git")
+   cssh
+   switch-window
+   vkill
+   google-maps
+   minimap
+   browse-kill-ring
+   (:name dired-details
+	  :after (lambda()
+		   (define-key dired-mode-map "/" 'dired-details-toggle)))
+   (:name hl-sexp
+	  :after (lambda ()
+		   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+		   (set-face-attribute 'hl-sexp-face nil :background "#393f41")))
+   rainbow-mode
+   (:name vcl-mode
+	  :type git-svn
+	  :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
+   list-processes+
+   mailq
+   (:name auto-complete
+	  :after (lambda() (require 'chezwam-auto-complete)))
+   asciidoc
+   xml-rpc-el
+   pastebin
+   php-mode-improved
+   org-mode
+   undo-tree
+   dirtree
+   (:name dired-sync
+	  :url "git@github.com:renard/dired-sync.git")
+   (:name yasnippet
+	  :type git-svn
+	  :url "http://yasnippet.googlecode.com/svn/trunk/"
+	  :after (lambda () (require 'chezwam-yasnippet)))
+   skype
+   
+))
  
 
 
