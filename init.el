@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2010-12-14 15:37:13
+;; Last changed: 2010-12-16 17:22:30
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -64,7 +64,11 @@
 		   (setq gnus-init-file "~/.emacs.d/el-get/chezwam/gnus-init")))
    (:name string-template
 	  :url "git@github.com:renard/string-template-el.git")
-   cssh
+   (:name cssh
+	  :url "git@github.com:renard/cssh.git")
+   (:name org-website
+	  :type git
+	  :url "git@github.com:renard/org-website.git")
    switch-window
    vkill
    google-maps
