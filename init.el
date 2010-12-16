@@ -76,7 +76,7 @@
    (:name hl-sexp
 	  :after (lambda ()
 		   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
-		   (set-face-attribute 'hl-sexp-face nil :background "#393f41")))
+		   (set-face-attribute 'hl-sexp-face nil :background "#32383a")))
    rainbow-mode
    (:name vcl-mode
 	  :type git-svn
