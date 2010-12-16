@@ -99,7 +99,8 @@
 	  :url "http://yasnippet.googlecode.com/svn/trunk/"
 	  :after (lambda () (require 'chezwam-yasnippet)))
    skype
-   
+   dig
+   cisco-router-mode
 ))
  
 
