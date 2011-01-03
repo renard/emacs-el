@@ -75,7 +75,9 @@
    vkill
    google-maps
    minimap
-   browse-kill-ring
+   (:name browse-kill-ring
+	  :after (lambda()
+		   (define-key global-map (kbd "C-M-y") 'browse-kill-ring)))
    (:name dired-details
 	  :after (lambda()
 		   (define-key dired-mode-map "/" 'dired-details-toggle)))
