@@ -65,7 +65,9 @@
    (:name string-template
 	  :url "git@github.com:renard/string-template-el.git")
    (:name cssh
-	  :url "git@github.com:renard/cssh.git")
+	  :url "git@github.com:renard/cssh.git"
+	  :after (lambda()
+		   (define-key dired-mode-map (kbd "C-=") 'cssh-term-open)))
    (:name org-website
 	  :type git
 	  :url "git@github.com:renard/org-website.git")
