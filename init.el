@@ -97,11 +97,15 @@
    xml-rpc-el
    pastebin
    php-mode-improved
-   org-mode
+   (:name org-mode
+	  :after '(lambda() 
+		    (require 'chezwam-org)
+		    (require 'chezwam-org-publish)))
    undo-tree
    dirtree
    (:name dired-sync
-	  :url "git@github.com:renard/dired-sync.git")
+	  :url "git@github.com:renard/dired-sync.git"
+	  :after (lambda() (define-key dired-mode-map (kbd "C-c S") 'dired-do-sync)))
    (:name yasnippet
 	  :type git-svn
 	  :url "http://yasnippet.googlecode.com/svn/trunk/"
