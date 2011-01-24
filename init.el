@@ -52,6 +52,11 @@
 	  :after (lambda ()
 		   (setq magit-commit-signoff t)
 		   (global-set-key (kbd "C-x C-z") 'magit-status)
+		   ;;(set-face-attribute 'magit-item-highlight nil :foreground "#32383a")
+		   (set-face-attribute 'magit-diff-add nil :foreground "#8ae234")
+		   (set-face-attribute 'magit-diff-hunk-header nil :foreground "#fce94f")
+		   (set-face-attribute 'magit-diff-file-header nil :foreground "#ad7fa8")
+		   
 		   (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)))
    (:name buffer-move
 	  :after (lambda()
