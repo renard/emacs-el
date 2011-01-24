@@ -186,7 +186,7 @@
   (mapc (lambda(package)
   	  (message (format "Adding source for package %s" package))
   	  (let* ((source (el-get-package-def package))
-		 (el-path (or (plist-get source :load-path) '("."))))
+		 (el-path (el-get-load-path package)))
   	    (mapc (lambda (path)
   		    (message (format "\t adding %s" path))
   		    (el-get-add-path-to-list package 'load-path path))
