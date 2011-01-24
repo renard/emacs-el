@@ -67,7 +67,7 @@
    (:name cssh
 	  :url "git@github.com:renard/cssh.git"
 	  :after (lambda()
-		   (define-key dired-mode-map (kbd "C-=") 'cssh-term-open)))
+		   (define-key dired-mode-map (kbd "C-=") 'cssh-term-remote-open)))
    (:name org-website
 	  :type git
 	  :url "git@github.com:renard/org-website.git")
