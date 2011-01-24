@@ -120,23 +120,25 @@
    cisco-router-mode
    lua-mode
    (:name emms
-	  :after (lambda ()
-		   (emms-standard)
-		   ;; (emms-default-players) ; I want VLC mainly
-		   (setq emms-player-list
-			 '(;;emms-player-vlc
-			   emms-player-mpg321
-			   emms-player-ogg123
-			   emms-player-mplayer-playlist
-			   emms-player-mplayer))
-
-		   ;; Show the current track each time EMMS
-		   ;; starts to play a track with "NP : "
-		   (add-hook 'emms-player-started-hook 'emms-show)
-		   (setq emms-show-format "EMMS Now Playing: %s")
-		   
+   	  :after (lambda ()
+		   (require 'emms-browser)
+   		   (emms-standard)
+   		   ;; (emms-default-players) ; I want VLC mainly
+   		   (setq emms-player-list 
+			 '(emms-player-mplayer-playlist emms-player-mplayer))
+   		   ;; Show the current track each time EMMS
+   		   ;; starts to play a track with "NP : "
+   		   (add-hook 'emms-player-started-hook 'emms-show)
+   		   (setq emms-show-format "EMMS Now Playing: %s")
+		   (add-to-list 'emms-info-functions 'emms-info-ogginfo)
 		   (add-hook 'dired-load-hook
-			     (define-key dired-mode-map (kbd "E") 'emms-play-dired))))
+   			     (define-key dired-mode-map (kbd "E") 'emms-play-dired))
+		   (define-key emms-browser-mode-map (kbd "P")
+		     '(lambda () (interactive) (switch-to-buffer " *EMMS Playlist*")))
+		   (defun cw:emms:browser ()
+		     (interactive)
+		     (emms-add-directory "~/zic")
+		     (emms-browser))))
 
 
    (:name db-sql
