@@ -144,6 +144,9 @@
    auto-dictionnary
    org-buffers
    org-contacts
+   rst-mode
+   keywiz
+   kpm-list
 ))
  
 
