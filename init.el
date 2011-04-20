@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-04-20 15:20:00
+;; Last changed: 2011-04-20 16:09:36
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -25,15 +25,15 @@
 
 (setq message-log-max 2048)
 (setq backup-directory-alist
-      `((".*" .  "~/.emacs.d/.tmp/.backup")))
-(setq auto-save-list-file-prefix "~/.emacs.d/.tmp/.auto-save-list/.saves-")
+      `((".*" .  "~/.emacs.d/.tmp/backup")))
+(setq auto-save-list-file-prefix "~/.emacs.d/.tmp/auto-save-list/saves-")
 ;; (setq debug-on-error t)
 ;; el-get packages definition
 (setq
  el-get-sources
  '((:name el-get
 	  :after (lambda()
-		   (setq el-get-recipe-path-emacswiki "~/.emacs.d/downloaded/emacswiki")))
+		   (setq el-get-recipe-path-emacswiki "~/.emacs.d/.tmp/emacswiki")))
    ;; (:name fill-column-indicator
    ;; 	  :after (lambda()
    ;; 		   (require 'fill-column-indicator)
