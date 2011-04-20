@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-04-20 16:09:36
+;; Last changed: 2011-04-20 16:23:26
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -15,33 +15,18 @@
 
 
 ;;; Code:
-;; (message "Preloaded features: %s" features)
-;; (defadvice require
-;;   (before cw:require activate)
-;;   (if (member feature features)
-;;       (message "*** REQUIRE %s already loaded" feature)
-;;     (message "*** REQUIRE (require %s %s %s)" feature filename noerror)))
 
 
 (setq message-log-max 2048)
 (setq backup-directory-alist
       `((".*" .  "~/.emacs.d/.tmp/backup")))
 (setq auto-save-list-file-prefix "~/.emacs.d/.tmp/auto-save-list/saves-")
-;; (setq debug-on-error t)
-;; el-get packages definition
+
 (setq
  el-get-sources
  '((:name el-get
 	  :after (lambda()
 		   (setq el-get-recipe-path-emacswiki "~/.emacs.d/.tmp/emacswiki")))
-   ;; (:name fill-column-indicator
-   ;; 	  :after (lambda()
-   ;; 		   (require 'fill-column-indicator)
-   ;; 		   (setq fci-style 'rule)
-   ;; 		   (setq fci-rule-character ?│)
-   ;; 		   (setq fci-rule-color "#373d3f")
-   ;; 		   (add-hook 'find-file-hook 'fci-mode)
-   ;; 		   (add-hook 'message-mode-hook 'fci-mode)))
    color-theme
    (:name color-theme-tango
 	  :after (lambda() (color-theme-tango)
@@ -116,8 +101,6 @@
 	  :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
    list-processes+
    mailq
-   ;; (:name auto-complete
-   ;; 	  :after (lambda() (require 'chezwam-auto-complete)))
    asciidoc
    (:name adoc-mode
 	  :after (lambda()
@@ -137,42 +120,6 @@
 		    '("~/.emacs.d/el-get/chezwam-private-emacs-el/contacts.org"))
 		   (org-crypt-use-before-save-magic)
 		   (define-key org-mode-map (kbd "C-c E") 'cw:org:toggle-encryption)))
-
-   ;; (:name org-jambu
-   ;; 	  :type git
-   ;; 	  :url "git://repo.or.cz/org-mode/org-jambu.git"
-   ;; 	  :load-path ("contrib/odt")
-   ;; 	  :build `,(mapcar
-   ;; 		   (lambda (target)
-   ;; 		     (concat "ln -nfs ../../lisp/" target " "
-   ;; 			     (el-get-package-directory "org-jambu") "contrib/odt"))
-   ;; 		   '("org-html-utils.el" "org-odt-core.el" "org-odt.el"))
-   ;; 	  :after (lambda()
-   ;; 		   (setq org-odt-base-dir (el-get-package-directory "org-jambu"))
-   ;; 		   (setq org-odt-contrib-dir (expand-file-name "./contrib/odt/" org-odt-base-dir))
-
-   ;; 		   ;; archive mode
-   ;; 		   (setq auto-mode-alist
-   ;; 			 (append '(("\\.odt$" . archive-mode)) auto-mode-alist))
-   ;; 		   (require 'arc-mode)
-
-   ;; 		   ;; RelaxNG
-   ;; 		   (custom-set-variables '(rng-nxml-auto-validate-flag t))
-   ;; 		   (eval-after-load 'rng-loc
-   ;; 		     '(push (expand-file-name "schemas.xml" org-odt-contrib-dir)
-   ;; 			    rng-schema-locating-files))
-
-   ;; 		   ;; org
-   ;; 		   (eval-after-load 'org '(push '("\\.odt\\'" . system) org-file-apps))
-
-   ;; 		   ;; org-odt
-   ;; 		   (eval-after-load 'org-odt
-   ;; 		     '(setq org-export-odt-styles-file
-   ;; 			    (expand-file-name "OrgOdtStyles.xml" org-odt-contrib-dir)
-   ;; 			    org-export-odt-automatic-styles-file
-   ;; 			    (expand-file-name "OrgOdtAutomaticStyles.xml" org-odt-contrib-dir)))
-   ;; 		   (require 'org-odt)))
-
    (:name undo-tree
 	  :features undo-tree
 	  :after (lambda()  (global-set-key (kbd "C-x Z") 'undo-tree-visualize)))
@@ -208,14 +155,11 @@
 		     (interactive)
 		     (emms-add-directory "~/zic")
 		     (emms-browser))))
-
-
    (:name db-sql
 	  :url "git@github.com:renard/db-sql-el.git")
    rst-mode
    keywiz
    nagios-mode
-
    (:name smex
 	  :after (lambda ()
 		   (global-set-key (kbd "M-x") 'smex)
