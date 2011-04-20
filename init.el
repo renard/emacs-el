@@ -5,17 +5,25 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2010-12-31 09:21:07
+;; Last changed: 2011-04-20 15:20:00
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
 
 ;;; Commentary:
-;; 
+;;
 
 
 ;;; Code:
+;; (message "Preloaded features: %s" features)
+;; (defadvice require
+;;   (before cw:require activate)
+;;   (if (member feature features)
+;;       (message "*** REQUIRE %s already loaded" feature)
+;;     (message "*** REQUIRE (require %s %s %s)" feature filename noerror)))
 
+
+(setq message-log-max 2048)
 (setq backup-directory-alist
       `((".*" .  "~/.emacs.d/.tmp/.backup")))
 (setq auto-save-list-file-prefix "~/.emacs.d/.tmp/.auto-save-list/.saves-")
@@ -23,18 +31,37 @@
 ;; el-get packages definition
 (setq
  el-get-sources
- '(el-get
+ '((:name el-get
+	  :after (lambda()
+		   (setq el-get-recipe-path-emacswiki "~/.emacs.d/downloaded/emacswiki")))
+   ;; (:name fill-column-indicator
+   ;; 	  :after (lambda()
+   ;; 		   (require 'fill-column-indicator)
+   ;; 		   (setq fci-style 'rule)
+   ;; 		   (setq fci-rule-character ?│)
+   ;; 		   (setq fci-rule-color "#373d3f")
+   ;; 		   (add-hook 'find-file-hook 'fci-mode)
+   ;; 		   (add-hook 'message-mode-hook 'fci-mode)))
    color-theme
-   color-theme-tango
-
+   (:name color-theme-tango
+	  :after (lambda() (color-theme-tango)
+		    (set-face-attribute 'comint-highlight-input nil :italic nil)
+		    (set-face-attribute 'font-lock-string-face nil :italic nil)))
+   (:name hl-sexp
+   	  :after (lambda ()
+   		   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+   		   (set-face-attribute 'hl-sexp-face nil :background "#32383a")))
+   offlineimap
    (:name chezwam
 	  :type git
 	  :url "git@github.com:renard/chezwam-el.git"
-	  :features chezwam)
+	  :features chezwam
+	  :after (lambda() (require 'chezwam)))
    (:name chezwam-private-emacs-el
 	  :type git
 	  :url "git.private.cw:git/chezwam-emacs-el.git"
-	  :after (lambda() (require 'chezwam-erc-conf)))
+	  :features chezwam-private
+	  :after (lambda() (require 'chezwam-private)))
    (:name ssh-config
 	  :url "git@github.com:renard/ssh-config-el.git"
 	  :after (lambda()
@@ -45,8 +72,6 @@
 	  :after (lambda() (require 'chezwam-escreen)))
    (:name gnus-identities
 	  :url "git@github.com:renard/gnus-identities.git")
-   (:name bbdb
-	  :after (lambda() (require 'chezwam-bbdb)))
    (:name magit
 	  :features magit
 	  :after (lambda ()
@@ -56,7 +81,7 @@
 		   (set-face-attribute 'magit-diff-add nil :foreground "#8ae234")
 		   (set-face-attribute 'magit-diff-hunk-header nil :foreground "#fce94f")
 		   (set-face-attribute 'magit-diff-file-header nil :foreground "#ad7fa8")
-		   
+		   (set-face-attribute 'magit-item-highlight nil :background  "#32383a")
 		   (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)))
    (:name buffer-move
 	  :after (lambda()
@@ -79,34 +104,79 @@
    switch-window
    vkill
    google-maps
-   minimap
    (:name browse-kill-ring
 	  :after (lambda()
 		   (define-key global-map (kbd "C-M-y") 'browse-kill-ring)))
    (:name dired-details
 	  :after (lambda()
 		   (define-key dired-mode-map "/" 'dired-details-toggle)))
-   (:name hl-sexp
-	  :after (lambda ()
-		   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
-		   (set-face-attribute 'hl-sexp-face nil :background "#32383a")))
    rainbow-mode
    (:name vcl-mode
 	  :type git-svn
 	  :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
    list-processes+
    mailq
-   (:name auto-complete
-	  :after (lambda() (require 'chezwam-auto-complete)))
+   ;; (:name auto-complete
+   ;; 	  :after (lambda() (require 'chezwam-auto-complete)))
    asciidoc
+   (:name adoc-mode
+	  :after (lambda()
+		   (add-to-list 'auto-mode-alist '("\\.[1-9]\\.txt$" . adoc-mode))
+		   (add-hook 'adoc-mode-hook 'flyspell-mode)
+		   (add-hook 'adoc-mode-hook 'flyspell-buffer)
+		   (define-key adoc-mode-map (kbd "C-c m") 'cw:adoc-mode:compile)))
    xml-rpc-el
    pastebin
+   gnuplot-mode
    php-mode-improved
    (:name org-mode
-	  :after '(lambda() 
-		    (require 'chezwam-org)
-		    (require 'chezwam-org-publish)))
-   undo-tree
+	  :features (org-contacts org-crypt)
+	  :after (lambda()
+		   (setq
+		    org-contacts-files
+		    '("~/.emacs.d/el-get/chezwam-private-emacs-el/contacts.org"))
+		   (org-crypt-use-before-save-magic)
+		   (define-key org-mode-map (kbd "C-c E") 'cw:org:toggle-encryption)))
+
+   ;; (:name org-jambu
+   ;; 	  :type git
+   ;; 	  :url "git://repo.or.cz/org-mode/org-jambu.git"
+   ;; 	  :load-path ("contrib/odt")
+   ;; 	  :build `,(mapcar
+   ;; 		   (lambda (target)
+   ;; 		     (concat "ln -nfs ../../lisp/" target " "
+   ;; 			     (el-get-package-directory "org-jambu") "contrib/odt"))
+   ;; 		   '("org-html-utils.el" "org-odt-core.el" "org-odt.el"))
+   ;; 	  :after (lambda()
+   ;; 		   (setq org-odt-base-dir (el-get-package-directory "org-jambu"))
+   ;; 		   (setq org-odt-contrib-dir (expand-file-name "./contrib/odt/" org-odt-base-dir))
+
+   ;; 		   ;; archive mode
+   ;; 		   (setq auto-mode-alist
+   ;; 			 (append '(("\\.odt$" . archive-mode)) auto-mode-alist))
+   ;; 		   (require 'arc-mode)
+
+   ;; 		   ;; RelaxNG
+   ;; 		   (custom-set-variables '(rng-nxml-auto-validate-flag t))
+   ;; 		   (eval-after-load 'rng-loc
+   ;; 		     '(push (expand-file-name "schemas.xml" org-odt-contrib-dir)
+   ;; 			    rng-schema-locating-files))
+
+   ;; 		   ;; org
+   ;; 		   (eval-after-load 'org '(push '("\\.odt\\'" . system) org-file-apps))
+
+   ;; 		   ;; org-odt
+   ;; 		   (eval-after-load 'org-odt
+   ;; 		     '(setq org-export-odt-styles-file
+   ;; 			    (expand-file-name "OrgOdtStyles.xml" org-odt-contrib-dir)
+   ;; 			    org-export-odt-automatic-styles-file
+   ;; 			    (expand-file-name "OrgOdtAutomaticStyles.xml" org-odt-contrib-dir)))
+   ;; 		   (require 'org-odt)))
+
+   (:name undo-tree
+	  :features undo-tree
+	  :after (lambda()  (global-set-key (kbd "C-x Z") 'undo-tree-visualize)))
+
    dirtree
    (:name dired-sync
 	  :url "git@github.com:renard/dired-sync.git"
@@ -115,7 +185,6 @@
 	  :type git-svn
 	  :url "http://yasnippet.googlecode.com/svn/trunk/"
 	  :after (lambda () (require 'chezwam-yasnippet)))
-   skype
    dig
    cisco-router-mode
    lua-mode
@@ -124,7 +193,7 @@
 		   (require 'emms-browser)
    		   (emms-standard)
    		   ;; (emms-default-players) ; I want VLC mainly
-   		   (setq emms-player-list 
+   		   (setq emms-player-list
 			 '(emms-player-mplayer-playlist emms-player-mplayer))
    		   ;; Show the current track each time EMMS
    		   ;; starts to play a track with "NP : "
@@ -143,14 +212,22 @@
 
    (:name db-sql
 	  :url "git@github.com:renard/db-sql-el.git")
-   auto-dictionnary
-   org-buffers
-   org-contacts
    rst-mode
    keywiz
-   kpm-list
+   nagios-mode
+
+   (:name smex
+	  :after (lambda ()
+		   (global-set-key (kbd "M-x") 'smex)
+		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+		   (global-set-key (kbd "ESC M-x") 'execute-extended-command)))
+   (:name iedit
+	  :after (lambda ()
+		   (define-key global-map (kbd "C-;") 'iedit-mode)
+		   (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)))
+
 ))
- 
+
 
 
 (defun bootstrap-el-get()
@@ -158,7 +235,7 @@
   (url-retrieve
    "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
    '(lambda(s)
-      (replace-string 
+      (replace-string
        "git://github.com/dimitri/el-get.git"
        "git@github.com:renard/el-get.git"
        nil (point-min) (point-max))
@@ -172,11 +249,11 @@
 
 (defun bootstrap-el-get-init ()
   "Add upstream branch to el-get git repository."
-  (let* ((default-directory (concat 
+  (let* ((default-directory (concat
 			     (file-name-as-directory
 			      (el-get-package-directory "el-get"))
 			     "el-get"))
-	 (git (or 
+	 (git (or
 	       (executable-find "git")
 	       (error "Unable to find `git'"))))
     (call-process git nil nil t "--no-pager" "remote" "add"
@@ -190,6 +267,7 @@
   "Load el-get environment."
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
   (require 'el-get)
+  (setq el-get-eval-after-load nil)
 
   ;; Setup load-path BEFORE anything else, so cyclic dependencies could be
   ;; properly handeled.
