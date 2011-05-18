@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-04-20 16:23:26
+;; Last changed: 2011-05-18 23:54:38
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -21,6 +21,19 @@
 (setq backup-directory-alist
       `((".*" .  "~/.emacs.d/.tmp/backup")))
 (setq auto-save-list-file-prefix "~/.emacs.d/.tmp/auto-save-list/saves-")
+
+(setq ido-save-directory-list-file "~/.emacs.d/.tmp/ido-last")
+(setq abbrev-file-name "~/.emacs.d/.tmp/abbrev_defs")
+(setq tramp-persistency-file-name "~/.emacs.d/.tmp/tramp")
+(setq org-publish-timestamp-directory "~/.emacs.d/.tmp/org-timestamps")
+
+(setq 
+ desktop-base-file-name "~/.emacs.d/.tmp/desktop/desktop"
+ desktop-base-lock-name "~/.emacs.d/.tmp/desktop/desktop.lock"
+ desktop-path '("~/.emacs.d/.tmp/desktop"))
+
+(setq mm-default-directory "~/Download/")
+
 
 (setq
  el-get-sources
@@ -63,6 +76,8 @@
 		   (setq magit-commit-signoff t)
 		   (global-set-key (kbd "C-x C-z") 'magit-status)
 		   ;;(set-face-attribute 'magit-item-highlight nil :foreground "#32383a")
+	
+		   (setq magit-save-some-buffers nil)
 		   (set-face-attribute 'magit-diff-add nil :foreground "#8ae234")
 		   (set-face-attribute 'magit-diff-hunk-header nil :foreground "#fce94f")
 		   (set-face-attribute 'magit-diff-file-header nil :foreground "#ad7fa8")
@@ -76,6 +91,7 @@
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
    (:name nognus
 	  :after (lambda()
+		   (setq gnus-startup-file "~/.emacs.d/.tmp/gnus/newsrc")
 		   (setq gnus-init-file "~/.emacs.d/el-get/chezwam/gnus-init")))
    (:name string-template
 	  :url "git@github.com:renard/string-template-el.git")
@@ -162,6 +178,7 @@
    nagios-mode
    (:name smex
 	  :after (lambda ()
+		   (setq smex-save-file "~/.emacs.d/.tmp/smex-items")
 		   (global-set-key (kbd "M-x") 'smex)
 		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 		   (global-set-key (kbd "ESC M-x") 'execute-extended-command)))
