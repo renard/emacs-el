@@ -144,10 +144,10 @@
    (:name dired-sync
 	  :url "git@github.com:renard/dired-sync.git"
 	  :after (lambda() (define-key dired-mode-map (kbd "C-c S") 'dired-do-sync)))
-   (:name yasnippet
-	  :type git-svn
-	  :url "http://yasnippet.googlecode.com/svn/trunk/"
-	  :after (lambda () (require 'chezwam-yasnippet)))
+  ; (:name yasnippet
+;	  :type git-svn
+;	  :url "http://yasnippet.googlecode.com/svn/trunk/"
+;	  :after (lambda () (require 'chezwam-yasnippet)))
    dig
    cisco-router-mode
    lua-mode
@@ -197,11 +197,11 @@
    "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
    '(lambda(s)
       (replace-string
-       "git://github.com/dimitri/el-get.git"
+       "http://github.com/dimitri/el-get.git"
        "git@github.com:renard/el-get.git"
        nil (point-min) (point-max))
       (goto-char (point-max))
-      (search-backward "(when (eq 0 status)")
+      (search-backward "(load (concat pdir package")
       (forward-sexp)
       (backward-char)
       (insert "(bootstrap-el-get-init)")
