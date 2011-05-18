@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-05-18 23:54:38
+;; Last changed: 2011-05-19 00:32:43
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -43,8 +43,21 @@
    color-theme
    (:name color-theme-tango
 	  :after (lambda() (color-theme-tango)
-		    (set-face-attribute 'comint-highlight-input nil :italic nil)
-		    (set-face-attribute 'font-lock-string-face nil :italic nil)))
+		   ;; diff
+		   (set-face-attribute 'diff-file-header nil :background nil)
+		   (set-face-attribute 'diff-function nil :background nil)
+		   (set-face-attribute 'diff-header nil :foreground "#729fcf" :background  nil)
+		   (set-face-attribute 'diff-hunk-header nil :foreground "#edd400" :background nil)
+		   (set-face-attribute 'diff-refine-change nil :background nil)
+		   (set-face-attribute 'diff-changed nil :background nil)
+		   (set-face-attribute 'diff-added nil :foreground "#8ae234")
+		   (set-face-attribute 'diff-removed nil :foreground "#f57900")
+		   (set-face-attribute 'diff-index nil :background "#32383a")
+		   ;; remove italic
+		   (set-face-attribute 'comint-highlight-input nil :italic nil)
+		   (set-face-attribute 'font-lock-string-face nil :italic nil)
+		   (set-face-attribute 'font-lock-function-name-face nil :italic nil)
+		   ))
    (:name hl-sexp
    	  :after (lambda ()
    		   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
@@ -75,10 +88,12 @@
 	  :after (lambda ()
 		   (setq magit-commit-signoff t)
 		   (global-set-key (kbd "C-x C-z") 'magit-status)
-		   ;;(set-face-attribute 'magit-item-highlight nil :foreground "#32383a")
-	
 		   (setq magit-save-some-buffers nil)
+
+		   (set-face-attribute 'magit-item-highlight nil :background nil)
+		   (set-face-attribute 'magit-diff-file-header nil :background nil)
 		   (set-face-attribute 'magit-diff-add nil :foreground "#8ae234")
+		   (set-face-attribute 'magit-diff-del nil :foreground "#f57900")
 		   (set-face-attribute 'magit-diff-hunk-header nil :foreground "#fce94f")
 		   (set-face-attribute 'magit-diff-file-header nil :foreground "#ad7fa8")
 		   (set-face-attribute 'magit-item-highlight nil :background  "#32383a")
@@ -134,6 +149,7 @@
 		   (setq
 		    org-contacts-files
 		    '("~/.emacs.d/el-get/chezwam-private-emacs-el/contacts.org"))
+		   (set-face-attribute 'org-hide nil :foreground "#3e4446")
 		   (org-crypt-use-before-save-magic)
 		   (define-key org-mode-map (kbd "C-c E") 'cw:org:toggle-encryption)))
    (:name undo-tree
