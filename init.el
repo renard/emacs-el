@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-05-19 00:32:43
+;; Last changed: 2011-05-19 00:37:46
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -92,6 +92,7 @@
 
 		   (set-face-attribute 'magit-item-highlight nil :background nil)
 		   (set-face-attribute 'magit-diff-file-header nil :background nil)
+		   (set-face-attribute 'magit-branch nil :foreground "#729fcf")
 		   (set-face-attribute 'magit-diff-add nil :foreground "#8ae234")
 		   (set-face-attribute 'magit-diff-del nil :foreground "#f57900")
 		   (set-face-attribute 'magit-diff-hunk-header nil :foreground "#fce94f")
