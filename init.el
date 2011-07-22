@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-21 19:00:11
+;; Last changed: 2011-07-22 12:36:03
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -86,71 +86,64 @@
 (eval-after-load "el-get"
   '(progn
      ;; define el-get sources
-     (setq ;; el-get-emacs "/home/renard/bin/emacs-test"
-	   ;; el-get-is-lazy t
-	   el-get-sources
-	   '(
-	     (:name dired-toggle-sudo
-		    :type git
-		    :url "git@github.com:renard/dired-toggle-sudo.git")
-	     (:name git-auto-commit
-		    :type git
-		    :url "git@github.com:renard/git-auto-commit.git")
-	     (:name quick-buffer-switch
-		    :type git
-		    :url "git@github.com:renard/quick-buffer-switch.git")
-	     (:name bzr
-		    :type apt-get)
-	     (:name string-template
-		    :url "git@github.com:renard/string-template-el.git")
-	     (:name org-website
-		    :depends string-template
-		    :url "git@github.com:renard/org-website.git")
-	     (:name vcl-mode ;; git-svn is better than just svn
-		    :type git-svn
-		    :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
-	     (:name undo-tree
-		    :after (lambda()
-			     (autoload 'undo-tree-visualize "undo-tree")))
-	     (:name dired-sync
-		    :url "git@github.com:renard/dired-sync.git")
-	     (:name db-sql
-		    :url "git@github.com:renard/db-sql-el.git")
-	     (:name lua-mode
-		    :url "https://github.com/immerrr/lua-mode.git")
-	     (:name ssh-config
-		    :url "git@github.com:renard/ssh-config-el.git")
-	     (:name gnus-identities
-		    :url "git@github.com:renard/gnus-identities.git")
-	     (:name emms ;; Original recipe is buggy
-		    :depends emacs-w3m
-		    :features nil
-		    :build ("mkdir -p ~/.emacs.d/emms"
-			    "make autoloads"
-			    "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
-			    "rm -rf ~/.emacs.d/emms"))
-	     (:name yasnippet ;; git-svn is better than just svn
-		    :url "http://yasnippet.googlecode.com/svn/trunk/"
-		    :type git-svn)
-	     (:name xml-rpc-el
-		    :debpends bzr)
-
-	     (:name cw-gtd
-		    :type git
-		    :url  "/home/renard/dev/.emacs.d/cw-gtd")
-
-	     (:name mediawiki
-		    :after (lambda ()
-			     (autoload 'mediawiki-open "mediawiki.el")
-			     (autoload 'mediawiki-site "mediawiki.el")))
-
-	     (:name ace-jump
-		    :type git
-		    :url "https://github.com/winterTTr/ace-jump-mode.git")
-	     ;; (:name inkmacs
-	     ;; 	    :type git
-	     ;; 	    :url "https://github.com/jave/inkmacs.git")
-	     ))
+     (setq
+      el-get-sources
+      '(
+	(:name dired-toggle-sudo
+	       :type git
+	       :url "git@github.com:renard/dired-toggle-sudo.git")
+	(:name git-auto-commit
+	       :type git
+	       :url "git@github.com:renard/git-auto-commit.git")
+	(:name quick-buffer-switch
+	       :type git
+	       :url "git@github.com:renard/quick-buffer-switch.git")
+	(:name bzr
+	       :type apt-get)
+	(:name string-template
+	       :url "git@github.com:renard/string-template-el.git")
+	(:name org-website
+	       :depends string-template
+	       :url "git@github.com:renard/org-website.git")
+	(:name vcl-mode ;; git-svn is better than just svn
+	       :type git-svn
+	       :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
+	(:name undo-tree
+	       :after (lambda()
+			(autoload 'undo-tree-visualize "undo-tree")))
+	(:name dired-sync
+	       :url "git@github.com:renard/dired-sync.git")
+	(:name db-sql
+	       :url "git@github.com:renard/db-sql-el.git")
+	(:name lua-mode
+	       :url "https://github.com/immerrr/lua-mode.git")
+	(:name ssh-config
+	       :url "git@github.com:renard/ssh-config-el.git")
+	(:name gnus-identities
+	       :url "git@github.com:renard/gnus-identities.git")
+	(:name emms ;; Original recipe is buggy
+	       :depends emacs-w3m
+	       :features nil
+	       :build ("mkdir -p ~/.emacs.d/emms"
+		       "make autoloads"
+		       "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
+		       "rm -rf ~/.emacs.d/emms"))
+	(:name yasnippet ;; git-svn is better than just svn
+	       :url "http://yasnippet.googlecode.com/svn/trunk/"
+	       :type git-svn)
+	(:name xml-rpc-el
+	       :debpends bzr)
+	(:name cw-gtd
+	       :type git
+	       :url  "/home/renard/dev/.emacs.d/cw-gtd")
+	(:name mediawiki
+	       :after (lambda ()
+			(autoload 'mediawiki-open "mediawiki.el")
+			(autoload 'mediawiki-site "mediawiki.el")))
+	(:name ace-jump
+	       :type git
+	       :url "https://github.com/winterTTr/ace-jump-mode.git")
+	))
 
      ;; create a package list to be installed
      (let ((cw:packages 
@@ -228,15 +221,3 @@
 	   (+
 	    (- (+ hi lo) (+ (first before-init-time) (second before-init-time)))
 	    (/ (- ms (third before-init-time)) (expt 10.0 6)))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((eval set-face-attribute (quote whitespace-line) nil :background "red1" :foreground "yellow" :weight (quote bold)) (eval set-face-attribute (quote whitespace-tab) nil :background "red1" :foreground "yellow" :weight (quote bold)) (whitespace-style face trailing lines-tail) (whitespace-line-column . 80) (eval require (quote whitespace))))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
