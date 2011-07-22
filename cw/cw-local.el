@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-22 16:00:20
+;; Last changed: 2011-07-22 17:48:50
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -113,6 +113,9 @@
 	 ad-do-it
 	 (kill-buffer orig)))
 
+     (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
+
+     (define-key dired-mode-map (kbd "<C-return>")  'gnus-dired-find-file-mailcap)
      (define-key dired-mode-map "/" 'dired-details-toggle)
      (define-key dired-mode-map "Y"  'dired-do-relsymlink)
      (define-key dired-mode-map (kbd "C-c S") 'dired-do-sync)
@@ -353,6 +356,11 @@
      (set-face-attribute 'magit-diff-hunk-header nil :foreground "#fce94f")
      (set-face-attribute 'magit-diff-file-header nil :foreground "#ad7fa8")
      (set-face-attribute 'magit-item-highlight nil :background  "#32383a")))
+
+(eval-after-load 'mailcap
+  '(progn
+     (add-to-list 'mailcap-mime-extensions '(".mkv" . "video/x-matroska"))
+     (mailcap-parse-mailcaps nil t)))
 
 (eval-after-load 'menu-bar
   '(progn (menu-bar-mode -1)))
