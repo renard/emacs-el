@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-05-19 00:37:46
+;; Last changed: 2011-07-21 19:00:11
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -16,251 +16,227 @@
 
 ;;; Code:
 
+(eval-when-compile (require 'cl))
 
-(setq message-log-max 2048)
-(setq backup-directory-alist
-      `((".*" .  "~/.emacs.d/.tmp/backup")))
-(setq auto-save-list-file-prefix "~/.emacs.d/.tmp/auto-save-list/saves-")
+;; Set some default directories
+(let ((tmp-dir (file-name-as-directory
+		(concat (file-name-as-directory user-emacs-directory)
+			".tmp"))))
 
-(setq ido-save-directory-list-file "~/.emacs.d/.tmp/ido-last")
-(setq abbrev-file-name "~/.emacs.d/.tmp/abbrev_defs")
-(setq tramp-persistency-file-name "~/.emacs.d/.tmp/tramp")
-(setq org-publish-timestamp-directory "~/.emacs.d/.tmp/org-timestamps")
+  (mkdir tmp-dir t)
+  (setq auto-save-list-file-prefix (concat tmp-dir "auto-save-list/saves-"))
 
-(setq 
- desktop-base-file-name "~/.emacs.d/.tmp/desktop/desktop"
- desktop-base-lock-name "~/.emacs.d/.tmp/desktop/desktop.lock"
- desktop-path '("~/.emacs.d/.tmp/desktop"))
+  (eval-after-load 'abbrev
+    `(progn
+       (setq abbrev-file-name (concat ,tmp-dir "abbrev_defs"))))
 
-(setq mm-default-directory "~/Download/")
+  (eval-after-load 'desktop
+    `(progn
+       (setq
+	desktop-base-file-name (concat ,tmp-dir "desktop")
+	desktop-base-lock-name (concat ,tmp-dir "desktop.lock")
+	desktop-path (list ,tmp-dir))))
 
+  (eval-after-load 'emms
+    `(progn 
+       (setq emms-directory (concat ,tmp-dir "emms"))
+       (mkdir emms-directory t)))
 
-(setq
- el-get-sources
- '((:name el-get
-	  :after (lambda()
-		   (setq el-get-recipe-path-emacswiki "~/.emacs.d/.tmp/emacswiki")))
-   color-theme
-   (:name color-theme-tango
-	  :after (lambda() (color-theme-tango)
-		   ;; diff
-		   (set-face-attribute 'diff-file-header nil :background nil)
-		   (set-face-attribute 'diff-function nil :background nil)
-		   (set-face-attribute 'diff-header nil :foreground "#729fcf" :background  nil)
-		   (set-face-attribute 'diff-hunk-header nil :foreground "#edd400" :background nil)
-		   (set-face-attribute 'diff-refine-change nil :background nil)
-		   (set-face-attribute 'diff-changed nil :background nil)
-		   (set-face-attribute 'diff-added nil :foreground "#8ae234")
-		   (set-face-attribute 'diff-removed nil :foreground "#f57900")
-		   (set-face-attribute 'diff-index nil :background "#32383a")
-		   ;; remove italic
-		   (set-face-attribute 'comint-highlight-input nil :italic nil)
-		   (set-face-attribute 'font-lock-string-face nil :italic nil)
-		   (set-face-attribute 'font-lock-function-name-face nil :italic nil)
-		   ))
-   (:name hl-sexp
-   	  :after (lambda ()
-   		   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
-   		   (set-face-attribute 'hl-sexp-face nil :background "#32383a")))
-   offlineimap
-   (:name chezwam
-	  :type git
-	  :url "git@github.com:renard/chezwam-el.git"
-	  :features chezwam
-	  :after (lambda() (require 'chezwam)))
-   (:name chezwam-private-emacs-el
-	  :type git
-	  :url "git.private.cw:git/chezwam-emacs-el.git"
-	  :features chezwam-private
-	  :after (lambda() (require 'chezwam-private)))
-   (:name ssh-config
-	  :url "git@github.com:renard/ssh-config-el.git"
-	  :after (lambda()
-		   (setq sc:ssh-file "~/.emacs.d/el-get/chezwam-private-emacs-el/hosts.org")))
-   (:name escreen
-	  :type git
-	  :url "git@github.com:renard/escreen-el.git"
-	  :after (lambda() (require 'chezwam-escreen)))
-   (:name gnus-identities
-	  :url "git@github.com:renard/gnus-identities.git")
-   (:name magit
-	  :features magit
-	  :after (lambda ()
-		   (setq magit-commit-signoff t)
-		   (global-set-key (kbd "C-x C-z") 'magit-status)
-		   (setq magit-save-some-buffers nil)
+  (eval-after-load 'files
+    `(progn
+       (setq
+	backup-directory-alist `((".*" . ,(concat ,tmp-dir "backup"))))))
 
-		   (set-face-attribute 'magit-item-highlight nil :background nil)
-		   (set-face-attribute 'magit-diff-file-header nil :background nil)
-		   (set-face-attribute 'magit-branch nil :foreground "#729fcf")
-		   (set-face-attribute 'magit-diff-add nil :foreground "#8ae234")
-		   (set-face-attribute 'magit-diff-del nil :foreground "#f57900")
-		   (set-face-attribute 'magit-diff-hunk-header nil :foreground "#fce94f")
-		   (set-face-attribute 'magit-diff-file-header nil :foreground "#ad7fa8")
-		   (set-face-attribute 'magit-item-highlight nil :background  "#32383a")
-		   (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)))
-   (:name buffer-move
-	  :after (lambda()
-		   (global-set-key (kbd "<C-S-up>")     'buf-move-up)
-		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
-		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
-   (:name nognus
-	  :after (lambda()
-		   (setq gnus-startup-file "~/.emacs.d/.tmp/gnus/newsrc")
-		   (setq gnus-init-file "~/.emacs.d/el-get/chezwam/gnus-init")))
-   (:name string-template
-	  :url "git@github.com:renard/string-template-el.git")
-   (:name cssh
-	  :url "git@github.com:renard/cssh.git"
-	  :after (lambda()
-		   (define-key dired-mode-map (kbd "C-=") 'cssh-term-remote-open)))
-   (:name org-website
-	  :type git
-	  :url "git@github.com:renard/org-website.git")
-   switch-window
-   vkill
-   google-maps
-   (:name browse-kill-ring
-	  :after (lambda()
-		   (define-key global-map (kbd "C-M-y") 'browse-kill-ring)))
-   (:name dired-details
-	  :after (lambda()
-		   (define-key dired-mode-map "/" 'dired-details-toggle)))
-   rainbow-mode
-   (:name vcl-mode
-	  :type git-svn
-	  :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
-   list-processes+
-   mailq
-   asciidoc
-   (:name adoc-mode
-	  :after (lambda()
-		   (add-to-list 'auto-mode-alist '("\\.[1-9]\\.txt$" . adoc-mode))
-		   (add-hook 'adoc-mode-hook 'flyspell-mode)
-		   (add-hook 'adoc-mode-hook 'flyspell-buffer)
-		   (define-key adoc-mode-map (kbd "C-c m") 'cw:adoc-mode:compile)))
-   xml-rpc-el
-   pastebin
-   gnuplot-mode
-   php-mode-improved
-   (:name org-mode
-	  :features (org-contacts org-crypt)
-	  :after (lambda()
-		   (setq
-		    org-contacts-files
-		    '("~/.emacs.d/el-get/chezwam-private-emacs-el/contacts.org"))
-		   (set-face-attribute 'org-hide nil :foreground "#3e4446")
-		   (org-crypt-use-before-save-magic)
-		   (define-key org-mode-map (kbd "C-c E") 'cw:org:toggle-encryption)))
-   (:name undo-tree
-	  :features undo-tree
-	  :after (lambda()  (global-set-key (kbd "C-x Z") 'undo-tree-visualize)))
+  (eval-after-load 'ido
+    `(progn
+       (setq ido-save-directory-list-file (concat ,tmp-dir "ido-last"))))
 
-   dirtree
-   (:name dired-sync
-	  :url "git@github.com:renard/dired-sync.git"
-	  :after (lambda() (define-key dired-mode-map (kbd "C-c S") 'dired-do-sync)))
-  ; (:name yasnippet
-;	  :type git-svn
-;	  :url "http://yasnippet.googlecode.com/svn/trunk/"
-;	  :after (lambda () (require 'chezwam-yasnippet)))
-   dig
-   cisco-router-mode
-   lua-mode
-   (:name emms
-   	  :after (lambda ()
-		   (require 'emms-browser)
-   		   (emms-standard)
-   		   ;; (emms-default-players) ; I want VLC mainly
-   		   (setq emms-player-list
-			 '(emms-player-mplayer-playlist emms-player-mplayer))
-   		   ;; Show the current track each time EMMS
-   		   ;; starts to play a track with "NP : "
-   		   (add-hook 'emms-player-started-hook 'emms-show)
-   		   (setq emms-show-format "EMMS Now Playing: %s")
-		   (add-to-list 'emms-info-functions 'emms-info-ogginfo)
-		   (add-hook 'dired-load-hook
-   			     (define-key dired-mode-map (kbd "E") 'emms-play-dired))
-		   (define-key emms-browser-mode-map (kbd "P")
-		     '(lambda () (interactive) (switch-to-buffer " *EMMS Playlist*")))
-		   (defun cw:emms:browser ()
-		     (interactive)
-		     (emms-add-directory "~/zic")
-		     (emms-browser))))
-   (:name db-sql
-	  :url "git@github.com:renard/db-sql-el.git")
-   rst-mode
-   keywiz
-   nagios-mode
-   (:name smex
-	  :after (lambda ()
-		   (setq smex-save-file "~/.emacs.d/.tmp/smex-items")
-		   (global-set-key (kbd "M-x") 'smex)
-		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-		   (global-set-key (kbd "ESC M-x") 'execute-extended-command)))
-   (:name iedit
-	  :after (lambda ()
-		   (define-key global-map (kbd "C-;") 'iedit-mode)
-		   (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)))
+  (eval-after-load 'mm-decode
+    `(progn
+       (setq mm-default-directory "~/Download/")
+       (mkdir mm-default-directory t)))
 
-))
+  (eval-after-load 'gnus-start
+    `(progn
+       (setq gnus-startup-file (concat ,tmp-dir "gnus/newsrc"))
+       (mkdir (file-name-directory gnus-startup-file) t)))
 
+  (eval-after-load 'org-clock
+    `(progn
+       (setq org-clock-persist-file (concat ,tmp-dir "org/org-clock-save"))
+       (mkdir (file-name-directory org-clock-persist-file) t)))
 
+  (eval-after-load 'savehist
+    `(progn
+       (setq savehist-file (concat ,tmp-dir "history"))))
 
-(defun bootstrap-el-get()
-  "Install el-get if not installed."
-  (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-   '(lambda(s)
-      (replace-string
-       "http://github.com/dimitri/el-get.git"
-       "git@github.com:renard/el-get.git"
-       nil (point-min) (point-max))
-      (goto-char (point-max))
-      (search-backward "(load (concat pdir package")
-      (forward-sexp)
-      (backward-char)
-      (insert "(bootstrap-el-get-init)")
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
+  (eval-after-load 'smex
+    `(progn
+       (setq smex-save-file (concat ,tmp-dir "smex-items"))))
 
-(defun bootstrap-el-get-init ()
-  "Add upstream branch to el-get git repository."
-  (let* ((default-directory (concat
-			     (file-name-as-directory
-			      (el-get-package-directory "el-get"))
-			     "el-get"))
-	 (git (or
-	       (executable-find "git")
-	       (error "Unable to find `git'"))))
-    (call-process git nil nil t "--no-pager" "remote" "add"
-		  "upstream" "git://github.com/dimitri/el-get.git"))
-  (mapc (lambda (p) (el-get-save-package-status p "installed"))
-   	(el-get-package-name-list))
-  (message "el-get installed! You should restart emacs now."))
+  
+  (eval-after-load 'tramp-cache
+    `(progn
+       (setq tramp-persistency-file-name (concat ,tmp-dir "tramp"))))
 
+  (eval-after-load 'url
+    `(progn
+       (setq url-configuration-directory (concat ,tmp-dir "url")))))
 
-(defun load-el-get ()
-  "Load el-get environment."
-  (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
-  (require 'el-get)
-  (setq el-get-eval-after-load nil)
+(eval-after-load "el-get"
+  '(progn
+     ;; define el-get sources
+     (setq ;; el-get-emacs "/home/renard/bin/emacs-test"
+	   ;; el-get-is-lazy t
+	   el-get-sources
+	   '(
+	     (:name dired-toggle-sudo
+		    :type git
+		    :url "git@github.com:renard/dired-toggle-sudo.git")
+	     (:name git-auto-commit
+		    :type git
+		    :url "git@github.com:renard/git-auto-commit.git")
+	     (:name quick-buffer-switch
+		    :type git
+		    :url "git@github.com:renard/quick-buffer-switch.git")
+	     (:name bzr
+		    :type apt-get)
+	     (:name string-template
+		    :url "git@github.com:renard/string-template-el.git")
+	     (:name org-website
+		    :depends string-template
+		    :url "git@github.com:renard/org-website.git")
+	     (:name vcl-mode ;; git-svn is better than just svn
+		    :type git-svn
+		    :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
+	     (:name undo-tree
+		    :after (lambda()
+			     (autoload 'undo-tree-visualize "undo-tree")))
+	     (:name dired-sync
+		    :url "git@github.com:renard/dired-sync.git")
+	     (:name db-sql
+		    :url "git@github.com:renard/db-sql-el.git")
+	     (:name lua-mode
+		    :url "https://github.com/immerrr/lua-mode.git")
+	     (:name ssh-config
+		    :url "git@github.com:renard/ssh-config-el.git")
+	     (:name gnus-identities
+		    :url "git@github.com:renard/gnus-identities.git")
+	     (:name emms ;; Original recipe is buggy
+		    :depends emacs-w3m
+		    :features nil
+		    :build ("mkdir -p ~/.emacs.d/emms"
+			    "make autoloads"
+			    "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
+			    "rm -rf ~/.emacs.d/emms"))
+	     (:name yasnippet ;; git-svn is better than just svn
+		    :url "http://yasnippet.googlecode.com/svn/trunk/"
+		    :type git-svn)
+	     (:name xml-rpc-el
+		    :debpends bzr)
 
-  ;; Setup load-path BEFORE anything else, so cyclic dependencies could be
-  ;; properly handeled.
-  (mapc (lambda(package)
-  	  (message (format "Adding source for package %s" package))
-  	  (let* ((source (el-get-package-def package))
-		 (el-path (el-get-load-path package)))
-  	    (mapc (lambda (path)
-  		    (message (format "\t adding %s" path))
-  		    (el-get-add-path-to-list package 'load-path path))
-  		  (if (stringp el-path) (list el-path) el-path))))
-  	(el-get-package-name-list))
-  (el-get))
+	     (:name cw-gtd
+		    :type git
+		    :url  "/home/renard/dev/.emacs.d/cw-gtd")
+
+	     (:name mediawiki
+		    :after (lambda ()
+			     (autoload 'mediawiki-open "mediawiki.el")
+			     (autoload 'mediawiki-site "mediawiki.el")))
+
+	     (:name ace-jump
+		    :type git
+		    :url "https://github.com/winterTTr/ace-jump-mode.git")
+	     ;; (:name inkmacs
+	     ;; 	    :type git
+	     ;; 	    :url "https://github.com/jave/inkmacs.git")
+	     ))
+
+     ;; create a package list to be installed
+     (let ((cw:packages 
+	    '(
+	      adoc-mode
+	      browse-kill-ring
+	      buffer-move
+	      cisco-router-mode
+	      color-theme
+	      color-theme-tango
+	      crontab-mode
+	      dig
+	      dired-details
+	      dirtree
+	      escreen
+	      google-maps
+	      iedit
+	      keywiz
+	      list-processes+
+	      magit
+	      mailq
+	      nagios-mode
+	      nognus
+	      offlineimap
+	      org-mode
+	      pastebin
+	      php-mode-improved
+	      rainbow-delimiters
+	      rainbow-mode
+	      rst-mode
+	      smex
+	      switch-window
+	      vkill
+
+	      )))
+
+       (setq cw:packages
+	     (append cw:packages
+		     (loop for src in el-get-sources
+			   collect (el-get-source-name src))))
+
+       (message "running (el-get 'sync '%s)" cw:packages)
+       ;; Really do install packages
+       (el-get 'sync cw:packages)
+       (require 'cw-local nil t)
+       (require 'cw-private nil t))))
+
+;; Add some definitions
+(loop for p in '("cw" "el-get/el-get")
+      do (add-to-list 'load-path
+		      (concat (file-name-as-directory user-emacs-directory) p)))
+
+(unless noninteractive
+  ;; must be set before Org is loaded.
+  (setq org-replace-disputed-keys t))
 
 ;; Load el-get
-(if (not (file-directory-p "~/.emacs.d/el-get/"))
-    (bootstrap-el-get)
-  (load-el-get))
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   (lambda (s)
+     (end-of-buffer)
+     (eval-print-last-sexp))))
+
+(with-current-buffer
+    (find-file
+     (concat
+      (file-name-as-directory user-emacs-directory)
+      "cw/cw-pass.el.gpg"))
+  (eval-buffer)
+  (kill-buffer))
+
+(message "Emacs loaded in %fs"
+	 (destructuring-bind (hi lo ms) (current-time)
+	   (+
+	    (- (+ hi lo) (+ (first before-init-time) (second before-init-time)))
+	    (/ (- ms (third before-init-time)) (expt 10.0 6)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values (quote ((eval set-face-attribute (quote whitespace-line) nil :background "red1" :foreground "yellow" :weight (quote bold)) (eval set-face-attribute (quote whitespace-tab) nil :background "red1" :foreground "yellow" :weight (quote bold)) (whitespace-style face trailing lines-tail) (whitespace-line-column . 80) (eval require (quote whitespace))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
