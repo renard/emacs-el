@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-22 12:20:41
+;; Last changed: 2011-07-22 15:10:31
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -344,6 +344,7 @@
      (setq
       magit-commit-signoff t
       magit-save-some-buffers nil)
+     (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
      (set-face-attribute 'magit-item-highlight nil :background nil)
      (set-face-attribute 'magit-diff-file-header nil :background nil)
      (set-face-attribute 'magit-branch nil :foreground "#729fcf")
