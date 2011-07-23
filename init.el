@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-23 21:50:18
+;; Last changed: 2011-07-23 22:43:58
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -17,7 +17,6 @@
 ;;; Code:
 
 (eval-when-compile (require 'cl))
-
 
 ;; Set some default directories
 (let ((tmp-dir (file-name-as-directory
@@ -209,7 +208,20 @@
   (url-retrieve
    "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
    (lambda (s)
-     (end-of-buffer)
+     ;; Add upstream branch to local repository.
+     (replace-string
+      "http://github.com/dimitri/el-get.git"
+      "git@github.com:renard/el-get.git"
+      nil (point-min) (point-max))
+     (goto-char (point-max))
+     (search-backward "(unless (zerop status)")
+     (forward-sexp)
+     (insert
+      "(cd package)"
+      "(call-process git nil `(,buf t) t \"--no-pager\""
+      "\"remote\" \"add\" \"--fetch\"  \"upstream\""
+      "\"git://github.com/dimitri/el-get.git\")")
+     (goto-char (point-max))
      (eval-print-last-sexp))))
 
 (with-current-buffer
