@@ -1,11 +1,11 @@
 ;; cw-gnus.el --- Gnus configuration
 
-;; Copyright © 2010 Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
+;; Copyright © 2011 Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 
-;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
+;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2011-07-13
-;; Last changed: 2011-07-13 22:17:46
+;; Last changed: 2011-07-23 23:06:39
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
