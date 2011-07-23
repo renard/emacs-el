@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-22 14:50:57
+;; Last changed: 2011-07-23 21:50:18
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -17,6 +17,7 @@
 ;;; Code:
 
 (eval-when-compile (require 'cl))
+
 
 ;; Set some default directories
 (let ((tmp-dir (file-name-as-directory
@@ -197,6 +198,9 @@
 		      (concat (file-name-as-directory user-emacs-directory) p)))
 
 (unless noninteractive
+  (require 'server)
+  (unless (server-running-p)
+    (server-start))
   ;; must be set before Org is loaded.
   (setq org-replace-disputed-keys t))
 
