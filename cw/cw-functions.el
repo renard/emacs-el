@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-23 23:06:14
+;; Last changed: 2011-07-25 11:48:34
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -214,9 +214,20 @@ kill related buffers."
   (escreen-goto-screen 1)
   (delete-other-windows)
   (split-window-horizontally)
-  (with-current-buffer (or (car (erc-buffer-list)) (car (buffer-list)))
-    (unless erc-server-process
-      (cw:erc:connect)))
+
+  (when
+      (or
+       (not (erc-buffer-list))
+       (let (do-reconnect)
+	 (mapcar (lambda(x)
+		   (when (string= "*irc: " (substring (buffer-name x) 0 6))
+		     (unless (get-buffer-process x)
+		       (setq do-reconnect t))))
+		 (erc-buffer-list))
+	 do-reconnect))
+    (cw:erc:disconnect)
+    (cw:erc:connect))
+
   (let* ((bl (erc-buffer-list))
 	 (b1 (car bl))
 	 (b2 (cadr bl)))
