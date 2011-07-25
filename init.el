@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-23 23:10:58
+;; Last changed: 2011-07-25 09:56:30
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -193,7 +193,7 @@
        (require 'cw-private nil t))))
 
 ;; Add some definitions
-(loop for p in '("cw" "el-get/el-get")
+(loop for p in '("cw" "cw-private" "el-get/el-get")
       do (add-to-list 'load-path
 		      (concat (file-name-as-directory user-emacs-directory) p)))
 
