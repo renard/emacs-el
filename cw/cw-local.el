@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-25 14:33:18
+;; Last changed: 2011-07-25 16:50:17
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -118,6 +118,7 @@
      (define-key dired-mode-map (kbd "<C-return>")  'gnus-dired-find-file-mailcap)
      (define-key dired-mode-map "/" 'dired-details-toggle)
      (define-key dired-mode-map "Y"  'dired-do-relsymlink)
+     (define-key dired-mode-map (kbd "C-s") 'dired-isearch-filenames)
      (define-key dired-mode-map (kbd "C-c S") 'dired-do-sync)
      (define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)))
 
