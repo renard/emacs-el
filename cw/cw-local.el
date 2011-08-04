@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-29 10:22:57
+;; Last changed: 2011-08-03 18:54:40
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -418,7 +418,11 @@
 (eval-after-load 'org-crypt
   '(progn
      (defadvice org-encrypt-entry
+       "Go to CRYPTKEY property node make sure that a GPG key
+would be used if applicable ad remove CLEAR tag.
+"
        (around cw:org-encrypt-entry activate)
+       (search-backward ":CRYPTKEY:" nil t)
        (org-back-to-heading t)
        (show-subtree)
        ad-do-it
@@ -426,18 +430,21 @@
        (org-set-tags-to (delete "CLEAR" (org-get-tags)))
        (hide-entry))
      (defadvice org-decrypt-entry
+       "Add a CLEAR tag to the current entry."
        (around cw:org-decrypt-entry activate)
        (org-back-to-heading t)
        (show-subtree)
-       ad-do-it
-       (org-back-to-heading t)
-       (hide-subtree)
-       (let ((tags-list (org-get-tags)))
-	 (when (member org-crypt-tag-matcher tags-list)
-	   (org-set-tags-to (append '("CLEAR") tags-list))
-	   (hide-entry)
-	   (show-children 3))))
-     (setq org-crypt-disable-auto-save t)))
+       (let ((modified-flag (buffer-modified-p)))
+	 ad-do-it
+	 (org-back-to-heading t)
+	 (hide-subtree)
+	 (let ((tags-list (org-get-tags)))
+	   (when (member org-crypt-tag-matcher tags-list)
+	     (org-set-tags-to (append '("CLEAR") tags-list))
+	     (hide-entry)
+	     (show-children 3)))
+	 (set-buffer-modified-p modified-flag))
+       (setq org-crypt-disable-auto-save t)))
 
 (eval-after-load 'org-install
   '(progn
