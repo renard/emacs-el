@@ -1,3 +1,6 @@
 [submodule "cw-private"]
 	path = cw-private
 	url = git.private.cw:git/chezwam-emacs-el.git
+[submodule "org"]
+	path = org
+	url = git.private.cw:git/chezwam-org-files.git
