@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-03 18:54:40
+;; Last changed: 2011-08-04 18:35:46
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -402,7 +402,16 @@
 		    nil t)
 	       (message (format "Loading dict %s" (match-string 1)))
 	       (ignore-errors
-		 (ispell-change-dictionary (match-string 1))))))))
+		 (ispell-change-dictionary (match-string 1)))))
+
+	   (goto-char (point-min))
+	   (save-match-data
+	     (when (search-forward-regexp
+		    "^#\\+INPUT_METHOD:[ \t]+\\(.*\\)"
+		    nil t)
+	       (message (format "Setting input method %s" (match-string 1)))
+	       (ignore-errors
+		 (set-input-method (match-string 1))))))))
      (when (functionp 'org-crypt-use-before-save-magic)
        (org-crypt-use-before-save-magic))
      (set-face-attribute 'org-hide nil :foreground "#3e4446")
