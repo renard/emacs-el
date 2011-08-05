@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-05 18:15:44
+;; Last changed: 2011-08-05 19:02:32
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -200,6 +200,14 @@
   '(progn
      (add-hook 'after-save-hook 'cw:make-buffer-file-executable-if-script-p)
      (add-hook 'before-save-hook 'time-stamp)))
+
+(eval-after-load 'fill-column-indicator
+  '(progn
+     (setq
+      fci-rule-color "#3e4446"
+      fci-rule-width 1
+      fci-rule-character ?│
+      fci-handle-truncate-lines t)))
 
 (eval-after-load 'flyspell
   '(progn
@@ -801,6 +809,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
     (interactive)
     (when (and (buffer-file-name)
 	       (file-exists-p (buffer-file-name)))
+      (fci-mode)
       (highlight-changes-mode)))
   (add-hook 'find-file-hook 'cw:global-file-init)
 
