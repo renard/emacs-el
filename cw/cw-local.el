@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-05 15:28:09
+;; Last changed: 2011-08-05 17:28:45
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -294,6 +294,16 @@
      (define-key hs-minor-mode-map (kbd "C-c <C-return>") 'hs-show-all)
      (define-key hs-minor-mode-map (kbd "C-c RET") 'hs-hide-all)
      (add-hook 'hs-minor-mode-hook 'hs-hide-all)))
+
+(eval-after-load 'hilit-chg
+  '(progn
+     (set-face-attribute 'highlight-changes nil :foreground nil :background "#2e4436")
+     (set-face-attribute 'highlight-changes-delete nil :foreground nil :background "#3e3446")
+     (defun cw:hilit-chg-reset ()
+       "Remove highlight marks in current buffer."
+       (interactive)
+       (highlight-changes-remove-highlight (point-min) (point-max)))
+     (add-hook 'after-save-hook 'cw:hilit-chg-reset)))
 
 (eval-after-load 'hippie-exp
   '(progn
