@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-05 18:11:32
+;; Last changed: 2011-08-05 18:15:44
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -501,7 +501,7 @@ would be used if applicable ad remove CLEAR tag.
       (";" [" ;"])       (";;" [";"])
       (":" [" :"])       ("::" [":"])
 
-     ))
+     )))
 
  ;; r
 (eval-after-load 'rainbow-delimiters
