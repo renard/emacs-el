@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-06 00:41:24
+;; Last changed: 2011-08-06 00:57:33
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -502,6 +502,18 @@ would be used if applicable ad remove CLEAR tag.
       (">>" [" »"])      (">>>" [">>"])
       ("``" ["“"])       ("```" ["``"])
       ("`'" ["”"])       ("`''" ["`'"])
+
+      ("o^" ?°)          ("o^^" ["o^"])
+      ("1^" ?¹)          ("1^^" ["1^"])
+      ("2^" ?²)          ("2^^" ["2^"])
+      ("3^" ?³)          ("3^^" ["3^"])
+      ("4^" ?⁴)          ("4^^" ["4^"])
+      ("5^" ?⁵)          ("5^^" ["5^"])
+      ("6^" ?⁶)          ("6^^" ["6^"])
+      ("7^" ?⁷)          ("7^^" ["7^"])
+      ("8^" ?⁸)          ("8^^" ["8^"])
+      ("9^" ?⁹)          ("9^^" ["9^"])
+      ("0^" ?⁰)          ("0^^" ["0^"])
 
       ;; non breaking space
       ("?" [" ?"])       ("??" ["?"])
