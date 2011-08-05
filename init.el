@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-25 16:50:39
+;; Last changed: 2011-08-05 15:35:05
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -139,7 +139,7 @@
 	       :debpends bzr)
 	(:name cw-gtd
 	       :type git
-	       :url  "/home/renard/dev/.emacs.d/cw-gtd")
+	       :url  "git@github.com:renard/cw-gtd.git")
 	(:name mediawiki
 	       :after (lambda ()
 			(autoload 'mediawiki-open "mediawiki.el")
