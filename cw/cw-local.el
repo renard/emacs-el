@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-05 17:28:45
+;; Last changed: 2011-08-05 17:38:02
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -795,6 +795,13 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   ;; (when (require 'ace-jump-mode nil t)
   ;;   (global-set-key (kbd "C-x C-PC") 'ace-jump-mode))
 
+  (defun cw:global-file-init()
+    "Add some global configuration when opening a file."
+    (interactive)
+    (when (and (buffer-file-name)
+	       (file-exists-p (buffer-file-name)))
+      (highlight-changes-mode)))
+  (add-hook 'find-file-hook 'cw:global-file-init)
 
   (when (require 'yasnippet nil t)
     (yas/initialize))
