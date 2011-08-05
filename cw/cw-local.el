@@ -817,26 +817,6 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (when (require 'yasnippet nil t)
     (yas/initialize))
 
-  (defun set-hooks-debug (&optional unadvice)
-    "Toggle hook name display when run.
-
-If universal argument is provided, debug is set to off.
-"
-    (interactive "P")
-    (if unadvice
-	(progn
-	  (ad-unadvise 'run-hooks)
-	  (ad-unadvise 'run-hook-with-args))
-      (progn
-	(defadvice run-hooks (before cw:run-hooks activate)
-	  "Show hook name on run."
-	  (with-current-buffer "*Messages*"
-	    (insert (format "running hooks: %s\n" (ad-get-args 0)))))
-	(defadvice run-hook-with-args (before cw:run-hook-with-args activate)
-	  "Show hook name on run."
-	  (with-current-buffer "*Messages*"
-	    (insert (format "running hooks with args: %s\n" (ad-get-args 0))))))))
-  
   (when (boundp 'completing-read-function)
     (defun ido-completing-read* (prompt choices &optional predicate require-match
 				      initial-input hist def inherit-input-method)

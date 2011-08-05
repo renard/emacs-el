@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-07-25 11:48:34
+;; Last changed: 2011-08-06 00:57:09
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -360,3 +360,24 @@ when process state changes to `exit'."
   "Open `default-directory' in `dired' without confirmation."
   (interactive)
   (cw:with-parse-directory (progn (dired default-directory))))
+
+;;;###autoload
+(defun set-hooks-debug (&optional desactivate)
+  "Toggle hook name display when run.
+
+If universal argument or DESACTIVATE is provided, debug is set to
+off."
+  (interactive "P")
+  (if unadvice
+      (progn
+	(ad-unadvise 'run-hooks)
+	(ad-unadvise 'run-hook-with-args))
+    (progn
+      (defadvice run-hooks (before cw:run-hooks activate)
+	"Show hook name on run."
+	(with-current-buffer "*Messages*"
+	  (insert (format "running hooks: %s\n" (ad-get-args 0)))))
+      (defadvice run-hook-with-args (before cw:run-hook-with-args activate)
+	"Show hook name on run."
+	(with-current-buffer "*Messages*"
+	  (insert (format "running hooks with args: %s\n" (ad-get-args 0))))))))
