@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-05 17:38:02
+;; Last changed: 2011-08-05 18:11:32
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -193,7 +193,8 @@
 (eval-after-load 'faces
   '(progn
      (unless noninteractive
-       (set-face-font 'default "DejaVu Sans Mono-10"))))
+       (set-face-font 'default "DejaVu Sans Mono-10"))
+     (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
 
 (eval-after-load 'files
   '(progn
@@ -298,7 +299,7 @@
 (eval-after-load 'hilit-chg
   '(progn
      (set-face-attribute 'highlight-changes nil :foreground nil :background "#2e4436")
-     (set-face-attribute 'highlight-changes-delete nil :foreground nil :background "#3e3446")
+     (set-face-attribute 'highlight-changes-delete nil :foreground "#be3446" :background "#3e3446" :underline t)
      (defun cw:hilit-chg-reset ()
        "Remove highlight marks in current buffer."
        (interactive)
