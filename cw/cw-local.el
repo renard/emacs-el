@@ -453,7 +453,7 @@ would be used if applicable ad remove CLEAR tag.
 	     (hide-entry)
 	     (show-children 3)))
 	 (set-buffer-modified-p modified-flag))
-       (setq org-crypt-disable-auto-save t)))
+       (setq org-crypt-disable-auto-save t))))
 
 (eval-after-load 'org-install
   '(progn
