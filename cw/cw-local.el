@@ -445,11 +445,10 @@
 
 (eval-after-load 'org-crypt
   '(progn
-     (defadvice org-encrypt-entry
+     (defadvice org-encrypt-entry (around cw:org-encrypt-entry activate)
        "Go to CRYPTKEY property node make sure that a GPG key
 would be used if applicable ad remove CLEAR tag.
 "
-       (around cw:org-encrypt-entry activate)
        (search-backward ":CRYPTKEY:" nil t)
        (org-back-to-heading t)
        (show-subtree)
@@ -457,9 +456,8 @@ would be used if applicable ad remove CLEAR tag.
        (org-back-to-heading t)
        (org-set-tags-to (delete "CLEAR" (org-get-tags)))
        (hide-entry))
-     (defadvice org-decrypt-entry
+     (defadvice org-decrypt-entry (around cw:org-decrypt-entry activate)
        "Add a CLEAR tag to the current entry."
-       (around cw:org-decrypt-entry activate)
        (org-back-to-heading t)
        (show-subtree)
        (let ((modified-flag (buffer-modified-p)))
