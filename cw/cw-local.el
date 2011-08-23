@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-06 01:30:43
+;; Last changed: 2011-08-23 13:22:27
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -589,7 +589,10 @@ or `mail-envelope-from'."
 
 (eval-after-load 'smtpmail
   '(progn
-     (setq smtpmail-default-smtp-server "127.0.0.1")))
+     (setq
+      sendmail-query-once-function 'smtpmail-send-it
+      smtpmail-default-smtp-server "127.0.0.1"
+      smtpmail-smtp-service "smtp")))
 
 (eval-after-load "subr"
   ;; subr is not provided
