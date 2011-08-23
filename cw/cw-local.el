@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-23 13:22:27
+;; Last changed: 2011-08-23 14:32:00
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -304,10 +304,16 @@
      (define-key hs-minor-mode-map (kbd "C-c RET") 'hs-hide-all)
      (add-hook 'hs-minor-mode-hook 'hs-hide-all)))
 
-(eval-after-load 'hilit-chg
+(eval-after-load "hilit-chg"
   '(progn
-     (set-face-attribute 'highlight-changes nil :foreground nil :background "#2e4436")
-     (set-face-attribute 'highlight-changes-delete nil :foreground nil :background "#3e3446" :underline nil)
+     ;; This ugly trick is used to prevent from getting red colored changes
+     ;; at startup.
+     (defadvice hilit-chg-make-list
+       (after cw:hilit-chg-make-list activate)
+       "Update face attributes."
+       (set-face-attribute 'highlight-changes nil :foreground nil :background "#2e4436")
+       (set-face-attribute 'highlight-changes-delete nil :foreground nil :background "#3e3446" :underline nil))
+     (hilit-chg-make-list)
      (defun cw:hilit-chg-reset ()
        "Remove highlight marks in current buffer."
        (interactive)
