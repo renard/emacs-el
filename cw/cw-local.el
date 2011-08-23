@@ -307,7 +307,7 @@
 (eval-after-load 'hilit-chg
   '(progn
      (set-face-attribute 'highlight-changes nil :foreground nil :background "#2e4436")
-     (set-face-attribute 'highlight-changes-delete nil :foreground "#be3446" :background "#3e3446" :underline t)
+     (set-face-attribute 'highlight-changes-delete nil :foreground nil :background "#3e3446" :underline nil)
      (defun cw:hilit-chg-reset ()
        "Remove highlight marks in current buffer."
        (interactive)
