@@ -585,14 +585,14 @@ or `mail-envelope-from'."
      (setq
       mail-specify-envelope-from t
       mail-envelope-from 'header
+      send-mail-function 'smtpmail-send-it
+      smtpmail-smtp-server "127.0.0.1"
       message-from-style 'angles)))
 
 (eval-after-load 'smtpmail
   '(progn
      (setq
-      sendmail-query-once-function 'smtpmail-send-it
-      smtpmail-default-smtp-server "127.0.0.1"
-      smtpmail-smtp-service "smtp")))
+      sendmail-query-once-function 'smtpmail-send-it)))
 
 (eval-after-load "subr"
   ;; subr is not provided
