@@ -341,8 +341,8 @@
      ;; Some ido key bindings
      (define-key global-map (kbd "C-x C-b") 'ido-switch-buffer)
      (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
-     ;; Do not create "Ido Completion Help" buffer.
-     (defadvice ido-completion-help (around cw:ido-completion-help activate))
+     (defadvice ido-completion-help (around cw:ido-completion-help activate)
+       "Do not create \"Ido Completion Help\" buffer.")
      (defun cw:ido-init-keys ()
        "Add some usefull ido bindings."
        (define-key ido-common-completion-map (kbd "?") 'ad-Orig-ido-completion-help))
