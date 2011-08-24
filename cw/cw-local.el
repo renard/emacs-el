@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-24 17:43:15
+;; Last changed: 2011-08-24 17:44:49
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -74,7 +74,7 @@
  ;; d
 (eval-after-load 'desktop
   '(progn
-     (setq 
+     (setq
       desktop-restore-eager 20)))
 
 (eval-after-load 'diff-mode
@@ -125,7 +125,7 @@
  ;; e
 (eval-after-load 'erc
   '(progn
-     (setq 
+     (setq
       erc-server-auto-reconnect nil
       erc-kill-server-buffer-on-quit t)
      (set-face-attribute 'erc-notice-face nil :foreground "#ad7fa8")
@@ -138,7 +138,7 @@
 
 (eval-after-load 'erc-track
   '(progn
-     (setq 
+     (setq
       erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "333" "353")
       erc-track-use-faces t
       erc-track-priority-faces-only 'all)))
@@ -222,7 +222,7 @@
        (if (buffer-live-p "*Group*")
 	   (switch-to-buffer"*Group*")
 	 ad-do-it))
-     (setq       
+     (setq
       gnus-message-archive-group 'cw:gnus:archive-message)))
 
 (eval-after-load 'gnus-art
@@ -240,7 +240,7 @@
 
 (eval-after-load 'gnus-start
   '(progn
-     (setq gnus-init-file 
+     (setq gnus-init-file
 	   (concat (file-name-as-directory user-emacs-directory) "cw/cw-gnus.el"))
      (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)))
 
@@ -296,7 +296,7 @@
 		      (format "...  / %d"
 			      (count-lines (overlay-start ov)
 					   (overlay-end ov))))))
-     
+
      (setq hs-set-up-overlay 'display-code-line-counts)
 
 
@@ -445,7 +445,7 @@
      (define-key org-mode-map (kbd "C-c E") 'cw:org:toggle-encryption)))
 
 (eval-after-load 'org-contacts
-  '(progn 
+  '(progn
      (setq
       org-contacts-files
       '("~/.emacs.d/org/contacts.org"))))
@@ -584,7 +584,7 @@ or `mail-envelope-from'."
        (setq ad-return-value
 	     (or
 	      (nth 1 (mail-extract-address-components
-		      (or 
+		      (or
 		       (message-fetch-field "Sender")
 		       (message-fetch-field "Return-path")
 		       (message-fetch-field "From"))))
@@ -655,7 +655,7 @@ or `mail-envelope-from'."
 	   term-default-bg-color 'unspecified)
      (add-hook 'term-mode-hook (lambda () (hl-line-mode -1)))
      (add-hook 'term-mode-hook 'cw:shell:set-font)
-     
+
      (defun cw:term:toggle-line-mode()
        "Toogle between line and char mode in term-mode."
        (interactive)
@@ -742,7 +742,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
      (eval-last-sexp nil)
      (kill-buffer "tramp-sh.el.gz")
 
-     (defadvice tramp-open-connection-setup-interactive-shell 
+     (defadvice tramp-open-connection-setup-interactive-shell
        (before cw:tramp-open-connection-setup-interactive-shell activate)
        "Add process-sentinel to tramp-shells. Kill buffer when process died."
        (set-process-sentinel
@@ -873,7 +873,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 	   predicate require-match initial-input hist def inherit-input-method)
 	(completing-read-default prompt choices predicate require-match
 				 initial-input hist def inherit-input-method)))
-  
+
     (setq completing-read-function 'ido-completing-read*)))
 
 (unless noninteractive (cw:init))

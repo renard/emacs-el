@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-06 00:57:09
+;; Last changed: 2011-08-24 17:45:16
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -18,7 +18,7 @@
 
 (require 'cl)
 
-;; 
+;;
 ;; adoc-mode
 ;;
 ;;;###autoload
@@ -304,7 +304,7 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
 			 ;; don't store these lines into shell history
 			 "history -d $((HISTCMD - 1));\n"))
        ;; Start shell
-       (switch-to-buffer 
+       (switch-to-buffer
 	(apply
 	 'make-term (if host
 			(concat "ssh " host)

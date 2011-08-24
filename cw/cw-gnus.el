@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2011-07-13
-;; Last changed: 2011-07-23 23:06:39
+;; Last changed: 2011-08-24 17:45:09
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -30,7 +30,7 @@ given by `cw:gnus:host-configuration'."
 		 cw:gnus:host-configuration))
      :archive))
    (t current-folder)))
-	
+
 
 
 

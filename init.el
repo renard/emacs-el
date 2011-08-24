@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-23 14:50:36
+;; Last changed: 2011-08-24 17:45:37
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -47,7 +47,7 @@
        (setq el-get-recipe-path-emacswiki (concat ,tmp-dir "emacswiki"))))
 
   (eval-after-load 'emms
-    `(progn 
+    `(progn
        (setq emms-directory (concat ,tmp-dir "emms"))
        (mkdir emms-directory t)))
 
@@ -83,7 +83,7 @@
     `(progn
        (setq smex-save-file (concat ,tmp-dir "smex-items"))))
 
-  
+
   (eval-after-load 'tramp-cache
     `(progn
        (setq tramp-persistency-file-name (concat ,tmp-dir "tramp"))))
@@ -158,7 +158,7 @@
 	))
 
      ;; create a package list to be installed
-     (let ((cw:packages 
+     (let ((cw:packages
 	    '(
 	      adoc-mode
 	      browse-kill-ring
