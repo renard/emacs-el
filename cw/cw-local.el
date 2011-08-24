@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-23 14:32:00
+;; Last changed: 2011-08-24 17:43:15
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -42,7 +42,7 @@
 (eval-after-load 'browse-url
   '(progn
      (setq
-      browse-url-generic-program "x-www-browser"
+      browse-url-generic-program "surf"
       browse-url-browser-function 'browse-url-generic)))
 
 (eval-after-load 'buffer-move
@@ -186,8 +186,7 @@
 
      (global-set-key (kbd "M-[") 'escreen-goto-prev-screen)
      (global-set-key (kbd "M-]") 'escreen-goto-next-screen)
-     (unless noninteractive
-       (global-set-key (kbd "C-\\ l") 'escreen-get-active-screen-numbers-with-emphasis))))
+     (define-key escreen-map "l" 'escreen-get-active-screen-numbers-with-emphasis)))
 
  ;; f
 (eval-after-load 'faces
@@ -228,7 +227,8 @@
 
 (eval-after-load 'gnus-art
   '(progn
-     (setq 
+     (define-key gnus-article-mode-map (kbd "<C-return>") 'gnus-article-browse-html-article)
+     (setq
       gnus-visible-headers (concat gnus-visible-headers
 				   "\\|^User-Agent:\\|^X-Mailer:")
       gnus-article-update-date-headers nil)))
@@ -246,7 +246,8 @@
 
 (eval-after-load 'gnus-sum
   '(progn
-     (setq       
+     (define-key gnus-summary-mode-map (kbd "<C-return>") 'gnus-article-browse-html-article)
+     (setq
       gnus-user-date-format-alist
       '(
 	((gnus-seconds-today) .           "Today      %H:%M")
