@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-24 17:44:49
+;; Last changed: 2011-08-31 14:39:02
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -42,7 +42,8 @@
 (eval-after-load 'browse-url
   '(progn
      (setq
-      browse-url-generic-program "surf"
+      browse-url-generic-program "x-www-browser"
+      browse-url-generic-args '("--new-window")
       browse-url-browser-function 'browse-url-generic)))
 
 (eval-after-load 'buffer-move
@@ -76,6 +77,21 @@
   '(progn
      (setq
       desktop-restore-eager 20)))
+
+(eval-after-load 'dictonary
+  '(progn
+     ;; (make-local-hook HOOK)
+     ;; This function is obsolete since 21.1;
+     ;; not necessary any more.
+     (defun make-local-hook (name) "backward compat" nil)
+     (global-set-key (kbd "C-c ?") (lambda () (interactive)
+				     (dictionary-lookup-definition)))
+     (setq
+      dictionary-server "localhost")))
+
+(eval-after-load 'diff
+  '(progn
+     (setq diff-switches "-Nu")))
 
 (eval-after-load 'diff-mode
   '(progn
@@ -387,6 +403,7 @@
 (eval-after-load 'mailcap
   '(progn
      (add-to-list 'mailcap-mime-extensions '(".mkv" . "video/x-matroska"))
+     (add-to-list 'mailcap-mime-extensions '(".f4v" . "video/x-matroska"))
      (mailcap-parse-mailcaps nil t)))
 
 (eval-after-load 'menu-bar

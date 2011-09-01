@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-24 17:45:37
+;; Last changed: 2011-09-01 18:03:28
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -149,12 +149,21 @@
 	       :after (lambda ()
 			(autoload 'mediawiki-open "mediawiki.el")
 			(autoload 'mediawiki-site "mediawiki.el")))
-	(:name ace-jump
-	       :type git
-	       :url "https://github.com/winterTTr/ace-jump-mode.git")
 	(:name fill-column-indicator
 	 :type git
 	 :url "https://github.com/alpaker/Fill-Column-Indicator.git")
+	(:name dictionary
+	       :website "http://www.myrkr.in-berlin.de/dictionary/"
+	       :desciption "Emacs package for talking to a dictionary server"
+	       :type http-tar
+	       :options ("xzf")
+	       :url "http://www.myrkr.in-berlin.de/dictionary/dictionary-1.8.7.tar.gz"
+	       :build ("make"))
+	(:name blorg
+	       :type git
+	       :url "https://github.com/RolKau/blorg.git")
+	(:name elscreen-buffer-list
+	       :type emacswiki)
 	))
 
      ;; create a package list to be installed
@@ -176,6 +185,7 @@
 	      keywiz
 	      list-processes+
 	      magit
+	      magithub
 	      mailq
 	      muse
 	      nagios-mode
@@ -190,7 +200,7 @@
 	      smex
 	      switch-window
 	      vkill
-
+	      hl-tags-mode
 	      )))
 
        (setq cw:packages
