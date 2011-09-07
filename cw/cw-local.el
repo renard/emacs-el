@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-08-31 14:39:02
+;; Last changed: 2011-09-07 18:17:59
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -136,9 +136,39 @@
      (define-key dired-mode-map "Y"  'dired-do-relsymlink)
      (define-key dired-mode-map (kbd "C-s") 'dired-isearch-filenames)
      (define-key dired-mode-map (kbd "C-c S") 'dired-do-sync)
+     (define-key dired-mode-map (kbd "C-c s") 'dired-do-sync-pool)
      (define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)))
 
  ;; e
+(eval-after-load 'emms
+  '(progn
+     (require 'emms-setup nil t)
+     (require 'emms-mode-line nil t)
+     (require 'emms-player-mplayer nil t)
+     ;;(require 'emms-url nil t)
+     ;;(require 'emms-tag-editor nil t)
+     (require 'emms-info-libtag nil t)
+     (require 'emms-browser nil t)
+
+     (setq
+      emms-show-format "NP: %s"
+      emms-player-list '(emms-player-mplayer-playlist emms-player-mplayer))))
+
+(eval-after-load 'emms-info
+  '(progn
+     (setq
+      emms-info-asynchronously t
+      emms-info-functions '(emms-info-libtag))))
+
+(eval-after-load 'emms-mode-line
+  '(progn
+     (setq
+      emms-mode-line-format " %s ")))
+
+(eval-after-load 'emms-setup
+  '(progn
+     (emms-standard)))
+
 (eval-after-load 'erc
   '(progn
      (setq
