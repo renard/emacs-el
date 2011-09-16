@@ -450,7 +450,9 @@
 	 (hs-minor-mode)
 	 (flyspell-prog-mode))
        (rainbow-delimiters-mode 1))
-     (add-hook 'emacs-lisp-mode-hook 'cw:emacs-lisp-mode-setup)))
+
+     (add-hook 'emacs-lisp-mode-hook 'cw:emacs-lisp-mode-setup)
+     (add-hook 'lisp-mode-hook 'cw:emacs-lisp-mode-setup)))
 
  ;; m
 (eval-after-load 'magit
