@@ -729,48 +729,49 @@ or `mail-envelope-from'."
  ;; t
 (eval-after-load 'term
   '(progn
-     (define-key term-raw-map escreen-prefix-char escreen-map)
-     (define-key term-raw-map (kbd "M-[") 'escreen-goto-prev-screen)
-     (define-key term-raw-map (kbd "M-]") 'escreen-goto-next-screen)
-     (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
-     (setq ansi-term-color-vector
-	   [unspecified "black" "#f57900" "#8ae234" "#edd400" "#729fcf"
-			"#ad7fa8" "cyan3" "#eeeeec"]
-	   term-default-fg-color "#eeeeec"
-	   term-default-bg-color 'unspecified)
-     (add-hook 'term-mode-hook (lambda () (hl-line-mode -1)))
-     (add-hook 'term-mode-hook 'cw:shell:set-font)
+     (unless noninteractive
+       (define-key term-raw-map escreen-prefix-char escreen-map)
+       (define-key term-raw-map (kbd "M-[") 'escreen-goto-prev-screen)
+       (define-key term-raw-map (kbd "M-]") 'escreen-goto-next-screen)
+       (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
+       (setq ansi-term-color-vector
+	     [unspecified "black" "#f57900" "#8ae234" "#edd400" "#729fcf"
+			  "#ad7fa8" "cyan3" "#eeeeec"]
+	     term-default-fg-color "#eeeeec"
+	     term-default-bg-color 'unspecified)
+       (add-hook 'term-mode-hook (lambda () (hl-line-mode -1)))
+       (add-hook 'term-mode-hook 'cw:shell:set-font)
 
-     (defun cw:term:toggle-line-mode()
-       "Toogle between line and char mode in term-mode."
-       (interactive)
-       (if (term-in-char-mode)
-	   (term-line-mode)
-	 (end-of-buffer)
-	 (term-char-mode)))
+       (defun cw:term:toggle-line-mode()
+	 "Toogle between line and char mode in term-mode."
+	 (interactive)
+	 (if (term-in-char-mode)
+	     (term-line-mode)
+	   (end-of-buffer)
+	   (term-char-mode)))
 
-     (defadvice global-hl-line-highlight
-       (around cw:global-hl-line-highlight activate)
-       "Disable hl-line-highlight in `term-char-mode'."
-       (unless (and (eq major-mode 'term-mode) (term-in-char-mode))
-	 ad-do-it))
+       (defadvice global-hl-line-highlight
+	 (around cw:global-hl-line-highlight activate)
+	 "Disable hl-line-highlight in `term-char-mode'."
+	 (unless (and (eq major-mode 'term-mode) (term-in-char-mode))
+	   ad-do-it))
 
-     (defun cw:term:backward-word ()
-       "Move backward work in term-mode."
-       (interactive)
-       (term-send-raw-string "\eb"))
+       (defun cw:term:backward-word ()
+	 "Move backward work in term-mode."
+	 (interactive)
+	 (term-send-raw-string "\eb"))
 
-     (defun cw:term:forward-word ()
-       "Move forward work in term-mode."
-       (interactive)
-       (term-send-raw-string "\ef"))
+       (defun cw:term:forward-word ()
+	 "Move forward work in term-mode."
+	 (interactive)
+	 (term-send-raw-string "\ef"))
 
-     (define-key term-raw-map (kbd "C-y")  'term-paste)
-     (define-key term-raw-map (kbd "<C-right>")  'cw:term:forward-word)
-     (define-key term-raw-map (kbd "<C-left>")  'cw:term:backward-word)
-     (define-key term-raw-map (kbd "C-c C-'")  'cw:term:toggle-line-mode)
-     (define-key term-mode-map (kbd "C-c C-'")  'cw:term:toggle-line-mode)
-     (define-key term-raw-map [mouse-2] 'term-mouse-paste)))
+       (define-key term-raw-map (kbd "C-y")  'term-paste)
+       (define-key term-raw-map (kbd "<C-right>")  'cw:term:forward-word)
+       (define-key term-raw-map (kbd "<C-left>")  'cw:term:backward-word)
+       (define-key term-raw-map (kbd "C-c C-'")  'cw:term:toggle-line-mode)
+       (define-key term-mode-map (kbd "C-c C-'")  'cw:term:toggle-line-mode)
+       (define-key term-raw-map [mouse-2] 'term-mouse-paste))))
 
 (eval-after-load 'time-stamp
   '(progn
