@@ -20,7 +20,8 @@
   (save-buffer)
   (kill-buffer (current-buffer))
   ;; Other autoloads
-  (autoload 'org-crypt-use-before-save-magic "org-crypt"))
+  (autoload 'org-crypt-use-before-save-magic "org-crypt")
+  (autoload 'descbinds-anything "descbinds-anything"))
 
 (load "~/.emacs.d/.tmp/autoload")
 
