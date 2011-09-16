@@ -950,16 +950,6 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   ;; (when (require 'ace-jump-mode nil t)
   ;;   (global-set-key (kbd "C-x C-PC") 'ace-jump-mode))
 
-  (defun cw:global-file-init()
-    "Add some global configuration when opening a file."
-    (interactive)
-    (when (and (buffer-file-name)
-	       (file-exists-p (buffer-file-name)))
-      ;; need to wait a few moment for frame to be defined.
-      (run-with-idle-timer 0.01 nil 'fci-mode)
-      (highlight-changes-mode)))
-  (add-hook 'find-file-hook 'cw:global-file-init)
-
   (when (require 'yasnippet nil t)
     (yas/initialize))
 
