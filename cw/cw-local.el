@@ -918,6 +918,18 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (global-set-key (kbd "C-x <C-return>") 'cw:shell-run)
   (global-set-key (kbd "C-x <S-return>") 'cw:term-run)
 
+  (global-set-key (kbd "C-h b") 'descbinds-anything)
+
+  (defadvice anything-occur (around cw:anything-occur activate)
+    "Restrict buffer to selection if needed so goto line really works."
+    (save-restriction
+      (when (region-active-p)
+	(narrow-to-region (region-beginning) (region-end)))
+      (anything-other-buffer 'anything-c-source-occur "*Anything Occur*")))
+  ;; (ad-unadvise 'anything-occur)
+
+  (global-set-key (kbd "M-s M-s") 'anything-occur)
+
   ;; Global activations
   (desktop-save-mode 1)
   (savehist-mode 1)
