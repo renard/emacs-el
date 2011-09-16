@@ -921,15 +921,15 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 
   (global-set-key (kbd "C-h b") 'descbinds-anything)
 
-  (defadvice anything-occur (around cw:anything-occur activate)
-    "Restrict buffer to selection if needed so goto line really works."
+  (defun cw:anything-occur ()
+    "Restrict buffer to selection if needed so goto line really
+works and run `anything-other-buffer'."
+    (interactive)
     (save-restriction
       (when (region-active-p)
 	(narrow-to-region (region-beginning) (region-end)))
       (anything-other-buffer 'anything-c-source-occur "*Anything Occur*")))
-  ;; (ad-unadvise 'anything-occur)
-
-  (global-set-key (kbd "M-s M-s") 'anything-occur)
+  (global-set-key (kbd "M-s M-s") 'cw:anything-occur)
 
   ;; Global activations
   (desktop-save-mode 1)
