@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-19 14:33:21
+;; Last changed: 2011-09-19 15:06:16
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -21,7 +21,8 @@
   (kill-buffer (current-buffer))
   ;; Other autoloads
   (autoload 'org-crypt-use-before-save-magic "org-crypt")
-  (autoload 'descbinds-anything "descbinds-anything"))
+  (autoload 'descbinds-anything "descbinds-anything")
+  (autoload 'dictionary-new-search "dictionary"))
 
 (load "~/.emacs.d/.tmp/autoload")
 
@@ -79,7 +80,7 @@
      (setq
       desktop-restore-eager 20)))
 
-(eval-after-load "dictonary"
+(eval-after-load 'dictionary
   '(progn
      ;; (make-local-hook HOOK)
      ;; This function is obsolete since 21.1;
