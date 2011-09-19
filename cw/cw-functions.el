@@ -381,3 +381,15 @@ off."
 	"Show hook name on run."
 	(with-current-buffer "*Messages*"
 	  (insert (format "running hooks with args: %s\n" (ad-get-args 0))))))))
+
+;;;###autoload
+(defun asciify-string (string)
+"Convert STRING to ASCII string.
+For example:
+“passé” becomes “passe”
+Code originally by Teemu Likonen."
+  (with-temp-buffer
+    (insert string)
+    (call-process-region (point-min) (point-max)
+			 "iconv" t t nil "--to-code=ASCII//TRANSLIT")
+    (buffer-substring-no-properties (point-min) (point-max))))
