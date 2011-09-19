@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-07 18:17:59
+;; Last changed: 2011-09-19 14:33:21
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -79,14 +79,12 @@
      (setq
       desktop-restore-eager 20)))
 
-(eval-after-load 'dictonary
+(eval-after-load "dictonary"
   '(progn
      ;; (make-local-hook HOOK)
      ;; This function is obsolete since 21.1;
      ;; not necessary any more.
      (defun make-local-hook (name) "backward compat" nil)
-     (global-set-key (kbd "C-c ?") (lambda () (interactive)
-				     (dictionary-lookup-definition)))
      (setq
       dictionary-server "localhost")))
 
@@ -920,6 +918,13 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (global-set-key (kbd "C-x <S-return>") 'cw:term-run)
 
   (global-set-key (kbd "C-h b") 'descbinds-anything)
+
+
+  (global-set-key (kbd "C-c ?")
+		  (lambda () (interactive)
+		    (dictionary-new-search
+		     (cons (asciify-string (current-word))
+			   dictionary-default-dictionary))))
 
   (defun cw:anything-occur ()
     "Restrict buffer to selection if needed so goto line really
