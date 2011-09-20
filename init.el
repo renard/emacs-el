@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-02 15:58:26
+;; Last changed: 2011-09-16 21:17:35
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -158,12 +158,14 @@
 	       :type git
 	       :description "Blogging engine using Emacs Org-mode to create static pages"
 	       :url "https://github.com/RolKau/blorg.git")
+	(:name descbinds-anything
+	       :type emacswiki)
 	))
-
      ;; create a package list to be installed
      (let ((cw:packages
 	    '(
 	      adoc-mode
+	      anything
 	      browse-kill-ring
 	      buffer-move
 	      cisco-router-mode
