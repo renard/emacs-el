@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-20 21:33:31
+;; Last changed: 2011-09-21 18:10:21
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -393,3 +393,18 @@ Code originally by Teemu Likonen."
     (call-process-region (point-min) (point-max)
 			 "iconv" t t nil "--to-code=ASCII//TRANSLIT")
     (buffer-substring-no-properties (point-min) (point-max))))
+
+;;;###autoload
+(defun find-function-or-variable-at-point ()
+  "Locate function or variable at point."
+  (interactive)
+  (let ((f-o-v (thing-at-point 'symbol)))
+    (when f-o-v
+      (setq f-o-v (intern (substring-no-properties f-o-v)))
+      (cond
+       ((fboundp f-o-v)
+	(find-function-other-window f-o-v))
+       ((boundp f-o-v)
+	(find-variable-other-window f-o-v))
+       (t
+	(message (format "No definition found for %s" f-o-v)))))))

@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-19 15:19:07
+;; Last changed: 2011-09-21 18:14:22
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -453,7 +453,7 @@
 	 (hs-minor-mode)
 	 (flyspell-prog-mode))
        (rainbow-delimiters-mode 1))
-
+     (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'find-function-or-variable-at-point)
      (add-hook 'emacs-lisp-mode-hook 'cw:emacs-lisp-mode-setup)
      (add-hook 'lisp-mode-hook 'cw:emacs-lisp-mode-setup)))
 
