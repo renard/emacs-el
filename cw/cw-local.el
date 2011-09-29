@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-21 18:15:20
+;; Last changed: 2011-09-29 22:23:12
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -924,6 +924,11 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 
   (global-set-key (kbd "C-h b") 'descbinds-anything)
 
+  (global-set-key (kbd "<C-XF86AudioPlay>") 'emms-smart-browse)
+  (global-set-key (kbd "<S-XF86AudioPause>") 'emms-stop)
+  (global-set-key (kbd "<XF86AudioPlay>") 'emms-pause)
+  (global-set-key (kbd "<XF86AudioNext>") 'emms-next)
+  (global-set-key (kbd "<XF86AudioPrev>") 'emms-previous)
 
   (global-set-key (kbd "C-c ?")
 		  (lambda () (interactive)

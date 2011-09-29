@@ -129,6 +129,7 @@
 	(:name gnus-identities
 	       :url "git@github.com:renard/gnus-identities.git")
 	(:name emms ;; Original recipe is buggy
+	       :url "git@github.com:renard/emms.git"
 	       :depends emacs-w3m
 	       :features nil
 	       :build ("mkdir -p ~/.emacs.d/emms"
