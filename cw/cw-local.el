@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-29 22:23:12
+;; Last changed: 2011-10-10 15:10:59
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -499,6 +499,10 @@
   '(progn
      (setq mm-inline-large-images 'resize)
      (add-to-list 'mm-attachment-override-types "image/.*")))
+
+(eval-after-load 'mouse
+  '(progn
+     (setq mouse-yank-at-point t)))
 
  ;; o
 (eval-after-load 'org
