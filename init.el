@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-16 21:17:35
+;; Last changed: 2011-12-01 10:28:24
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -171,6 +171,9 @@
      ;; create a package list to be installed
      (let ((cw:packages
 	    '(
+	      ;; nognus should be first item to be loaded otherwise emacs'
+	      ;; version of gnus-util is loaded instead.
+	      nognus
 	      adoc-mode
 	      anything
 	      browse-kill-ring
@@ -194,7 +197,6 @@
 	      mailq
 	      muse
 	      nagios-mode
-	      nognus
 	      offlineimap
 	      org-mode
 	      pastebin
