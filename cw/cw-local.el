@@ -591,6 +591,18 @@ would be used if applicable ad remove CLEAR tag.
   '(progn
      (setq show-paren-style 'parenthesis)))
 
+(eval-after-load 'projects
+  '(progn
+     (setq
+      project-rename-all-buffers t
+      project-buffer-name-directory-prefix "»"
+      project-root-alist
+      '(
+	("emacs.d" . "~/.emacs.d")
+	("fai" . "~/src/fai-config")
+	("qbs" . "~/.emacs.d/el-get/quick-buffer-switch/")))))
+
+
  ;; q
 (eval-after-load 'quail
   '(progn
@@ -852,9 +864,6 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 	    (kill-buffer (process-buffer proc))))))))
 
  ;; u
-(eval-after-load 'uniquify
-  '(progn
-     (setq uniquify-buffer-name-style 'post-forward)))
 
  ;; x
 (eval-after-load 'x-win
@@ -959,7 +968,6 @@ works and run `anything-other-buffer'."
   ;;(menu-bar-mode -1)
 
 
-  (require 'uniquify nil t)
   (ido-mode t)
   (show-paren-mode t)
   (add-hook 'after-save-hook 'gac-commit-file t nil)

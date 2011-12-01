@@ -109,6 +109,12 @@
 	(:name bzr
 	       :description "Easy to use distributed version control system"
 	       :type apt-get)
+	(:name texinfo
+	       :description "Documentation system for on-line information and printed output"
+	       :type apt-get)
+	(:name emacs-goodies-el
+	       :description "Miscellaneous add-ons for Emacs"
+	       :type apt-get)
 	(:name string-template
 	       :url "git@github.com:renard/string-template-el.git")
 	(:name org-website
