@@ -384,6 +384,9 @@
 	     try-complete-lisp-symbol-partially
 	     try-complete-lisp-symbol))))
 
+(eval-after-load 'sgml-mode
+  '(progn
+     (add-hook 'html-mode-hook 'hl-tags-mode)))
  ;; i
 (eval-after-load 'ibuffer
   '(progn
