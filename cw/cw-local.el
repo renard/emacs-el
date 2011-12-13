@@ -665,6 +665,12 @@ would be used if applicable ad remove CLEAR tag.
 
      (global-set-key (kbd "<f9>") 'cw:toggle-input-method)))
 
+(eval-after-load 'quick-buffer-switch
+ '(progn
+    (defun cw:qbs-add-sudo-cmd ()
+      (define-key quick-buffer-switch-map (kbd "C-s") 'dired-toggle-sudo))
+    (add-hook 'qbs-post-init-hook 'cw:qbs-add-sudo-cmd)))
+
  ;; r
 (eval-after-load 'rainbow-delimiters
   '(progn
