@@ -965,6 +965,8 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 		     (cons (asciify-string (current-word))
 			   dictionary-default-dictionary))))
 
+  (qbs-init)
+
   (defun cw:anything-occur ()
     "Restrict buffer to selection if needed so goto line really
 works and run `anything-other-buffer'."
