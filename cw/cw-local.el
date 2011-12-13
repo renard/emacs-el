@@ -384,9 +384,11 @@
 	     try-complete-lisp-symbol-partially
 	     try-complete-lisp-symbol))))
 
-(eval-after-load 'sgml-mode
+
+(eval-after-load 'hl-tags-mode
   '(progn
-     (add-hook 'html-mode-hook 'hl-tags-mode)))
+     (set-face-attribute 'hl-tags-face nil :background "#2e4436" :foreground nil)))
+
  ;; i
 (eval-after-load 'ibuffer
   '(progn
@@ -705,6 +707,11 @@ or `mail-envelope-from'."
       send-mail-function 'smtpmail-send-it
       smtpmail-smtp-server "127.0.0.1"
       message-from-style 'angles)))
+
+(eval-after-load 'sgml-mode
+  '(progn
+     (add-hook 'html-mode-hook 'hl-tags-mode)))
+
 
 (eval-after-load 'smtpmail
   '(progn
