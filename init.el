@@ -51,6 +51,10 @@
        (setq emms-directory (concat ,tmp-dir "emms"))
        (mkdir emms-directory t)))
 
+  (eval-after-load 'eshell
+    `(progn
+       (setq eshell-directory-name (concat ,tmp-dir "eshell"))))
+
   (eval-after-load 'files
     `(progn
        (setq
