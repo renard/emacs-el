@@ -770,6 +770,7 @@ or `mail-envelope-from'."
        (define-key term-raw-map (kbd "M-[") 'escreen-goto-prev-screen)
        (define-key term-raw-map (kbd "M-]") 'escreen-goto-next-screen)
        (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
+       (define-key term-raw-map (kbd "M-'") 'ido-switch-buffer)
        (setq ansi-term-color-vector
 	     [unspecified "black" "#f57900" "#8ae234" "#edd400" "#729fcf"
 			  "#ad7fa8" "cyan3" "#eeeeec"]
