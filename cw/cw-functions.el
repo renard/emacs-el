@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-09-21 18:10:21
+;; Last changed: 2011-12-14 14:17:57
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -302,7 +302,7 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
 			   "export PROMPT_COMMAND=prompt_cmd;")))
        (setq cmd (concat cmd " "
 			 ;; don't store these lines into shell history
-			 "history -d $((HISTCMD - 1));\n"))
+			 "history -d $((HISTCMD - 1)); clear; \n"))
        ;; Start shell
        (switch-to-buffer
 	(apply
