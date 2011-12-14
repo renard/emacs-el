@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-12-14 11:21:44
+;; Last changed: 2011-12-14 15:22:57
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -433,7 +433,8 @@
       ido-use-filename-at-point 'guess
       ido-show-dot-for-dired t
       ido-use-url-at-point t
-      ido-auto-merge-delay-time 2.00)
+      ido-auto-merge-delay-time 5.00
+      ido-default-buffer-method 'selected-window)
      ;; Some ido key bindings
      (define-key global-map (kbd "C-x C-b") 'ido-switch-buffer)
      (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
