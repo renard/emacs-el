@@ -948,6 +948,8 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (global-set-key (kbd "<C-f2>") 'cw:erc:switch-to-screen)
   (define-key global-map (kbd "C-x C-d") 'cw:dired)
 
+  (global-set-key (kbd "C-x K") 'delete-frame)
+
   (global-set-key (kbd "C-x <C-return>") 'cw:shell-run)
   (global-set-key (kbd "C-x <S-return>") 'cw:term-run)
 
