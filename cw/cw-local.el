@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-12-14 16:29:15
+;; Last changed: 2011-12-15 00:16:00
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -47,8 +47,8 @@
 (eval-after-load 'browse-url
   '(progn
      (setq
-      browse-url-generic-program "x-www-browser"
-      browse-url-generic-args '("--new-window")
+      browse-url-generic-program "raise-x-www-browser"
+      browse-url-generic-args '("")
       browse-url-browser-function 'browse-url-generic)))
 
 (eval-after-load 'buffer-move
