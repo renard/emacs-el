@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-12-01 10:28:24
+;; Last changed: 2011-12-14 11:18:15
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -169,6 +169,10 @@
 	       :type git
 	       :description "Blogging engine using Emacs Org-mode to create static pages"
 	       :url "https://github.com/RolKau/blorg.git")
+	(:name org-hyde
+	       :type git
+	       :description "Export org-mode trees to hyde ready html files"
+	       :url "https://github.com/punchagan/org-hyde.git")
 	(:name descbinds-anything
 	       :type emacswiki)
 	))
