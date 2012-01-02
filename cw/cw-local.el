@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-12-19 13:32:41
+;; Last changed: 2012-01-02 11:52:00
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -902,6 +902,11 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 	   yas/prompt-functions '(yas/completing-prompt))
      (yas/load-directory yas/root-directory)
      (add-hook 'yas/minor-mode-hook 'cw:yasnippet:insert-snippet-new-file)))
+
+ ;; v
+(eval-after-load vc-hooks
+  '(progn
+     (setq vc-handled-backends nil)))
 
  ;; w
 (eval-after-load 'windmove
