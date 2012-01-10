@@ -1011,6 +1011,7 @@ works and run `anything-other-buffer'."
   (show-paren-mode t)
   (add-hook 'after-save-hook 'gac-commit-file t nil)
   (add-to-list 'auto-mode-alist '("\\.[1-9]\\.txt$" . adoc-mode))
+  (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
   (global-hl-line-mode)
   (when (functionp 'qbs-init) (qbs-init))
   (when (functionp 'cw:gtd:init) (cw:gtd:init))
