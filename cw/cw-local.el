@@ -922,7 +922,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
      (add-hook 'yas/minor-mode-hook 'cw:yasnippet:insert-snippet-new-file)))
 
  ;; v
-(eval-after-load vc-hooks
+(eval-after-load 'vc-hooks
   '(progn
      (setq vc-handled-backends nil)))
 
