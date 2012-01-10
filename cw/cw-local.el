@@ -515,11 +515,22 @@
      (setq mouse-yank-at-point t)))
 
  ;; o
+(eval-after-load 'o-blog
+  `(progn
+     (setq ob-async-opts '("--eval" "(require (quote color-theme))"
+			    "--eval" "(require (quote color-theme-tango))"))
+     (defadvice org-publish-blog (around cw:org-publish-blog activate)
+       "Do define `cw:org:publishing-project' before publishing."
+       (let ((cw:org:publishing-project t))
+	 ad-do-it))))
+
+
 (eval-after-load 'org
   '(progn
      (defun cw:org:org-mode-setup ()
        "Setup buffer for `org-mode' files."
        (unless (and
+		(not noninteractive)
 		(boundp 'cw:org:publishing-project)
 		cw:org:publishing-project)
 	 (setq time-stamp-start "^#\\+DATE: ")
