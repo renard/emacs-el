@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-02 11:52:00
+;; Last changed: 2012-01-10 11:08:49
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -444,6 +444,12 @@
        "Add some usefull ido bindings."
        (define-key ido-common-completion-map (kbd "?") 'ad-Orig-ido-completion-help))
      (add-hook 'ido-setup-hook 'cw:ido-init-keys)))
+
+(eval-after-load 'ielm
+  '(progn
+     (define-key inferior-emacs-lisp-mode-map (kbd "C-c C-f") 'find-function-or-variable-at-point)
+     (add-hook 'inferior-emacs-lisp-mode-hook 'eldoc-mode)
+     (add-hook 'inferior-emacs-lisp-mode-hook 'rainbow-delimiters-mode)))
 
 (eval-after-load 'ispell
   '(progn
