@@ -445,6 +445,13 @@
        (define-key ido-common-completion-map (kbd "?") 'ad-Orig-ido-completion-help))
      (add-hook 'ido-setup-hook 'cw:ido-init-keys)))
 
+(eval-after-load 'ispell
+  '(progn
+     (setq ispell-program-name
+	   (or
+	    (locate-file "ispell"   exec-path exec-suffixes 'file-executable-p)
+	    (locate-file "aspell"   exec-path exec-suffixes 'file-executable-p)))))
+
  ;; l
 (eval-after-load 'lisp-mode
   '(progn
