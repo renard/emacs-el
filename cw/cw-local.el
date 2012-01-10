@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-10 11:08:49
+;; Last changed: 2012-01-10 11:17:30
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -467,7 +467,9 @@
 		 (and (boundp 'cw:yasnippet:in-expansionp)
 		      (not cw:yasnippet:in-expansionp)))
 	 (unless (boundp 'cw:org:publishing-project)
-	   (hs-minor-mode))
+	   ;; Do not hide large buffers
+	   (when (< 65536 (buffer-size))
+	     (hs-minor-mode)))
 	 (flyspell-prog-mode))
        (rainbow-delimiters-mode 1))
      (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'find-function-or-variable-at-point)
