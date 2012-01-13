@@ -408,3 +408,110 @@ Code originally by Teemu Likonen."
 	(find-variable-other-window f-o-v))
        (t
 	(message (format "No definition found for %s" f-o-v)))))))
+
+;;;###autoload
+(defun phone-number-bounds-of-phone-number-at-point ()
+  "Return the start and end points of a phone number at the current
+point.
+The result is a paired list of character positions for an phone
+number located at the current point in the current buffer. An
+phone number is any decimal digit 0 through 9 with an optional
+starting plus symbol (`+') and with `.', `-' or space in it."
+  (save-excursion
+    (skip-chars-backward "()0123456789 .+-")
+    (if (looking-at "[()+0-9 .]+")
+        (let ((start (point)))
+          (skip-chars-forward "()0123456789 .+-")
+          (cons start (point)))
+      nil)))
+
+(put 'phone-number 'bounds-of-thing-at-point
+     'phone-number-bounds-of-phone-number-at-point)
+
+;;;###autoload
+((defun org-contact-call(&optional contact type properties cmd)
+  "Call CONTACT on its TYPE phone.
+
+If PROPERTIES is not specified, phone number is looked in
+properties matching HOME_PHONE, HOME_MOBILE, OFFICE_PHONE and
+OFFICE_MOBILE.
+
+CMD is a string used to call the contact. By default it is set to:
+\"twinkle --cmd 'call %s' --immediate\"."
+  (interactive)
+  (let* ((properties (or properties
+			 '("HOME_PHONE" "HOME_MOBILE" "OFFICE_PHONE" "OFFICE_MOBILE")))
+	 (properties-filter (format "%s={.+}" (mapconcat 'identity properties "={.+}|")))
+	 (contact (car (org-contacts-filter
+			(or contact
+			    (org-completing-read
+			     "Call: "
+			     (org-contacts-filter nil properties-filter) nil t)))))
+	 (number
+	  (replace-regexp-in-string
+	   "(.+)\\|\\s-+\\|-+\\|\\.+" ""
+	   (if type
+	       (loop for (k . v) in (nth 2 contact)
+		     when (equal k type)
+		     return v)
+	     (cadr
+	      (split-string
+	       (completing-read
+		"Phone number: "
+		(loop for (k . v) in (nth 2 contact)
+		      when (member k properties)
+		      collect (format "%s:%s" k v))
+		nil t)
+	       ":")))))
+	 (cmd (or cmd "twinkle --cmd 'call %s' --immediate"))
+
+
+	 (cmd-line (list "sh" "-c" (format cmd number)))
+	 (cmd-buf (get-buffer-create
+		   (format " *Calling: %s*"
+			   (substring-no-properties (car contact)))))
+	 (proc (apply 'start-process (car cmd-line)
+		      cmd-buf (car cmd-line) (cdr cmd-line))))
+
+    (process-put proc :cmd cmd)
+    (process-put proc :cmd-buf cmd-buf)
+
+    (set-process-sentinel
+     proc
+     '(lambda (proc change)
+	(when (eq (process-status proc) 'exit)
+	  (let ((status  (process-exit-status proc))
+		(cmd (process-get proc :cmd))
+		(cmd-buf (process-get proc :cmd-buf)))
+	    (when (and
+		   (not (eq 0 status))
+		   (process-buffer proc))
+	      (set-window-buffer (selected-window) cmd-buf)
+	      (error "Call error: %s" cmd))
+	    (when cmd-buf (kill-buffer cmd-buf))))))))
+
+;;;###autoload
+(defun save-file-and-copy ()
+  "Save current buffer and copy current file to an other file."
+  (interactive)
+  (save-buffer)
+  (let ((filename (read-file-name "Copy file to: " default-directory
+				  (expand-file-name
+				   (file-name-nondirectory (buffer-name))
+				   default-directory)
+				  nil nil)))
+    (and (file-exists-p filename)
+	 (or (y-or-n-p (format "File `%s' exists; overwrite? " filename))
+	     (error "Canceled")))
+    (write-region (point-min) (point-max) filename)))
+
+(defun cw:time-diff (t1 t2)
+  "Compute time delta between T1 and T2."
+  (let* ((t1 (if (stringp t1) (date-to-time t1) t1))
+	 (t2 (if (stringp t2) (date-to-time t2) t2))
+	 t3)
+    (when (time-less-p t1 t2)
+      (setq t3 t1
+	    t1 t2
+	    t2 t3))
+    (message (format-time-string "%H:%M:%S" (time-subtract t1 t2)))))
