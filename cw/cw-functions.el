@@ -350,6 +350,7 @@ when process state changes to `exit'."
   (org-crypt-use-before-save-magic)
   (save-excursion
     (org-back-to-heading t)
+    (org-show-entry)
     (next-line)
     (if (looking-at "-----BEGIN PGP MESSAGE-----")
 	(org-decrypt-entry)
