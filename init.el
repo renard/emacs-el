@@ -226,7 +226,8 @@
        ;; Really do install packages
        (el-get 'sync cw:packages)
        (require 'cw-local nil t)
-       (require 'cw-private nil t))))
+       (require 'cw-private nil t)
+       (require 'cw-local-fix nil t))))
 
 ;; Add some definitions
 (loop for p in '("cw" "cw-private" "el-get/el-get")
