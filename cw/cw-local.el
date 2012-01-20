@@ -765,6 +765,7 @@ or `mail-envelope-from'."
       "Delete spaces before going to next line."
       (unless buffer-read-only
 	(save-excursion
+	  (delete-horizontal-space t)
 	  (end-of-line)
 	  ;; This is an empty line, delete its spaces
 	  (when (looking-back "[ \t]+$")
