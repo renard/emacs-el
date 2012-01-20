@@ -467,10 +467,8 @@
 		 (and (boundp 'cw:yasnippet:in-expansionp)
 		      (not cw:yasnippet:in-expansionp)))
 	 (unless (boundp 'cw:org:publishing-project)
-	   ;; Do not hide large buffers
-	   (when (< 65536 (buffer-size))
-	     (hs-minor-mode)))
-	 (flyspell-prog-mode))
+	   (hs-minor-mode)
+	   (flyspell-prog-mode)))
        (rainbow-delimiters-mode 1))
      (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'find-function-or-variable-at-point)
      (add-hook 'emacs-lisp-mode-hook 'cw:emacs-lisp-mode-setup)
