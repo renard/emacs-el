@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-10 11:17:30
+;; Last changed: 2012-01-22 23:45:17
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -65,10 +65,10 @@
 
 (eval-after-load "color-theme"
   '(progn
-     (color-theme-tango)))
-
-(eval-after-load "color-theme-tango"
-  '(progn
+     (setq
+      color-theme-load-all-themes nil
+      color-theme-libraries nil)
+     (color-theme-tango)
      (set-face-attribute 'font-lock-string-face nil :italic nil)
      (set-face-attribute 'font-lock-function-name-face nil :italic nil)))
 
