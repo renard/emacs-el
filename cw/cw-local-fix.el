@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, 
 ;; Created: 2012-01-20
-;; Last changed: 2012-01-20 14:37:02
+;; Last changed: 2012-01-28 00:33:10
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -67,5 +67,38 @@ comments."
 	    (progress-reporter-done spew)))
 	(beginning-of-line)
 	(run-hooks 'hs-hide-hook)))))
+
+(eval-after-load "cc-engine"
+  '(progn
+     (defsubst c-state-pp-to-literal (from to)
+       ;; Do a parse-partial-sexp from FROM to TO, returning either
+       ;;     (STATE TYPE (BEG . END))     if TO is in a literal; or
+       ;;     (STATE)                      otherwise,
+       ;; where STATE is the parsing state at TO, TYPE is the type of the literal
+       ;; (one of 'c, 'c++, 'string) and (BEG . END) is the boundaries of the literal.
+       ;;
+       ;; Only elements 3 (in a string), 4 (in a comment), 5 (following a quote),
+       ;; 7 (comment type) and 8 (start of comment/string) (and possibly 9) of
+       ;; STATE are valid.
+       (save-restriction
+	 (widen)
+	 (save-excursion
+	   (let ((s (parse-partial-sexp from to))
+		 ty)
+	     (when (or (nth 3 s) (nth 4 s))	; in a string or comment
+	       (setq ty (cond
+			 ((nth 3 s) 'string)
+			 ((eq (nth 7 s) t) 'c++)
+			 (t 'c)))
+	       (parse-partial-sexp (point) (point-max)
+				   nil			 ; TARGETDEPTH
+				   nil			 ; STOPBEFORE
+				   s			 ; OLDSTATE
+				   'syntax-table))	 ; stop at end of literal
+	     (if ty
+		 `(,s ,ty (,(nth 8 s) . ,(point)))
+	       `(,s))))))
+     ))
+
 
 (provide 'cw-local-fix)
