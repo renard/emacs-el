@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-22 23:45:17
+;; Last changed: 2012-01-28 02:27:05
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -529,7 +529,16 @@
      (defadvice org-publish-blog (around cw:org-publish-blog activate)
        "Do define `cw:org:publishing-project' before publishing."
        (let ((cw:org:publishing-project t))
-	 ad-do-it))))
+	 ad-do-it))
+     (defun cw:o-blog:start-httpd ()
+       "Start httpd server after blog is published."
+       (unless noninteractive
+	 (let ((httpd-root (format "%s%s" default-directory
+				  (ob:blog-publish-dir BLOG))))
+	   (httpd-start)
+	   (message (format "Starting web at %s" httpd-root))
+	   (browse-url (format "http://127.0.0.1:%d" httpd-port)))))
+     (add-hook 'o-blog-after-publish-hook 'cw:o-blog:start-httpd)))
 
 
 (eval-after-load 'org
