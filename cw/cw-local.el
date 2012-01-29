@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-28 02:27:05
+;; Last changed: 2012-01-29 23:34:07
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -942,6 +942,10 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 (eval-after-load 'vc-hooks
   '(progn
      (setq vc-handled-backends nil)))
+
+(eval-after-load 'vline
+  '(progn
+     (set-face-attribute 'vline nil :background "#32383a")))
 
  ;; w
 (eval-after-load 'windmove

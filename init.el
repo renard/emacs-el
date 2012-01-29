@@ -214,6 +214,7 @@
 	      smex
 	      switch-window
 	      vkill
+	      vline
 	      hl-tags-mode
 	      )))
 
