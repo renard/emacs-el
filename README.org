@@ -1,6 +1,6 @@
 #+TITLE: My emacs settings
 #+DESCRIPTION: 
-#+DATE: 2012-01-30 01:41:21
+#+DATE: 2012-01-30 01:51:53
 
 An ever-changing set of emacs settings. This is optimized for my laptop
 running [[http://debian.org][Debian stable]].
@@ -13,16 +13,18 @@ I also do use [[http://emacs.naquadah.org][emacs-snapshot]].
 
 You might need some extra packages such as:
 
+  - autoconf
+  - bzr
+  - cvs
+  - emacs-goodies-el
   - git
   - git-svn
-  - bzr
   - texinfo
-  - emacs-goodies-el
 
 To install them:
 
 #+begin_src sh
-apt-get install git git-svn bzr texinfo emacs-goodies-el
+apt-get install autoconf bzr cvs emacs-goodies-el git git-svn texinfo
 #+end_src
 
 ** Emacs configuration
