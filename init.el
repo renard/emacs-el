@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 01:38:57
+;; Last changed: 2012-01-30 01:47:07
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -119,9 +119,6 @@
 	(:name org-website
 	       :depends string-template
 	       :url "git@github.com:renard/org-website.git")
-	(:name vcl-mode ;; git-svn is better than just svn
-	       :type git-svn
-	       :url "http://varnish-cache.org/svn/trunk/varnish-tools/emacs")
 	(:name undo-tree
 	       :after (lambda()
 			(autoload 'undo-tree-visualize "undo-tree")))
