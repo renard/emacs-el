@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, 
 ;; Created: 2012-01-20
-;; Last changed: 2012-01-28 00:33:10
+;; Last changed: 2012-01-28 02:13:05
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -99,6 +99,18 @@ comments."
 		 `(,s ,ty (,(nth 8 s) . ,(point)))
 	       `(,s))))))
      ))
+
+(eval-after-load "el-get"
+  '(progn
+     (defun el-get-save-package-status (package status)
+       "Save given package status"
+       (let ((p (el-get-package-symbol package))
+	     (s (el-get-read-all-packages-status))
+	     print-length print-level)
+	 (with-temp-file el-get-status-file
+	   (insert
+	    (format "%S" (if s (plist-put s p status)
+			   `(,p ,status)))))))))
 
 
 (provide 'cw-local-fix)
