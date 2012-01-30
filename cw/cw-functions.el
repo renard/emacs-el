@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2011-12-14 14:17:57
+;; Last changed: 2012-01-24 19:56:42
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -430,7 +430,7 @@ starting plus symbol (`+') and with `.', `-' or space in it."
      'phone-number-bounds-of-phone-number-at-point)
 
 ;;;###autoload
-((defun org-contact-call(&optional contact type properties cmd)
+(defun org-contact-call(&optional contact type properties cmd)
   "Call CONTACT on its TYPE phone.
 
 If PROPERTIES is not specified, phone number is looked in
