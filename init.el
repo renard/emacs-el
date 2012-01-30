@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 00:56:06
+;; Last changed: 2012-01-30 01:02:28
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -284,5 +284,6 @@
 	   (/ (- ms (third before-init-time)) (expt 10.0 6)))))
        (msg (format "Emacs loaded in %.3fs" time)))
   (message msg)
-  (unless noninteractive
+  (when (and (not noninteractive)
+	     (boundp 'el-get-notify))
     (el-get-notify "Emacs is ready." msg)))
