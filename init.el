@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 01:24:15
+;; Last changed: 2012-01-30 01:28:13
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -248,10 +248,10 @@
 
 ;; Load el-get
 (unless (require 'el-get nil t)
-  (let (el-get-master-branch)
-    (url-retrieve
-     "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-     (lambda (s)
+  (url-retrieve
+   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   (lambda (s)
+     (let (el-get-master-branch)
        (when cw:el-get-repository
 	 ;; Add upstream branch to local repository.
 	 (replace-string
