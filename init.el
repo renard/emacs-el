@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 01:53:57
+;; Last changed: 2012-01-30 01:55:18
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -202,9 +202,11 @@
 	      rst-mode
 	      smex
 	      switch-window
+	      vcl-mode
 	      vkill
 	      vline
 	      hl-tags-mode
+	      yasnippet
 	      )))
 
        (setq cw:packages
