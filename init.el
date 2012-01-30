@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 01:02:28
+;; Last changed: 2012-01-30 01:24:15
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -248,25 +248,26 @@
 
 ;; Load el-get
 (unless (require 'el-get nil t)
-  (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-   (lambda (s)
-     (when cw:el-get-repository
-       ;; Add upstream branch to local repository.
-       (replace-string
-	"http://github.com/dimitri/el-get.git"
-	cw:el-get-repository
-	nil (point-min) (point-max))
+  (let (el-get-master-branch)
+    (url-retrieve
+     "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+     (lambda (s)
+       (when cw:el-get-repository
+	 ;; Add upstream branch to local repository.
+	 (replace-string
+	  "http://github.com/dimitri/el-get.git"
+	  cw:el-get-repository
+	  nil (point-min) (point-max))
+	 (goto-char (point-max))
+	 (search-backward "(unless (zerop status)")
+	 (forward-sexp)
+	 (insert
+	  "(cd package)"
+	  "(call-process git nil `(,buf t) t \"--no-pager\""
+	  "\"remote\" \"add\" \"--fetch\"  \"upstream\""
+	  "\"git://github.com/dimitri/el-get.git\")"))
        (goto-char (point-max))
-       (search-backward "(unless (zerop status)")
-       (forward-sexp)
-       (insert
-	"(cd package)"
-	"(call-process git nil `(,buf t) t \"--no-pager\""
-	"\"remote\" \"add\" \"--fetch\"  \"upstream\""
-	"\"git://github.com/dimitri/el-get.git\")"))
-     (goto-char (point-max))
-     (eval-print-last-sexp))))
+       (eval-print-last-sexp)))))
 
 (unless noninteractive
   (with-current-buffer
