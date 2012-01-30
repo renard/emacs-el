@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-29 23:34:07
+;; Last changed: 2012-01-30 03:01:53
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -933,9 +933,9 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 
      (setq-default yas/dont-activate 'cw:yasnippet:do-activatep)
      (setq yas/trigger-key "M-TAB"
-	   yas/snippet-dirs "~/.emacs.d/templates"
 	   yas/prompt-functions '(yas/completing-prompt))
-     (yas/load-directory yas/root-directory)
+     (add-to-list 'yas/snippet-dirs "~/.emacs.d/templates")
+     (yas/reload-all)
      (add-hook 'yas/minor-mode-hook 'cw:yasnippet:insert-snippet-new-file)))
 
  ;; v
