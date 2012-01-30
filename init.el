@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 01:28:13
+;; Last changed: 2012-01-30 01:38:57
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -114,15 +114,6 @@
 	       :url "git@github.com:renard/git-auto-commit.git")
 	(:name quick-buffer-switch
 	       :url "git@github.com:renard/quick-buffer-switch.git")
-	(:name bzr
-	       :description "Easy to use distributed version control system"
-	       :type apt-get)
-	(:name texinfo
-	       :description "Documentation system for on-line information and printed output"
-	       :type apt-get)
-	(:name emacs-goodies-el
-	       :description "Miscellaneous add-ons for Emacs"
-	       :type apt-get)
 	(:name string-template
 	       :url "git@github.com:renard/string-template-el.git")
 	(:name org-website
