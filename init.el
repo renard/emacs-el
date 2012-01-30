@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 01:47:07
+;; Last changed: 2012-01-30 01:53:57
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -138,9 +138,6 @@
 		       "make autoloads"
 		       "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
 		       "rm -rf ~/.emacs.d/emms"))
-	(:name yasnippet ;; git-svn is better than just svn
-	       :url "http://yasnippet.googlecode.com/svn/trunk/"
-	       :type git-svn)
 	(:name xml-rpc-el
 	       :debpends bzr)
 	(:name cw-gtd
