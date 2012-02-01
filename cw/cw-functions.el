@@ -360,7 +360,14 @@ when process state changes to `exit'."
 (defun cw:dired ()
   "Open `default-directory' in `dired' without confirmation."
   (interactive)
-  (cw:with-parse-directory (progn (dired default-directory))))
+  ;; You need quick-buffer-switch.el
+  ;; https://github.com/renard/quick-buffer-switch
+  (let ((marker (qbs-find-buffer-visiting-dir default-directory)))
+    (if marker
+	(progn
+	  (switch-to-buffer (marker-buffer marker))
+	  (goto-char (marker-position marker)))
+      (dired default-directory))))
 
 ;;;###autoload
 (defun set-hooks-debug (&optional desactivate)
