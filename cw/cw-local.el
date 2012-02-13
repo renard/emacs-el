@@ -625,6 +625,19 @@ would be used if applicable ad remove CLEAR tag.
   '(progn
      (setq show-paren-style 'parenthesis)))
 
+(eval-after-load 'popwin
+  '(progn
+     (loop for b in '("*Ido Completions*"
+		      "*Quail Completions*"
+		      "*Anything Occur*"
+		      "*Disabled Command*"
+		      "*Backtrace*"
+		      "*Kill Ring*")
+	   do (add-to-list
+	       'popwin:special-display-config
+	       `(,b :noselect t))
+	   finally return popwin:special-display-config)))
+
 (eval-after-load 'projects
   '(progn
      (setq
