@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-24 19:56:42
+;; Last changed: 2012-02-05 19:43:51
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -306,10 +306,12 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
        ;; Start shell
        (switch-to-buffer
 	(apply
-	 'make-term (if host
-			(concat "ssh " host)
-		      (file-name-nondirectory shell))
-	 shell nil sh-cmd))
+	 'make-term (list
+		     (if host
+			 (concat "ssh " host)
+		       (file-name-nondirectory shell))
+		     shell)))
+       ;;nil sh-cmd))
        (cw:set-process-sentinel-kill-buffer-on-process-exit)
        (term-mode)
        (term-char-mode)
