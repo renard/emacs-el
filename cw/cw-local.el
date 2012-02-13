@@ -238,6 +238,7 @@
 (eval-after-load 'faces
   '(progn
      (unless noninteractive
+       ;; use fc-list
        (set-face-font 'default "DejaVu Sans Mono-10"))
      (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
 
