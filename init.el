@@ -197,10 +197,12 @@
 	      org-mode
 	      pastebin
 	      php-mode-improved
+	      popwin
 	      rainbow-delimiters
 	      rainbow-mode
 	      rst-mode
 	      smex
+	      srep
 	      switch-window
 	      vcl-mode
 	      vkill
