@@ -1042,12 +1042,16 @@ works and run `anything-other-buffer'."
   (savehist-mode 1)
   ;;(menu-bar-mode -1)
 
+  ;; notification-notify
+  (require notifications nil t)
+
 
   (ido-mode t)
   (show-paren-mode t)
   (add-hook 'after-save-hook 'gac-commit-file t nil)
   (add-to-list 'auto-mode-alist '("\\.[1-9]\\.txt$" . adoc-mode))
   (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
+  (add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
   (global-hl-line-mode)
   (when (functionp 'qbs-init) (qbs-init))
   (when (functionp 'cw:gtd:init) (cw:gtd:init))
