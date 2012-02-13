@@ -950,7 +950,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
      (setq-default yas/dont-activate 'cw:yasnippet:do-activatep)
      (setq yas/trigger-key "M-TAB"
 	   yas/prompt-functions '(yas/completing-prompt))
-     (add-to-list 'yas/snippet-dirs "~/.emacs.d/templates")
+     (setq yas/snippet-dirs "~/.emacs.d/templates")
      (yas/reload-all)
      (add-hook 'yas/minor-mode-hook 'cw:yasnippet:insert-snippet-new-file)))
 
