@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 01:55:18
+;; Last changed: 2012-02-13 23:38:44
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -154,16 +154,33 @@
 	       :options ("xzf")
 	       :url "http://www.myrkr.in-berlin.de/dictionary/dictionary-1.8.7.tar.gz"
 	       :build ("make"))
-	(:name blorg
-	       :type git
-	       :description "Blogging engine using Emacs Org-mode to create static pages"
-	       :url "https://github.com/RolKau/blorg.git")
-	(:name org-hyde
-	       :type git
-	       :description "Export org-mode trees to hyde ready html files"
-	       :url "https://github.com/punchagan/org-hyde.git")
+
 	(:name descbinds-anything
 	       :type emacswiki)
+
+	(:name org2blog
+	       :type git
+	       :description "Export org-mode to Wordpress"
+	       :url "git://github.com/punchagan/org2blog.git")
+
+	(:name o-blog
+	       :type git
+	       :description "Export org-mode trees to html blog"
+	       :url "git@github.com:renard/o-blog.git")
+
+	(:name lorem-ipsum
+	       :after (lambda()
+			(autoload 'Lorem-ipsum-insert-paragraphs "lorem-ipsum" nil t)
+			(autoload 'Lorem-ipsum-insert-sentences "lorem-ipsum" nil t)
+			(autoload 'Lorem-ipsum-insert-list "lorem-ipsum" nil t))
+	       :type emacswiki)
+
+	(:name indirect-region
+	       :type git
+	       :description "Act like indirect buffer for region."
+	       :url "git@github.com:renard/indirect-region.git")
+
+
 	))
      ;; create a package list to be installed
      (let ((cw:packages
@@ -183,7 +200,9 @@
 	      dired-details
 	      dirtree
 	      escreen
+	      elnode
 	      fill-column-indicator
+	      filladapt
 	      google-maps
 	      iedit
 	      keywiz
