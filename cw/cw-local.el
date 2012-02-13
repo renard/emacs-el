@@ -905,7 +905,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
       tramp-terminal-type "screen"
       tramp-backup-directory-alist backup-directory-alist)))
 
-(eval-after-load 'tramp-sh
+(eval-after-load "tramp-sh"
   '(progn
      ;; Reload `tramp-compute-multi-hops' to make `cw:tramp-error' advice
      ;; work. WHY ????"
