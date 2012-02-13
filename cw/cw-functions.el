@@ -364,12 +364,16 @@ when process state changes to `exit'."
   (interactive)
   ;; You need quick-buffer-switch.el
   ;; https://github.com/renard/quick-buffer-switch
-  (let ((marker (qbs-find-buffer-visiting-dir default-directory)))
+  (let ((marker (qbs-find-buffer-visiting-dir default-directory))
+	(filename (buffer-file-name)))
     (if marker
 	(progn
 	  (switch-to-buffer (marker-buffer marker))
 	  (goto-char (marker-position marker)))
-      (dired default-directory))))
+      (dired default-directory))
+    (when filename
+      (search-forward-regexp
+       (format " %s$" (file-name-nondirectory filename))))))
 
 ;;;###autoload
 (defun set-hooks-debug (&optional desactivate)
