@@ -414,8 +414,10 @@
 	 ("org" (mode . org-mode))
 	 ("emms" (or
 		  (mode . emms)))
-	 ("hidden" (or
-		    (name . "^ "))))))
+	 ("tramp" (or
+		    (name . "^\\*tramp")))
+	 ("magit" (or
+		    (name . "^\\*magit"))))))
      (add-hook 'ibuffer-mode-hook
 	       (lambda ()
 		 (ibuffer-switch-to-saved-filter-groups "default")))
