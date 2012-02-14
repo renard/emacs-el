@@ -251,7 +251,7 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
 	   ;; fall back to nil
 	   (or (ignore-errors (dired-current-directory))
 	       (ignore-errors (file-name-directory (buffer-file-name)))
-	       "~"))
+	       default-directory))
 	  (file-vector
 	   ;; get a tramp usable file URI from directory.
 	   (or (ignore-errors (tramp-dissect-file-name current-buffer-dir))
