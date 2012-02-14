@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-13 23:38:44
+;; Last changed: 2012-02-14 21:34:27
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -278,13 +278,14 @@
        (eval-print-last-sexp)))))
 
 (unless noninteractive
-  (with-current-buffer
-      (find-file
-       (concat
+  (let ((pass-file (concat
 	(file-name-as-directory user-emacs-directory)
-	"cw-private/cw-pass.el.gpg"))
-    (eval-buffer)
-    (kill-buffer)))
+	"cw-private/cw-pass.el.gpg")))
+    (when (file-readable-p pass-file)
+      (with-current-buffer
+	  (find-file pass-file)
+	(eval-buffer)
+	(kill-buffer)))))
 
 (let* ((time
 	(destructuring-bind (hi lo ms) (current-time)
