@@ -639,6 +639,7 @@ would be used if applicable ad remove CLEAR tag.
 		      "*Anything Occur*"
 		      "*Disabled Command*"
 		      "*Backtrace*"
+		      "*magit-edit-log*"
 		      "*Kill Ring*")
 	   do (add-to-list
 	       'popwin:special-display-config
