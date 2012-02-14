@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-14 18:52:07
+;; Last changed: 2012-02-14 21:28:57
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -268,6 +268,22 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
 		(tramp-make-tramp-file-name method user host localname)
 	      localname)))
      ,@body))
+
+(defun cw:open-shell (&optional path arg)
+  "Open shell to PATH. if `current-prefix-arg' \(C-u\) is used open a term instead.
+See `cw:term-run' and `cw:shell-run'."
+  (interactive
+   (list
+    (ido-read-file-name "Shell to: " "/" nil t nil )
+    current-prefix-arg))
+    (with-temp-buffer
+      (let ((default-directory (if (file-directory-p path)
+				   path
+				 (file-name-nondirectory path))))
+	(message "Open shell to %S" default-directory)
+	(if arg
+	    (cw:term-run)
+	  (cw:shell-run)))))
 
 (eval-when-compile (require 'term))
 ;;;###autoload
