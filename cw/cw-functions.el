@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-14 18:47:41
+;; Last changed: 2012-02-14 18:52:07
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -384,7 +384,7 @@ If DONT-REUSE is not nil try to use an existing shell."
 If universal argument or DESACTIVATE is provided, debug is set to
 off."
   (interactive "P")
-  (if unadvice
+  (if desactivate
       (progn
 	(ad-unadvise 'run-hooks)
 	(ad-unadvise 'run-hook-with-args))
