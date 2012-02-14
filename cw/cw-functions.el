@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-05 19:43:51
+;; Last changed: 2012-02-14 18:47:41
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -305,28 +305,23 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
 			 "history -d $((HISTCMD - 1)); clear; \n"))
        ;; Start shell
        (switch-to-buffer
-	(apply
-	 'make-term (list
-		     (if host
-			 (concat "ssh " host)
-		       (file-name-nondirectory shell))
-		     shell)))
-       ;;nil sh-cmd))
-       (cw:set-process-sentinel-kill-buffer-on-process-exit)
+	(apply  'make-term
+	 (append
+	  (list
+	   (if host (concat "ssh " host)
+	     (concat (file-name-nondirectory shell) " " default-directory))
+	   shell nil)
+	  sh-cmd)))
+
+       (set-process-sentinel
+	(get-buffer-process (current-buffer))
+	(lambda (proc change)
+	  (when (eq (process-status proc) 'exit)
+	    (kill-buffer (process-buffer proc)))))
+
        (term-mode)
        (term-char-mode)
        (process-send-string (get-buffer-process (current-buffer)) cmd)))))
-
-;;;###autoload
-(defun cw:set-process-sentinel-kill-buffer-on-process-exit ()
-  "Add a sentinel to `current-buffer' to close current buffer
-when process state changes to `exit'."
-  (when (ignore-errors (get-buffer-process (current-buffer)))
-    (set-process-sentinel
-     (get-buffer-process (current-buffer))
-     (lambda (proc change)
-       (when (eq (process-status proc) 'exit)
-         (kill-buffer (process-buffer proc)))))))
 
 ;;;###autoload
 (defun cw:shell:set-font()
@@ -337,10 +332,17 @@ when process state changes to `exit'."
   (buffer-face-mode))
 
 ;;;###autoload
-(defun cw:shell-run (&optional sudo)
-  "Run terminal in current buffer directory."
+(defun cw:shell-run (&optional sudo dont-reuse)
+  "Run terminal in current buffer directory using sudo if SUDO is
+not nil.
+If DONT-REUSE is not nil try to use an existing shell."
   (interactive "P")
-  (cw:with-parse-directory sudo (progn (shell))))
+  (cw:with-parse-directory
+   sudo
+   (let ((buffer (format "*shell %s*" default-directory)))
+     (unless dont-reuse
+       (setq buffer (generate-new-buffer-name buffer)))
+     (shell buffer))))
 
 
 ;; Org functions
