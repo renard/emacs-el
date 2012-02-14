@@ -1021,6 +1021,10 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (global-set-key (kbd "<XF86AudioNext>") 'emms-next)
   (global-set-key (kbd "<XF86AudioPrev>") 'emms-previous)
 
+
+  (define-key global-map (kbd "C-=") 'cw:open-shell)
+
+
   (global-set-key (kbd "C-c ?")
 		  (lambda () (interactive)
 		    (dictionary-new-search
