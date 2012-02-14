@@ -1,6 +1,6 @@
 #+TITLE: My emacs settings
 #+DESCRIPTION: 
-#+DATE: 2012-01-30 01:51:53
+#+DATE: 2012-02-14 21:40:21
 
 An ever-changing set of emacs settings. This is optimized for my laptop
 running [[http://debian.org][Debian stable]].
@@ -59,8 +59,9 @@ Some parts which are not very useful in a batch mode are ignored in
 
 I do use [[https://github.com/dimitri/el-get][el-get]] to manage my emacs add-ons. Default [[https://github.com/dimitri/el-get/raw/master/el-get-install.el][el-get installer]] is
 perfect but I want to use my own el-get repository. If you want to use
-official one or your own simply change the value of =cw:el-get-repository=.
+official one or your own simply change the value of =cw:el-get-repository=
+in =init.el=.
 
 ** temporary file
 
-I try to keep all emacs package related files under =~/.emacs.d/.tmp/= 
+I try to keep all emacs package related files under =~/.emacs.d/.tmp/=.
