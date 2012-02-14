@@ -418,6 +418,9 @@
 		  (mode . emms)))
 	 ("tramp" (or
 		    (name . "^\\*tramp")))
+	 ("term" (or
+		  (mode . term-mode)
+		  (mode . shell-mode)))
 	 ("magit" (or
 		    (name . "^\\*magit"))))))
      (add-hook 'ibuffer-mode-hook
