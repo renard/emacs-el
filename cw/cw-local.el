@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-01-30 03:01:53
+;; Last changed: 2012-02-14 21:31:28
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -69,6 +69,7 @@
       color-theme-load-all-themes nil
       color-theme-libraries nil)
      (color-theme-tango)
+     (set-face-attribute 'comint-highlight-input nil :italic nil)
      (set-face-attribute 'font-lock-string-face nil :italic nil)
      (set-face-attribute 'font-lock-function-name-face nil :italic nil)))
 
