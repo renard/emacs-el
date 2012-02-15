@@ -160,6 +160,11 @@
 	       :description "Act like indirect buffer for region."
 	       :url "git@github.com:renard/indirect-region.git")
 
+	(:name webjump++
+	       :type git
+	       :description "Easy search web on engines."
+	       :url "git@github.com:renard/webjump-plus-plus.git")
+
 
 	))
      ;; create a package list to be installed
