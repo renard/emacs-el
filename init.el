@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-14 21:34:27
+;; Last changed: 2012-02-15 22:53:04
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -119,9 +119,6 @@
 	(:name org-website
 	       :depends string-template
 	       :url "git@github.com:renard/org-website.git")
-	(:name undo-tree
-	       :after (lambda()
-			(autoload 'undo-tree-visualize "undo-tree")))
 	(:name dired-sync
 	       :url "git@github.com:renard/dired-sync.git")
 	(:name db-sql
@@ -138,8 +135,6 @@
 		       "make autoloads"
 		       "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
 		       "rm -rf ~/.emacs.d/emms"))
-	(:name xml-rpc-el
-	       :debpends bzr)
 	(:name cw-gtd
 	       :type git
 	       :url  "git@github.com:renard/cw-gtd.git")
@@ -147,21 +142,6 @@
 	       :after (lambda ()
 			(autoload 'mediawiki-open "mediawiki.el")
 			(autoload 'mediawiki-site "mediawiki.el")))
-	(:name dictionary
-	       :website "http://www.myrkr.in-berlin.de/dictionary/"
-	       :description "Emacs package for talking to a dictionary server"
-	       :type http-tar
-	       :options ("xzf")
-	       :url "http://www.myrkr.in-berlin.de/dictionary/dictionary-1.8.7.tar.gz"
-	       :build ("make"))
-
-	(:name descbinds-anything
-	       :type emacswiki)
-
-	(:name org2blog
-	       :type git
-	       :description "Export org-mode to Wordpress"
-	       :url "git://github.com/punchagan/org2blog.git")
 
 	(:name o-blog
 	       :type git
@@ -196,6 +176,8 @@
 	      color-theme
 	      color-theme-tango
 	      crontab-mode
+	      descbinds-anything
+	      dictionary
 	      dig
 	      dired-details
 	      dirtree
@@ -213,6 +195,7 @@
 	      muse
 	      nagios-mode
 	      offlineimap
+	      org2blog
 	      org-mode
 	      pastebin
 	      php-mode-improved
@@ -223,11 +206,13 @@
 	      smex
 	      srep
 	      switch-window
+	      undo-tree
 	      vcl-mode
 	      vkill
 	      vline
 	      hl-tags-mode
 	      yasnippet
+	      xml-rpc-el
 	      )))
 
        (setq cw:packages
