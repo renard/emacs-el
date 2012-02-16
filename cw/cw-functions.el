@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-14 21:28:57
+;; Last changed: 2012-02-16 01:45:31
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -418,13 +418,19 @@ off."
 (defun asciify-string (string)
 "Convert STRING to ASCII string.
 For example:
-“passé” becomes “passe”
-Code originally by Teemu Likonen."
-  (with-temp-buffer
-    (insert string)
-    (call-process-region (point-min) (point-max)
-			 "iconv" t t nil "--to-code=ASCII//TRANSLIT")
-    (buffer-substring-no-properties (point-min) (point-max))))
+“passé” becomes “passe”"
+  (loop for c across string
+	with ret
+	if (member (get-char-code-property c 'general-category)
+		   '(Lu Ll))
+	collect (downcase
+		 (char-to-string
+		  (or (car (get-char-code-property c 'decomposition))
+		      c)))
+	into ret
+	else
+	collect (char-to-string c) into ret
+	finally return (mapconcat 'identity ret "")))
 
 ;;;###autoload
 (defun find-function-or-variable-at-point ()
