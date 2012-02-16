@@ -1030,11 +1030,20 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (define-key global-map (kbd "C-=") 'cw:open-shell)
 
 
-  (global-set-key (kbd "C-c ?")
-		  (lambda () (interactive)
-		    (dictionary-new-search
-		     (cons (asciify-string (current-word))
-			   dictionary-default-dictionary))))
+  (global-set-key (kbd "C-c C-/") 'webjump++)
+
+  (defun cw:dictionary-search ()
+    (interactive)
+    (dictionary-search
+     (or
+      (when (region-active-p)
+	(buffer-substring-no-properties
+	 (mark) (point)))
+      (let ((wap (word-at-point)))
+	(when wap (substring-no-properties wap))))
+     dictionary-default-dictionary))
+
+  (global-set-key (kbd "C-c ?") 'cw:dictionary-search)
 
   (qbs-init)
   (require 'projects)
