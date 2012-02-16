@@ -1063,7 +1063,7 @@ works and run `anything-other-buffer'."
   ;;(menu-bar-mode -1)
 
   ;; notification-notify
-  (require notifications nil t)
+  (require 'notifications nil t)
 
 
   (ido-mode t)
