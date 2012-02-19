@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-15 22:53:04
+;; Last changed: 2012-02-16 00:36:48
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -108,37 +108,60 @@
       '(
 	(:name dired-toggle-sudo
 	       :type git
+	       :description "Browse directory with sudo privileges."
 	       :url "git@github.com:renard/dired-toggle-sudo.git")
 	(:name git-auto-commit
 	       :type git
+	       :description "Git auto commit directory within emacs."
 	       :url "git@github.com:renard/git-auto-commit.git")
 	(:name quick-buffer-switch
+	       :type git
+	       :description "Quick switch to file or dir buffers."
 	       :url "git@github.com:renard/quick-buffer-switch.git")
 	(:name string-template
-	       :url "git@github.com:renard/string-template-el.git")
+	       :description "Support for $-substitution."
+	       :type git
+	       :url "git@github.com:renard/string-template-el.git"
+	       :features string-template)
 	(:name org-website
+	       :description "Generate multi-level website from org"
 	       :depends string-template
 	       :url "git@github.com:renard/org-website.git")
 	(:name dired-sync
-	       :url "git@github.com:renard/dired-sync.git")
+	       :description "Sync directories within dired"
+	       :type git
+	       :url "git@github.com:renard/dired-sync.git"
+	       :features dired-sync)
 	(:name db-sql
-	       :url "git@github.com:renard/db-sql-el.git")
+	       :website "https://github.com/renard/db-sql-el"
+	       :description "Connect to SQL server using tramp syntax"
+	       :type git
+	       :url "git@github.com:renard/db-sql-el.git"
+	       :features (db-sql))
 	(:name ssh-config
-	       :url "git@github.com:renard/ssh-config-el.git")
+	       :description "Manage both ssh and dsh confguration from emacs"
+	       :type git
+	       :url "git@github.com:renard/ssh-config-el.git"
+	       :features ssh-config)
 	(:name gnus-identities
+	       :description "Change identity when composing a message."
+	       :type git
 	       :url "git@github.com:renard/gnus-identities.git")
 	(:name emms ;; Original recipe is buggy
 	       :url "git@github.com:renard/emms.git"
 	       :depends emacs-w3m
+	       :description "The Emacs Multimedia System"
 	       :features nil
 	       :build ("mkdir -p ~/.emacs.d/emms"
 		       "make autoloads"
 		       "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
 		       "rm -rf ~/.emacs.d/emms"))
 	(:name cw-gtd
+	       :description "My Get the Thing Done files."
 	       :type git
 	       :url  "git@github.com:renard/cw-gtd.git")
 	(:name mediawiki
+	       :description "Mediawiki frontend"
 	       :after (lambda ()
 			(autoload 'mediawiki-open "mediawiki.el")
 			(autoload 'mediawiki-site "mediawiki.el")))
@@ -195,6 +218,7 @@
 	      keywiz
 	      list-processes+
 	      lua-mode
+	      lusty-explorer
 	      magit
 	      mailq
 	      muse
