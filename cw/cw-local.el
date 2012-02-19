@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-14 21:31:28
+;; Last changed: 2012-02-16 02:16:30
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -121,21 +121,44 @@
        "Replace current buffer if file is a directory."
        (interactive)
        (let* ((orig (current-buffer))
-	      (filename (dired-get-filename t t))
-	      (bye-p (file-directory-p filename)))
-	 ad-do-it
-	 (when (and bye-p (not (string-match "[/\\\\]\\.$" filename)))
-	   (kill-buffer orig))))
+     	      (filename (dired-get-filename t t))
+     	      (bye-p (file-directory-p filename)))
+     	 ad-do-it
+     	 (when (and bye-p (not (string-match "[/\\\\]\\.$" filename)))
+     	   (kill-buffer orig))))
+     ;;(ad-unadvise 'dired-find-file)
 
      (defadvice dired-up-directory (around cw:dired-up-directory activate)
        "Replace current buffer with parent dir."
        (let* ((orig (current-buffer)))
-	 ad-do-it
-	 (kill-buffer orig)))
+     	 ad-do-it
+     	 (kill-buffer orig)))
+     ;;(ad-unadvise 'dired-up-directory)
+
+     (defun cw:dired-find-file-maybe ()
+       "run `dired-find-file' or `dired-maybe-insert-subdir'
+depending on the context."
+       (interactive)
+       (let ((current-file (dired-get-filename)))
+	 (when (stringp current-file)
+	   (if (file-directory-p current-file)
+	       (progn
+		 ;;(dired-hide-subdir 1)
+		 (message (format "Inserting %S" current-file))
+		 (dired-maybe-insert-subdir current-file)
+		 (revert-buffer))
+	     (if (and (boundp 'ad-Orig-dired-find-file)
+		      (functionp 'ad-Orig-dired-find-file))
+		 ad-Orig-dired-find-file
+	       dired-find-file)))))
 
      (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
+     (define-key dired-mode-map (kbd "<return>") 'dired-find-file)
+     (define-key dired-mode-map (kbd "<M-return>") 'cw:dired-find-file-maybe)
+     (define-key dired-mode-map (kbd "TAB") 'dired-hide-subdir)
      (define-key dired-mode-map (kbd "<C-return>")  'gnus-dired-find-file-mailcap)
+     (define-key dired-mode-map (kbd "<backspace>")  'dired-kill-subdir)
      (define-key dired-mode-map "/" 'dired-details-toggle)
      (define-key dired-mode-map "Y"  'dired-do-relsymlink)
      (define-key dired-mode-map (kbd "C-s") 'dired-isearch-filenames)
@@ -644,8 +667,8 @@ would be used if applicable ad remove CLEAR tag.
 		      "*Kill Ring*")
 	   do (add-to-list
 	       'popwin:special-display-config
-	       `(,b :noselect t))
-	   finally return popwin:special-display-config)))
+	       `(,b :noselect t)))
+     (setq display-buffer-function 'popwin:display-buffer)))
 
 (eval-after-load 'projects
   '(progn
