@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-16 02:16:30
+;; Last changed: 2012-02-20 19:14:25
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -308,7 +308,24 @@ depending on the context."
 (eval-after-load 'gnus-msg
   '(progn
      (setq
-      gnus-gcc-mark-as-read t)))
+      gnus-gcc-mark-as-read t)
+     (defun cw:gnus-summary-followup-with-original (n &optional force-news)
+       "Run `gnus-summary-followup-with-original'. If called with
+`current-prefix-arg', set both `message-yank-prefix' and
+`message-citation-line-function' to empty string, and remove
+lines starting by \"^>\"."
+       (interactive "P")
+       (if current-prefix-arg
+	   (let ((message-yank-prefix "")
+		 (message-citation-line-function nil))
+	     (gnus-summary-followup-with-original n force-news)
+	     (save-excursion
+	       (save-match-data
+		 (while (re-search-forward "^>" nil t)
+		   (replace-match "" nil nil)))))
+		 (replace-string "^>$")
+	 (gnus-summary-followup-with-original n force-news)))
+     (define-key gnus-summary-mode-map "F" 'cw:gnus-summary-followup-with-original)))
 
 (eval-after-load 'gnus-start
   '(progn
