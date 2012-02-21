@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-20 19:24:19
+;; Last changed: 2012-02-21 11:15:48
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -680,7 +680,9 @@ would be used if applicable ad remove CLEAR tag.
 		      "*Anything Occur*"
 		      "*Disabled Command*"
 		      "*Backtrace*"
+		      "*Warnings*"
 		      "*magit-edit-log*"
+		      "*magit-process*"
 		      "*Kill Ring*")
 	   do (add-to-list
 	       'popwin:special-display-config
