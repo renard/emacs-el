@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-21 11:52:33
+;; Last changed: 2012-02-21 11:58:11
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -1123,6 +1123,7 @@ works and run `anything-other-buffer'."
   (show-paren-mode t)
   (add-hook 'after-save-hook 'gac-commit-file t nil)
   (add-to-list 'auto-mode-alist '("\\.[1-9]\\.txt$" . adoc-mode))
+  (add-to-list 'auto-mode-alist '("\\.asciidoc$" . adoc-mode))
   (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
   (add-to-list 'auto-mode-alist '("\\.less$" . css-mode))
   (global-hl-line-mode)
