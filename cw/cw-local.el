@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-21 11:15:48
+;; Last changed: 2012-02-21 11:50:35
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -856,6 +856,15 @@ or `mail-envelope-from'."
 	  (lambda (proc change)
 	    (when (eq (process-status proc) 'exit)
 	      (kill-buffer (process-buffer proc)))))))))
+
+(eval-after-load 'slime
+  '(progn
+     (setq inferior-lisp-mode "/usr/bin/sbcl")
+     (defun cw:slime-setup()
+       "Configure slime interface when connected to slime daemon"
+       (common-lisp-mode)
+       (hs-minor-mode 0))
+     (add-hook 'slime-connected-hook 'cw:slime-setup)))
 
 (eval-after-load 'startup
   '(progn
