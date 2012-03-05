@@ -33,6 +33,10 @@
      (add-hook 'adoc-mode-hook 'flyspell-buffer)
      (define-key adoc-mode-map (kbd "C-c m") 'cw:adoc-mode:compile)))
 
+(eval-after-load 'ack
+  '(progn
+     (setq ack-command "ack-grep --nocolor --nogroup ")))
+
 (eval-after-load 'ansi-color
   '(progn
      (setq ansi-color-names-vector
