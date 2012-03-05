@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-21 11:58:11
+;; Last changed: 2012-02-29 13:55:43
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -679,18 +679,20 @@ would be used if applicable ad remove CLEAR tag.
 
 (eval-after-load 'popwin
   '(progn
-     (loop for b in '("*Ido Completions*"
-		      "*Quail Completions*"
-		      "*Anything Occur*"
-		      "*Disabled Command*"
+     (loop for b in '(("*Ido Completions*" :noselect t)
+		      ("*Quail Completions* " :noselect t)
+		      ("*Anything Occur*" :noselect t)
+		      ("*Disabled Command*" :noselect t)
 		      "*Backtrace*"
-		      "*Warnings*"
+		      "*ack*"
+		      ("*Warnings*" :noselect t)
 		      "*magit-edit-log*"
 		      "*magit-process*"
 		      "*Kill Ring*")
 	   do (add-to-list
 	       'popwin:special-display-config
-	       `(,b :noselect t)))
+	       (if (listp b) b (list b))))
+
      (setq display-buffer-function 'popwin:display-buffer)))
 
 (eval-after-load 'projects
