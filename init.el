@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-16 00:36:48
+;; Last changed: 2012-03-08 09:45:57
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -160,23 +160,11 @@
 	       :description "My Get the Thing Done files."
 	       :type git
 	       :url  "git@github.com:renard/cw-gtd.git")
-	(:name mediawiki
-	       :description "Mediawiki frontend"
-	       :after (lambda ()
-			(autoload 'mediawiki-open "mediawiki.el")
-			(autoload 'mediawiki-site "mediawiki.el")))
 
 	(:name o-blog
 	       :type git
 	       :description "Export org-mode trees to html blog"
 	       :url "git@github.com:renard/o-blog.git")
-
-	(:name lorem-ipsum
-	       :after (lambda()
-			(autoload 'Lorem-ipsum-insert-paragraphs "lorem-ipsum" nil t)
-			(autoload 'Lorem-ipsum-insert-sentences "lorem-ipsum" nil t)
-			(autoload 'Lorem-ipsum-insert-list "lorem-ipsum" nil t))
-	       :type emacswiki)
 
 	(:name indirect-region
 	       :type git
