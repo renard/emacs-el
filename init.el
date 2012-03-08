@@ -197,8 +197,8 @@
 	      dig
 	      dired-details
 	      dirtree
+	      emacs-http-server
 	      escreen
-	      elnode
 	      fill-column-indicator
 	      filladapt
 	      google-maps
