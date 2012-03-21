@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-02-16 01:45:31
+;; Last changed: 2012-03-21 11:15:05
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -553,3 +553,15 @@ CMD is a string used to call the contact. By default it is set to:
 	    t1 t2
 	    t2 t3))
     (message (format-time-string "%H:%M:%S" (time-subtract t1 t2)))))
+
+
+;; a little timing facility, useful at the *ielm* prompt e.g.
+;; will discard your results -- part of why it's useful at the prompt.
+;;;###autoload
+(defun %time (fn)
+  (let* ((t0 (current-time)))
+    (funcall fn)
+    (time-to-seconds (time-subtract (current-time) t0))))
+;;;###autoload
+(defmacro time (form)
+  `(%time (lambda () ,form)))
