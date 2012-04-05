@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-03-21 11:05:04
+;; Last changed: 2012-04-05 12:30:12
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -75,7 +75,16 @@
      (color-theme-tango)
      (set-face-attribute 'comint-highlight-input nil :italic nil)
      (set-face-attribute 'font-lock-string-face nil :italic nil)
-     (set-face-attribute 'font-lock-function-name-face nil :italic nil)))
+     (set-face-attribute 'font-lock-function-name-face nil :italic nil)
+     ;; backup current color theme
+     (setf 'color-theme-snapshot (color-theme-make-snapshot))
+
+     (defun color-theme-undo ()
+       "Undo theme change.  Get back all of the frame, face,
+etc. settings that were in effect before the change"
+       (interactive)
+       (color-theme-reset-faces)
+       (color-theme-snapshot))))
 
 (eval-after-load 'common-win
   '(progn
