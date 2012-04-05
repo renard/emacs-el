@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-04-05 13:49:49
+;; Last changed: 2012-04-05 16:29:40
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -897,9 +897,10 @@ or `mail-envelope-from'."
 (eval-after-load 'term
   '(progn
      (unless noninteractive
-       (define-key term-raw-map escreen-prefix-char escreen-map)
-       (define-key term-raw-map (kbd "M-[") 'escreen-goto-prev-screen)
-       (define-key term-raw-map (kbd "M-]") 'escreen-goto-next-screen)
+       (when (require 'escreen nil t)
+	 (define-key term-raw-map escreen-prefix-char escreen-map)
+	 (define-key term-raw-map (kbd "M-[") 'escreen-goto-prev-screen)
+	 (define-key term-raw-map (kbd "M-]") 'escreen-goto-next-screen))
        (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
        (define-key term-raw-map (kbd "M-'") 'ido-switch-buffer)
        (setq ansi-term-color-vector
