@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-04-05 12:30:12
+;; Last changed: 2012-04-05 13:19:17
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -51,7 +51,10 @@
 (eval-after-load 'browse-url
   '(progn
      (setq
-      browse-url-generic-program "raise-x-www-browser"
+      browse-url-generic-program
+      (if (running-macosxp)
+	  "/Applications/Safari.app/Contents/MacOS/Safari"
+	"raise-x-www-browser")
       browse-url-generic-args nil
       browse-url-browser-function 'browse-url-generic)))
 
