@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-03-08 09:45:57
+;; Last changed: 2012-04-05 11:02:21
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -16,11 +16,27 @@
 
 ;;; Code:
 
+
 (eval-when-compile (require 'cl))
 
 (defvar cw:el-get-repository "git@github.com:renard/el-get.git"
   "Source from where to fetch `el-get'. If nil, use the official
   el-get repository.")
+
+ ;; Macro definition
+(defun running-macosxp ()
+  "Return T if running under Mac OS X."
+  (string-match "apple-darwin" system-configuration))
+
+(defmacro when-running-macosx (&rest body)
+  "eval body only when running under MacOSX"
+  `(when (running-macosxp) ,@body))
+
+(when-running-macosx
+ (loop for d in '("/usr/local/bin")
+       do (progn
+            (setenv "PATH" (concat d ":" (getenv "PATH")))
+            (add-to-list 'exec-path d))))
 
 ;; Set some default directories
 (let ((tmp-dir (file-name-as-directory
