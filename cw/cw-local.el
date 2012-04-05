@@ -326,7 +326,7 @@ depending on the context."
 				   "\\|^User-Agent:\\|^X-Mailer:\\|^X-Spam.score:")
       gnus-article-update-date-headers nil)))
 
-(eval-after-load 'gnus-msg
+(eval-after-load "gnus-msg"
   '(progn
      (setq
       gnus-gcc-mark-as-read t)
