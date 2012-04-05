@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-04-05 11:02:21
+;; Last changed: 2012-04-05 11:09:25
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -248,6 +248,7 @@
 	      vcl-mode
 	      vkill
 	      vline
+	      volatile-highlights
 	      hl-tags-mode
 	      yasnippet
 	      xml-rpc-el
