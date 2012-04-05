@@ -116,6 +116,11 @@
     `(progn
        (setq url-configuration-directory (concat ,tmp-dir "url")))))
 
+ ;; el-get configuration
+(eval-after-load 'el-get-github
+  '(progn
+     (setq el-get-github-default-url-type 'git)))
+
 (eval-after-load "el-get"
   '(progn
      ;; define el-get sources
