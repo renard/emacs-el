@@ -315,7 +315,7 @@ depending on the context."
      (define-key gnus-article-mode-map (kbd "<C-return>") 'gnus-article-browse-html-article)
      (setq
       gnus-visible-headers (concat gnus-visible-headers
-				   "\\|^User-Agent:\\|^X-Mailer:")
+				   "\\|^User-Agent:\\|^X-Mailer:\\|^X-Spam.score:")
       gnus-article-update-date-headers nil)))
 
 (eval-after-load 'gnus-msg
