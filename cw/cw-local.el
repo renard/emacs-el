@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-04-05 16:29:40
+;; Last changed: 2012-04-05 16:31:23
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -1121,7 +1121,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (global-set-key (kbd "C-c ?") 'cw:dictionary-search)
 
   (qbs-init)
-  (require 'projects)
+  (require 'projects nil t)
   (defun cw:anything-occur ()
     "Restrict buffer to selection if needed so goto line really
 works and run `anything-other-buffer'."
