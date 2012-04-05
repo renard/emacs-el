@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-04-05 13:45:23
+;; Last changed: 2012-04-05 13:49:49
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -279,12 +279,13 @@ depending on the context."
 (eval-after-load 'faces
   '(progn
      (unless noninteractive
-       ;; use fc-list
-       (set-face-font
-	'default
-	(if (running-macosxp)
-	    "Monaco-14"
-	  "DejaVu Sans Mono-10")))
+       (when window-system
+	 ;; use fc-list
+	 (set-face-font
+	  'default
+	  (if (running-macosxp)
+	      "Monaco-14"
+	    "DejaVu Sans Mono-10"))))
      (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
 
 (eval-after-load 'files
