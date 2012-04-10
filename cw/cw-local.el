@@ -80,7 +80,7 @@
      (set-face-attribute 'font-lock-string-face nil :italic nil)
      (set-face-attribute 'font-lock-function-name-face nil :italic nil)
      ;; backup current color theme
-     (setf 'color-theme-snapshot (color-theme-make-snapshot))
+     (setf color-theme-snapshot (color-theme-make-snapshot))
 
      (defun color-theme-undo ()
        "Undo theme change.  Get back all of the frame, face,
