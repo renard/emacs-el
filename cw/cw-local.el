@@ -618,6 +618,7 @@ lines starting by \"^>\\s-*\"."
      (defun cw:o-blog:start-httpd ()
        "Start httpd server after blog is published."
        (unless noninteractive
+	 (require 'httpd)
 	 (let ((httpd-root (format "%s%s" default-directory
 				  (ob:blog-publish-dir BLOG))))
 	   (httpd-start)
