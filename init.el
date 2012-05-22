@@ -218,6 +218,7 @@
 	      dig
 	      dired-details
 	      dirtree
+	      dpans2texi
 	      emacs-http-server
 	      escreen
 	      fill-column-indicator
