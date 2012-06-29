@@ -126,7 +126,7 @@
      ;; define el-get sources
      (setq
       el-get-sources
-      '(
+      `(
 	(:name dired-toggle-sudo
 	       :type git
 	       :description "Browse directory with sudo privileges."
@@ -168,15 +168,16 @@
 	       :description "Change identity when composing a message."
 	       :type git
 	       :url "git@github.com:renard/gnus-identities.git")
-	(:name emms ;; Original recipe is buggy
-	       :url "git@github.com:renard/emms.git"
-	       :depends emacs-w3m
-	       :description "The Emacs Multimedia System"
-	       :features nil
-	       :build ("mkdir -p ~/.emacs.d/emms"
-		       "make autoloads"
-		       "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
-		       "rm -rf ~/.emacs.d/emms"))
+	,(unless (running-macosxp)
+	   (:name emms ;; Original recipe is buggy
+		  :url "git@github.com:renard/emms.git"
+		  :depends emacs-w3m
+		  :description "The Emacs Multimedia System"
+		  :features nil
+		  :build `("mkdir -p ~/.emacs.d/emms"
+			   "make autoloads"
+			   ,(concat "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m' EMACS=" el-get-emacs))
+		  "rm -rf ~/.emacs.d/emms"))
 	(:name cw-gtd
 	       :description "My Get the Thing Done files."
 	       :type git
