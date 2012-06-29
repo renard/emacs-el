@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-05-03 13:52:53
+;; Last changed: 2012-06-29 19:06:46
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -50,13 +50,23 @@
  ;; b
 (eval-after-load 'browse-url
   '(progn
-     (setq
-      browse-url-generic-program
-      (if (running-macosxp)
-	  "/Applications/Safari.app/Contents/MacOS/Safari"
-	"raise-x-www-browser")
-      browse-url-generic-args nil
-      browse-url-browser-function 'browse-url-generic)))
+     (if (running-macosxp)
+       (progn
+	 (defun browse-url-default-macosx-browser (url &optional new-window)
+	   (interactive (browse-url-interactive-arg "URL: "))
+	   (if (and new-window (>= emacs-major-version 23))
+	       (ns-do-applescript
+		(format (concat "tell application \"Safari\" to make document with properties {URL:\"%s\"}\n"
+				"tell application \"Safari\" to activate") url))
+	     (start-process (concat "open " url) nil "open" url)))
+	 (setq browse-url-browser-function 'browse-url-default-macosx-browser))
+       (setq
+	browse-url-generic-program
+	(if (running-macosxp)
+	    "/Applications/Safari.app/Contents/MacOS/Safari"
+	  "raise-x-www-browser")
+	browse-url-generic-args nil
+	browse-url-browser-function 'browse-url-generic))))
 
 (eval-after-load 'buffer-move
   '(progn
@@ -284,7 +294,8 @@ depending on the context."
 	 (set-face-font
 	  'default
 	  (if (running-macosxp)
-	      "Monaco-14"
+	      ;;"Monaco-14"
+	    "DejaVu Sans Mono-14"
 	    "DejaVu Sans Mono-10"))))
      (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
 
@@ -607,6 +618,12 @@ lines starting by \"^>\\s-*\"."
   '(progn
      (setq mouse-yank-at-point t)))
 
+ ;; n
+(eval-after-load 'ns-win
+  '(progn
+     (setq mac-command-modifier 'meta
+	   mac-option-modifier nil)))
+
  ;; o
 (eval-after-load 'o-blog
   `(progn
@@ -618,6 +635,7 @@ lines starting by \"^>\\s-*\"."
 	 ad-do-it))
      (defun cw:o-blog:start-httpd ()
        "Start httpd server after blog is published."
+       (require 'httpd nil t)
        (unless noninteractive
 	 (require 'httpd)
 	 (let ((httpd-root (format "%s%s" default-directory
@@ -625,8 +643,12 @@ lines starting by \"^>\\s-*\"."
 	   (httpd-start)
 	   (message (format "Starting web at %s" httpd-root))
 	   (browse-url (format "http://127.0.0.1:%d" httpd-port)))))
-     (add-hook 'o-blog-after-publish-hook 'cw:o-blog:start-httpd)))
-
+     (defun cw:o-blog:browse()
+       (browse-url (format "%s%s/index.html" default-directory
+			   (ob:blog-publish-dir BLOG))))
+     (add-hook 'o-blog-after-publish-hook (if (running-macosxp)
+					      'cw:o-blog:browse
+					    'cw:o-blog:start-httpd))))
 
 (eval-after-load 'org
   '(progn
@@ -1161,6 +1183,9 @@ works and run `anything-other-buffer'."
 
   ;; slime support
   (require 'slime nil t)
+
+  (when (and (running-macosxp) ns-initialized)
+    (ns-toggle-fullscreen))
 
   (ido-mode t)
   (show-paren-mode t)

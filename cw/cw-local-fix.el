@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, 
 ;; Created: 2012-01-20
-;; Last changed: 2012-05-22 16:56:51
+;; Last changed: 2012-06-29 18:49:21
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -99,5 +99,31 @@ comments."
 		 `(,s ,ty (,(nth 8 s) . ,(point)))
 	       `(,s))))))
      ))
+
+(defun erc-update-modules ()
+  "Run this to enable erc-foo-mode for all modules in `erc-modules'."
+  (let (req)
+    (dolist (mod erc-modules)
+      (setq req (concat "erc-" (symbol-name mod)))
+      (cond
+       ;; yuck. perhaps we should bring the filenames into sync?
+       ((string= req "erc-capab-identify")
+	(setq req "erc-capab"))
+       ((string= req "erc-completion")
+	(setq req "erc-pcomplete"))
+       ((string= req "erc-pcomplete")
+	(setq mod 'completion))
+       ((string= req "erc-autojoin")
+	(setq req "erc-join")))
+      (condition-case nil
+	  (unless (member req features)
+	    (require (intern req)))
+	(error nil))
+      (let ((sym (intern-soft (concat "erc-" (symbol-name mod) "-mode"))))
+	(if (fboundp sym)
+	    (funcall sym 1)
+	  (error "`%s' is not a known ERC module" mod))))))
+
+
 
 (provide 'cw-local-fix)

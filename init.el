@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-04-18 01:50:56
+;; Last changed: 2012-06-29 19:09:35
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -127,7 +127,7 @@
      ;; define el-get sources
      (setq
       el-get-sources
-      '(
+      `(
 	(:name dired-toggle-sudo
 	       :type git
 	       :description "Browse directory with sudo privileges."
@@ -169,15 +169,6 @@
 	       :description "Change identity when composing a message."
 	       :type git
 	       :url "git@github.com:renard/gnus-identities.git")
-	(:name emms ;; Original recipe is buggy
-	       :url "git@github.com:renard/emms.git"
-	       :depends emacs-w3m
-	       :description "The Emacs Multimedia System"
-	       :features nil
-	       :build ("mkdir -p ~/.emacs.d/emms"
-		       "make autoloads"
-		       "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m'"
-		       "rm -rf ~/.emacs.d/emms"))
 	(:name cw-gtd
 	       :description "My Get the Thing Done files."
 	       :type git
@@ -197,16 +188,27 @@
 	       :type git
 	       :description "Easy search web on engines."
 	       :url "git@github.com:renard/webjump-plus-plus.git")
-
-
 	))
+     (unless (running-macosxp)
+       (add-to-list
+	'el-get-sources
+	'(:name emms ;; Original recipe is buggy
+		:url "git@github.com:renard/emms.git"
+		:depends emacs-w3m
+		:description "The Emacs Multimedia System"
+		:features nil
+		:build `("mkdir -p ~/.emacs.d/emms"
+			 "make autoloads"
+			 ,(concat "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m' EMACS=" el-get-emacs))
+		"rm -rf ~/.emacs.d/emms")))
      ;; create a package list to be installed
      (let ((cw:packages
-	    '(
+	    `(
 	      ;; nognus should be first item to be loaded otherwise emacs'
 	      ;; version of gnus-util is loaded instead.
 	      nognus
 	      org-mode
+
 	      adoc-mode
 	      anything
 	      browse-kill-ring
@@ -226,6 +228,7 @@
 	      fill-column-indicator
 	      filladapt
 	      google-maps
+	      ,(when (running-macosxp) 'growl)
 	      iedit
 	      keywiz
 	      list-processes+
@@ -238,7 +241,6 @@
 	      nagios-mode
 	      offlineimap
 	      org2blog
-
 	      pastebin
 	      php-mode-improved
 	      popwin
