@@ -565,3 +565,13 @@ CMD is a string used to call the contact. By default it is set to:
 ;;;###autoload
 (defmacro time (form)
   `(%time (lambda () ,form)))
+;;;###autoload
+(defun cw:slime:ccl ()
+  "Configure slime for CCL."
+  (interactive)
+  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+  (setq inferior-lisp-program
+	(loop for p in '("/usr/bin/ccl"
+			 "~/src/ccl/lx86cl64")
+	      until (file-exists-p p)
+	      finally return (concat p " -K utf-8"))))
