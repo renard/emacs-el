@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-05-03 13:52:53
+;; Last changed: 2012-06-29 19:06:46
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -294,7 +294,8 @@ depending on the context."
 	 (set-face-font
 	  'default
 	  (if (running-macosxp)
-	      "Monaco-14"
+	      ;;"Monaco-14"
+	    "DejaVu Sans Mono-14"
 	    "DejaVu Sans Mono-10"))))
      (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
 
