@@ -1101,6 +1101,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (global-set-key (kbd "<C-f1>") 'gnus)
 
   ;; cw-functions
+  (global-set-key (kbd "C-x M-s") 'save-file-and-copy)
   (global-set-key (kbd "C-%") 'goto-match-paren)
   (global-set-key (kbd "C-c C-d") 'cw:diff-with-file)
   (global-set-key (kbd "<C-f2>") 'cw:erc:switch-to-screen)
