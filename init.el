@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-06-29 18:52:15
+;; Last changed: 2012-06-29 19:09:35
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -169,16 +169,6 @@
 	       :description "Change identity when composing a message."
 	       :type git
 	       :url "git@github.com:renard/gnus-identities.git")
-	,(unless (running-macosxp)
-	   (:name emms ;; Original recipe is buggy
-		  :url "git@github.com:renard/emms.git"
-		  :depends emacs-w3m
-		  :description "The Emacs Multimedia System"
-		  :features nil
-		  :build `("mkdir -p ~/.emacs.d/emms"
-			   "make autoloads"
-			   ,(concat "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m' EMACS=" el-get-emacs))
-		  "rm -rf ~/.emacs.d/emms"))
 	(:name cw-gtd
 	       :description "My Get the Thing Done files."
 	       :type git
@@ -198,9 +188,19 @@
 	       :type git
 	       :description "Easy search web on engines."
 	       :url "git@github.com:renard/webjump-plus-plus.git")
-
-
 	))
+     (unless (running-macosxp)
+       (add-to-list
+	'el-get-sources
+	'(:name emms ;; Original recipe is buggy
+		:url "git@github.com:renard/emms.git"
+		:depends emacs-w3m
+		:description "The Emacs Multimedia System"
+		:features nil
+		:build `("mkdir -p ~/.emacs.d/emms"
+			 "make autoloads"
+			 ,(concat "make SITEFLAG='--no-site-file -L ~/.emacs.d/el-get/emacs-w3m' EMACS=" el-get-emacs))
+		"rm -rf ~/.emacs.d/emms")))
      ;; create a package list to be installed
      (let ((cw:packages
 	    `(
