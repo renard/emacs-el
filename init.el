@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-06-29 18:50:08
+;; Last changed: 2012-06-29 18:52:15
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -203,7 +203,7 @@
 	))
      ;; create a package list to be installed
      (let ((cw:packages
-	    '(
+	    `(
 	      ;; nognus should be first item to be loaded otherwise emacs'
 	      ;; version of gnus-util is loaded instead.
 	      nognus
@@ -228,6 +228,7 @@
 	      fill-column-indicator
 	      filladapt
 	      google-maps
+	      ,(when (running-macosxp) 'growl)
 	      iedit
 	      keywiz
 	      list-processes+
