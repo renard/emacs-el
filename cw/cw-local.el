@@ -600,6 +600,12 @@ lines starting by \"^>\\s-*\"."
   '(progn
      (setq mouse-yank-at-point t)))
 
+ ;; n
+(eval-after-load 'ns-win
+  '(progn
+     (setq mac-command-modifier 'meta
+	   mac-option-modifier nil)))
+
  ;; o
 (eval-after-load 'o-blog
   `(progn
@@ -1157,6 +1163,9 @@ works and run `anything-other-buffer'."
 
   ;; slime support
   (require 'slime nil t)
+
+  (when (and (running-macosxp) ns-initialized)
+    (ns-toggle-fullscreen))
 
   (ido-mode t)
   (show-paren-mode t)
