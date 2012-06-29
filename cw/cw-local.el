@@ -611,14 +611,19 @@ lines starting by \"^>\\s-*\"."
 	 ad-do-it))
      (defun cw:o-blog:start-httpd ()
        "Start httpd server after blog is published."
+       (require 'httpd nil t)
        (unless noninteractive
 	 (let ((httpd-root (format "%s%s" default-directory
 				  (ob:blog-publish-dir BLOG))))
 	   (httpd-start)
 	   (message (format "Starting web at %s" httpd-root))
 	   (browse-url (format "http://127.0.0.1:%d" httpd-port)))))
-     (add-hook 'o-blog-after-publish-hook 'cw:o-blog:start-httpd)))
-
+     (defun cw:o-blog:browse()
+       (browse-url (format "%s%s/index.html" default-directory
+			   (ob:blog-publish-dir BLOG))))
+     (add-hook 'o-blog-after-publish-hook (if (running-macosxp)
+					      'cw:o-blog:browse
+					    'cw:o-blog:start-httpd))))
 
 (eval-after-load 'org
   '(progn
