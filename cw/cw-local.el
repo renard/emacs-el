@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-04-05 16:31:23
+;; Last changed: 2012-05-03 13:52:53
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -90,7 +90,7 @@
      (set-face-attribute 'font-lock-string-face nil :italic nil)
      (set-face-attribute 'font-lock-function-name-face nil :italic nil)
      ;; backup current color theme
-     (setf 'color-theme-snapshot (color-theme-make-snapshot))
+     (setf color-theme-snapshot (color-theme-make-snapshot))
 
      (defun color-theme-undo ()
        "Undo theme change.  Get back all of the frame, face,
@@ -366,6 +366,22 @@ lines starting by \"^>\\s-*\"."
 
 (eval-after-load 'gnus-sum
   '(progn
+     (defvar cw:gnus-sum-mode-threads-list
+       '((".*" (progn
+		 (gnus-summary-toggle-threads 1)
+		 (gnus-summary-sort-by-date 1))))
+       "List defining how to sort messages in Summary buffer")
+
+     (defun cw:gnus-sum-mode-threads ()
+       "sort message in Summary buffer according to `cw:gnus-sum-mode-threads-list'"
+       (loop for rule in cw:gnus-sum-mode-threads-list
+	     when (string-match (car rule) gnus-newsgroup-name)
+	     do (progn
+		  (message "Matching %S" rule)
+		  (eval (cadr rule)))))
+
+     (add-hook 'gnus-summary-prepared-hook 'cw:gnus-sum-mode-threads)
+
      (define-key gnus-summary-mode-map (kbd "<C-return>") 'gnus-article-browse-html-article)
      (setq
       gnus-user-date-format-alist
@@ -619,6 +635,7 @@ lines starting by \"^>\\s-*\"."
        "Start httpd server after blog is published."
        (require 'httpd nil t)
        (unless noninteractive
+	 (require 'httpd)
 	 (let ((httpd-root (format "%s%s" default-directory
 				  (ob:blog-publish-dir BLOG))))
 	   (httpd-start)
