@@ -206,6 +206,8 @@
 	      ;; nognus should be first item to be loaded otherwise emacs'
 	      ;; version of gnus-util is loaded instead.
 	      nognus
+	      org-mode
+
 	      adoc-mode
 	      anything
 	      browse-kill-ring
@@ -236,7 +238,6 @@
 	      nagios-mode
 	      offlineimap
 	      org2blog
-	      org-mode
 	      pastebin
 	      php-mode-improved
 	      popwin
