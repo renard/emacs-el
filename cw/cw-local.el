@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-07-03 00:41:47
+;; Last changed: 2012-07-03 01:12:02
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -219,6 +219,7 @@ depending on the context."
   '(progn
      (emms-standard)))
 
+;;;###autoload (autoload 'erc-cw:page-me-mode "erc-cw:page-me" nil t)
 (eval-after-load 'erc
   '(progn
      (setq
@@ -230,10 +231,8 @@ depending on the context."
      (define-key erc-mode-map (kbd "C-x k") 'erc-iswitchb)
      (define-key erc-mode-map (kbd "C-C C-\\") 'cw:erc:channel-next-modified)
      (define-key erc-mode-map (kbd "C-C C-]") 'cw:erc:channel-next)
-     (define-key erc-mode-map (kbd "C-C C-[") 'cw:erc:channel-prev)))
+     (define-key erc-mode-map (kbd "C-C C-[") 'cw:erc:channel-prev)
 
-(eval-after-load 'erc-backend
-  '(progn
      (defun cw:erc-page-me-PRIVMSG (proc parsed)
        (let ((nick (car (erc-parse-user (erc-response.sender parsed))))
 	     (target (car (erc-response.command-args parsed)))
@@ -249,7 +248,7 @@ depending on the context."
 	      :urgency 'low))))
        ;; Return nil to continue processing by ERC
        nil)
-
+     (add-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG)
      (define-erc-module cw:page-me nil "page me on private message"
        ((add-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG))
        ((remove-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG)))))
