@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-07-01 23:13:11
+;; Last changed: 2012-07-02 22:08:37
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -320,10 +320,10 @@
 	(kill-buffer)))))
 
 (let* ((time
-	(destructuring-bind (hi lo ms) (current-time)
+	(destructuring-bind (hi lo us ps) (current-time)
 	  (+
 	   (- (+ hi lo) (+ (first before-init-time) (second before-init-time)))
-	   (/ (- ms (third before-init-time)) (expt 10.0 6)))))
+	   (/ (- us (third before-init-time)) (expt 10.0 6)))))
        (msg (format "Emacs loaded in %.3fs" time)))
   (message msg)
   (when (and (not noninteractive)
