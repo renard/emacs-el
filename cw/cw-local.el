@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-06-29 19:06:46
+;; Last changed: 2012-07-03 00:41:47
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -231,6 +231,28 @@ depending on the context."
      (define-key erc-mode-map (kbd "C-C C-\\") 'cw:erc:channel-next-modified)
      (define-key erc-mode-map (kbd "C-C C-]") 'cw:erc:channel-next)
      (define-key erc-mode-map (kbd "C-C C-[") 'cw:erc:channel-prev)))
+
+(eval-after-load 'erc-backend
+  '(progn
+     (defun cw:erc-page-me-PRIVMSG (proc parsed)
+       (let ((nick (car (erc-parse-user (erc-response.sender parsed))))
+	     (target (car (erc-response.command-args parsed)))
+	     (msg (erc-response.contents parsed)))
+	 (when (and (erc-current-nick-p target)
+		    (not (erc-is-message-ctcp-and-not-action-p msg)))
+	   (if (running-macosxp)
+	       (growl (format "ERC: %s" nick) msg)
+	     (notifications-notify
+	      :title nick
+	      :body msg
+	      :app-icon nil
+	      :urgency 'low))))
+       ;; Return nil to continue processing by ERC
+       nil)
+
+     (define-erc-module cw:page-me nil "page me on private message"
+       ((add-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG))
+       ((remove-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG)))))
 
 (eval-after-load 'erc-track
   '(progn
