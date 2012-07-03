@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-07-03 00:53:04
+;; Last changed: 2012-07-03 02:02:21
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -319,21 +319,10 @@
 	(eval-buffer)
 	(kill-buffer)))))
 
-(flet ((compute-time
-	(hi lo us)
-	(+
-	 (- (+ hi lo) (+ (first before-init-time) (second before-init-time)))
-	 (/ (- us (third before-init-time)) (expt 10.0 6)))))
-  (let* ((time
-	  (cond
-	   ((= 3 (length (current-time)))
-	    (destructuring-bind (hi lo us) (current-time)
-	      (compute-time hi lo us)))
-	   ((= 4 (length (current-time)))
-	    (destructuring-bind (hi lo us ps) (current-time)
-	      (compute-time hi lo us)))))
-	 (msg (format "Emacs loaded in %.3fs" time)))
-    (message msg)
-    (when (and (not noninteractive)
-	       (boundp 'el-get-notify-type))
-      (el-get-notify "Emacs is ready." msg))))
+(let* ((time (time-to-seconds
+	      (time-subtract (current-time) before-init-time)))
+       (msg (format "Emacs loaded in %.3fs" time)))
+  (message msg)
+  (when (and (not noninteractive)
+	     (boundp 'el-get-notify-type))
+    (el-get-notify "Emacs is ready." msg)))
