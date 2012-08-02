@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-02 11:34:27
+;; Last changed: 2012-08-02 11:43:19
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -444,7 +444,7 @@ lines starting by \"^>\\s-*\"."
 			      (summary 20 point)
 			      (article 1.0)))))
 
-     (loop for type in '(reply reply-yank forward message)
+     (loop for type in '(reply reply-yank forward message post mail-bound)
 	   do (gnus-add-configuration
 	       `(,type
 		 (horizontal 8
