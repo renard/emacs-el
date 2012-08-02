@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-07-03 01:12:02
+;; Last changed: 2012-08-02 11:34:27
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -428,6 +428,14 @@ lines starting by \"^>\\s-*\"."
 
 (eval-after-load 'gnus-win
   '(progn
+
+     (gnus-add-configuration
+      '(summary
+	(vertical 1.0
+		  (horizontal 1.0
+			      (group 50)
+			      (summary 1.0 point)))))
+
      (gnus-add-configuration
       '(article
 	(horizontal 8
@@ -435,14 +443,15 @@ lines starting by \"^>\\s-*\"."
 		    (vertical 1.0
 			      (summary 20 point)
 			      (article 1.0)))))
-     (gnus-add-configuration
-      '(summary
-	(vertical 1.0
-		  (horizontal 1.0
-			      (group 50)
-			      (summary 1.0 point)
-			      (if gnus-carpal
-				  '(summary-carpal 4))))))))
+
+     (loop for type in '(reply reply-yank forward message)
+	   do (gnus-add-configuration
+	       `(,type
+		 (horizontal 8
+			     (group 50)
+			     (vertical 1.0
+				       (summary 20)
+				       (,type 1.0 point))))))))
 
  ;; h
 (eval-after-load 'hideshow
