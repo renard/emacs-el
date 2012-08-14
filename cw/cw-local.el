@@ -1215,7 +1215,8 @@ works and run `anything-other-buffer'."
   ;; slime support
   (require 'slime nil t)
 
-  (when (and (running-macosxp) ns-initialized)
+  (when (and (running-macosxp) ns-initialized
+	     (functionp 'ns-toggle-fullscreen))
     (ns-toggle-fullscreen))
 
   (ido-mode t)
