@@ -87,7 +87,7 @@
 
   (eval-after-load 'mm-decode
     `(progn
-       (setq mm-default-directory "~/Download/")
+       (setq mm-default-directory "~/Downloads/gnus")
        (mkdir mm-default-directory t)))
 
   (eval-after-load 'gnus-start
