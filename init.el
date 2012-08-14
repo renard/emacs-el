@@ -260,7 +260,7 @@
 	      )))
 
        (when (running-macosxp)
-	 (add-to-list 'cw:packages 'growl))
+	 (add-to-list 'cw:packages 'terminal-notifier-el))
 
        (setq cw:packages
 	     (append cw:packages
