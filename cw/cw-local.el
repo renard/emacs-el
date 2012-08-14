@@ -1199,7 +1199,9 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 	(when wap (substring-no-properties wap))))
      dictionary-default-dictionary))
 
-  (global-set-key (kbd "C-c ?") 'cw:dictionary-search)
+  (if (running-macosxp)
+      (global-set-key (kbd "C-c ?") 'dictionary-app-search)
+    (global-set-key (kbd "C-c ?") 'cw:dictionary-search))
 
   (qbs-init)
   (require 'projects nil t)
