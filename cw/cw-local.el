@@ -1151,13 +1151,14 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   ;; undo-tree
   (global-set-key (kbd "C-x Z") 'undo-tree-visualize)
 
-  (global-set-key (kbd "<C-f1>") 'gnus)
+  (global-set-key (kbd (if (running-macosxp) "<M-f1>" "<C-f1>")) 'gnus)
 
   ;; cw-functions
   (global-set-key (kbd "C-x M-s") 'save-file-and-copy)
   (global-set-key (kbd "C-%") 'goto-match-paren)
   (global-set-key (kbd "C-c C-d") 'cw:diff-with-file)
-  (global-set-key (kbd "<C-f2>") 'cw:erc:switch-to-screen)
+  (global-set-key (kbd (if (running-macosxp) "<M-f2>" "<C-f2>"))
+		  'cw:erc:switch-to-screen)
   (define-key global-map (kbd "C-x C-d") 'cw:dired)
 
   (global-set-key (kbd "C-x K") 'delete-frame)
