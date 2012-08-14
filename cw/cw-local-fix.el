@@ -100,30 +100,5 @@ comments."
 	       `(,s))))))
      ))
 
-(defun erc-update-modules ()
-  "Run this to enable erc-foo-mode for all modules in `erc-modules'."
-  (let (req)
-    (dolist (mod erc-modules)
-      (setq req (concat "erc-" (symbol-name mod)))
-      (cond
-       ;; yuck. perhaps we should bring the filenames into sync?
-       ((string= req "erc-capab-identify")
-	(setq req "erc-capab"))
-       ((string= req "erc-completion")
-	(setq req "erc-pcomplete"))
-       ((string= req "erc-pcomplete")
-	(setq mod 'completion))
-       ((string= req "erc-autojoin")
-	(setq req "erc-join")))
-      (condition-case nil
-	  (unless (member req features)
-	    (require (intern req)))
-	(error nil))
-      (let ((sym (intern-soft (concat "erc-" (symbol-name mod) "-mode"))))
-	(if (fboundp sym)
-	    (funcall sym 1)
-	  (error "`%s' is not a known ERC module" mod))))))
-
-
 
 (provide 'cw-local-fix)
