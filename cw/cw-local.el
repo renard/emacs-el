@@ -1183,6 +1183,8 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 
   (define-key global-map (kbd "C-=") 'cw:open-shell)
 
+  (when (running-macosxp)
+    (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen))
 
   (global-set-key (kbd "C-c C-/") 'webjump++)
 
