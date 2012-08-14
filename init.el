@@ -240,7 +240,7 @@
 	      nagios-mode
 	      offlineimap
 	      org2blog
-	      pastebin
+	      ;;pastebin
 	      php-mode-improved
 	      popwin
 	      rainbow-delimiters
