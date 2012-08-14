@@ -219,6 +219,12 @@ depending on the context."
   '(progn
      (emms-standard)))
 
+(eval-after-load 'epg-config
+  '(progn
+     (setq epg-gpg-program (or (executable-find "gpg2")
+			       (executable-find "gpg")
+			       nil))))
+
 ;;;###autoload (autoload 'erc-cw:page-me-mode "erc-cw:page-me" nil t)
 (eval-after-load 'erc
   '(progn
