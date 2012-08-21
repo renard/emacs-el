@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-14 20:50:20
+;; Last changed: 2012-08-21 02:48:51
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -1228,6 +1228,9 @@ works and run `anything-other-buffer'."
 
   ;; slime support
   (require 'slime nil t)
+
+  (require 'cus-edit nil t)
+  (load custom-file)
 
   (when (and (running-macosxp) ns-initialized
 	     (functionp 'ns-toggle-fullscreen))

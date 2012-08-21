@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-14 18:15:42
+;; Last changed: 2012-08-21 02:47:59
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -53,8 +53,7 @@
   (eval-after-load 'cus-edit
     `(progn
        ;; Do not save custom variables.
-       (setq custom-file (concat ,tmp-dir "custom"))
-       (load custom-file)))
+       (setq custom-file (concat ,tmp-dir "custom"))))
 
   (eval-after-load 'desktop
     `(progn
