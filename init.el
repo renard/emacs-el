@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-21 02:47:59
+;; Last changed: 2012-08-22 04:58:37
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -312,9 +312,10 @@
   (let ((pass-file (concat
 	(file-name-as-directory user-emacs-directory)
 	"cw-private/cw-pass.el.gpg")))
+    (require 'epg-config)
     (when (and
 	   (file-readable-p pass-file)
-	   (functionp 'epg-gpg-program))
+	   (boundp 'epg-gpg-program))
       (with-current-buffer
 	  (find-file pass-file)
 	(eval-buffer)
