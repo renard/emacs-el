@@ -977,11 +977,17 @@ or `mail-envelope-from'."
 	 (define-key term-raw-map (kbd "M-]") 'escreen-goto-next-screen))
        (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
        (define-key term-raw-map (kbd "M-'") 'ido-switch-buffer)
-       (setq ansi-term-color-vector
-	     [unspecified "black" "#f57900" "#8ae234" "#edd400" "#729fcf"
-			  "#ad7fa8" "cyan3" "#eeeeec"]
-	     term-default-fg-color "#eeeeec"
-	     term-default-bg-color 'unspecified)
+       (set-face-attribute 'term-color-black nil :foreground "black")
+       (set-face-attribute 'term-color-red nil :foreground "#f57900")
+       (set-face-attribute 'term-color-green nil :foreground "#8ae234")
+       (set-face-attribute 'term-color-yellow nil :foreground "#edd400")
+       (set-face-attribute 'term-color-blue nil :foreground "#729fcf")
+       (set-face-attribute 'term-color-magenta nil :foreground "#ad7fa8")
+       (set-face-attribute 'term-color-cyan nil :foreground "cyan3")
+       (set-face-attribute 'term-color-white nil :foreground "#eeeeec")
+       (setq
+	term-default-fg-color "#eeeeec"
+	term-default-bg-color 'unspecified)
        (add-hook 'term-mode-hook (lambda () (hl-line-mode -1)))
        (add-hook 'term-mode-hook 'cw:shell:set-font)
 
