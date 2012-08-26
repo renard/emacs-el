@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-03-21 11:15:05
+;; Last changed: 2012-08-26 18:27:59
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -344,7 +344,9 @@ See `cw:term-run' and `cw:shell-run'."
   "Set default font for terminal."
   (set
    (make-local-variable 'buffer-face-mode-face)
-   '(:family "Terminus" :height 120))
+   (if (running-macosxp)
+       '(:family "Monaco" :height 120)
+   '(:family "Terminus" :height 120)))
   (buffer-face-mode))
 
 ;;;###autoload
