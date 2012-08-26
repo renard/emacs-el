@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-23 00:06:01
+;; Last changed: 2012-08-26 18:43:12
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -655,6 +655,11 @@ lines starting by \"^>\\s-*\"."
   '(progn
      (setq mouse-yank-at-point t)))
 
+(eval-after-load 'mule
+  '(progn
+     (setq default-keyboard-coding-system nil
+	   default-terminal-coding-system nil)))
+
  ;; n
 (eval-after-load 'ns-win
   '(progn
@@ -905,6 +910,7 @@ or `mail-envelope-from'."
       mail-envelope-from 'header
       send-mail-function 'smtpmail-send-it
       smtpmail-smtp-server "127.0.0.1"
+      default-sendmail-coding-system 'utf-8-unix
       message-from-style 'angles)))
 
 (eval-after-load 'sgml-mode
@@ -1272,5 +1278,11 @@ works and run `anything-other-buffer'."
     (setq completing-read-function 'ido-completing-read*)))
 
 (unless noninteractive (cw:init))
+
+(setq-default
+ locale-coding-system 'utf-8-unix
+ buffer-file-coding-system 'utf-8-unix
+ default-file-name-coding-system nil
+ default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 (provide 'cw-local)
