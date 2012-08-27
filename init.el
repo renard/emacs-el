@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-22 04:58:37
+;; Last changed: 2012-08-27 15:10:42
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -182,6 +182,10 @@
 	       :type git
 	       :description "Act like indirect buffer for region."
 	       :url "git@github.com:renard/indirect-region.git")
+	(:name terminal-notifier-el
+	       :type git
+	       :description "Emacs interface for terminal-notifier for MacOSX notification center."
+	       :url "git@github.com:terminal-notifier-el.git")
 
 	(:name webjump++
 	       :type git
