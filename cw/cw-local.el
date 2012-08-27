@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-26 18:43:12
+;; Last changed: 2012-08-27 15:10:03
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -1193,7 +1193,9 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (define-key global-map (kbd "C-=") 'cw:open-shell)
 
   (when (running-macosxp)
-    (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen))
+    (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
+    (global-set-key (kbd "M-v") 'yank)
+    (global-set-key (kbd "M-c") 'kill-ring-save))
 
   (global-set-key (kbd "C-c C-/") 'webjump++)
 
