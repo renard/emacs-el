@@ -46,8 +46,9 @@
 
 (eval-after-load 'anything
   '(progn
-       (require 'anything-config nil t)))
+     (require 'anything-config nil t)))
  ;; b
+
 (eval-after-load 'browse-url
   '(progn
      (if (running-macosxp)
