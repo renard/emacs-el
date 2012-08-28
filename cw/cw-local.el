@@ -323,7 +323,7 @@ depending on the context."
 	  'default
 	  (if (running-macosxp)
 	      ;;"Monaco-14"
-	    "DejaVu Sans Mono-14"
+	      "DejaVu Sans Mono-14"
 	    "DejaVu Sans Mono-10"))))
      (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
 
