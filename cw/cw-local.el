@@ -1195,8 +1195,7 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
 
   (when (running-macosxp)
     (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
-    (global-set-key (kbd "M-v") 'yank)
-    (global-set-key (kbd "M-c") 'kill-ring-save))
+    (global-set-key (kbd "M-v") 'yank))
 
   (global-set-key (kbd "C-c C-/") 'webjump++)
 
