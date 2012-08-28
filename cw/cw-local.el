@@ -543,12 +543,12 @@ lines starting by \"^>\\s-*\"."
 	 ("emms" (or
 		  (mode . emms)))
 	 ("tramp" (or
-		    (name . "^\\*tramp")))
+		   (name . "^\\*tramp")))
 	 ("term" (or
 		  (mode . term-mode)
 		  (mode . shell-mode)))
 	 ("magit" (or
-		    (name . "^\\*magit"))))))
+		   (name . "^\\*magit"))))))
      (add-hook 'ibuffer-mode-hook
 	       (lambda ()
 		 (ibuffer-switch-to-saved-filter-groups "default")))
