@@ -193,7 +193,7 @@
 	(:name terminal-notifier-el
 	       :type git
 	       :description "Emacs interface for terminal-notifier for MacOSX notification center."
-	       :url "git@github.com:terminal-notifier-el.git")
+	       :url "git@github.com:renard/terminal-notifier-el.git")
 
 	(:name webjump++
 	       :type git
