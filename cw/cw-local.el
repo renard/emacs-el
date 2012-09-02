@@ -1145,6 +1145,8 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (setq-default fill-column 76)
   (setq message-log-max 2048)
 
+  (setq use-dialog-box nil)
+
   ;; Key bindings
 
   ;; browse-kill-ring
