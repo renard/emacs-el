@@ -1039,6 +1039,10 @@ or `mail-envelope-from'."
       time-stamp-line-limit 0)
      (make-variable-buffer-local 'time-stamp-start)))
 
+(eval-after-load 'time
+  '(progn
+     (setq display-time-24hr-format t)))
+
 (eval-after-load 'tool-bar
   '(progn (tool-bar-mode -1)))
 
@@ -1248,6 +1252,8 @@ works and run `anything-other-buffer'."
   (when (and (running-macosxp) ns-initialized
 	     (functionp 'ns-toggle-fullscreen))
     (ns-toggle-fullscreen))
+
+  (display-time-mode 1)
 
   (ido-mode t)
   (show-paren-mode t)
