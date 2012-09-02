@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-28 10:19:57
+;; Last changed: 2012-09-02 15:35:05
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -30,7 +30,7 @@
 (eval-after-load 'adoc-mode
   '(progn
      (add-hook 'adoc-mode-hook 'flyspell-mode)
-     ;;c(add-hook 'adoc-mode-hook 'flyspell-buffer)
+     (add-hook 'adoc-mode-hook 'flyspell-buffer)
      (define-key adoc-mode-map (kbd "C-c m") 'cw:adoc-mode:compile)))
 
 (eval-after-load 'ack
