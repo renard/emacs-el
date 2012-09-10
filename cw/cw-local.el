@@ -542,6 +542,9 @@ lines starting by \"^>\\s-*\"."
 	 ("org" (mode . org-mode))
 	 ("emms" (or
 		  (mode . emms)))
+	 ("adoc" (or
+		  (mode . adoc-mode)))
+
 	 ("tramp" (or
 		   (name . "^\\*tramp")))
 	 ("term" (or
@@ -631,6 +634,17 @@ lines starting by \"^>\\s-*\"."
      (add-to-list 'mailcap-mime-extensions '(".f4v" . "video/x-f4v"))
      (add-to-list 'mailcap-mime-extensions '(".wmv" . "video/x-wmv"))
      (mailcap-parse-mailcaps nil t)))
+
+(eval-after-load 'markup-faces
+  '(progn
+     (set-face-attribute 'markup-title-0-face nil :height 1.5)
+     (set-face-attribute 'markup-title-1-face nil :height 1.4)
+     (set-face-attribute 'markup-title-2-face nil :height 1.3)
+     (set-face-attribute 'markup-title-3-face nil :height 1.2)
+     (set-face-attribute 'markup-title-4-face nil :height 1.1)
+     (set-face-attribute 'markup-title-5-face nil :height 1.0)
+     (set-face-attribute 'markup-meta-face nil :height 1.0)
+     (set-face-attribute 'markup-meta-hide-face nil :height 1.0)))
 
 (eval-after-load 'menu-bar
   '(progn (menu-bar-mode -1)))
