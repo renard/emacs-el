@@ -171,6 +171,7 @@
 	      fill-column-indicator
 	      filladapt
 	      google-maps
+	      gnus-identities
 	      iedit
 	      keywiz
 	      list-processes+
