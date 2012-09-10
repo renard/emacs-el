@@ -1,0 +1,4 @@
+(:name magit-identities
+       :type git
+       :description "Use several identities in magit."
+       :url "git@github.com:renard/magit-identities")

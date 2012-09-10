@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-30 23:17:41
+;; Last changed: 2012-09-02 23:58:34
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -127,79 +127,10 @@
 
 (eval-after-load "el-get"
   '(progn
-     ;; define el-get sources
-     (setq
-      el-get-sources
-      `(
-	(:name dired-toggle-sudo
-	       :type git
-	       :description "Browse directory with sudo privileges."
-	       :url "git@github.com:renard/dired-toggle-sudo.git")
-	(:name git-auto-commit
-	       :type git
-	       :description "Git auto commit directory within emacs."
-	       :url "git@github.com:renard/git-auto-commit.git")
-	(:name quick-buffer-switch
-	       :type git
-	       :description "Quick switch to file or dir buffers."
-	       :url "git@github.com:renard/quick-buffer-switch.git")
-	(:name string-template
-	       :description "Support for $-substitution."
-	       :type git
-	       :url "git@github.com:renard/string-template-el.git"
-	       :features string-template)
-	(:name org-website
-	       :description "Generate multi-level website from org"
-	       :depends string-template
-	       :url "git@github.com:renard/org-website.git")
-	(:name dired-sync
-	       :description "Sync directories within dired"
-	       :type git
-	       :url "git@github.com:renard/dired-sync.git"
-	       :features dired-sync)
-	(:name db-sql
-	       :website "https://github.com/renard/db-sql-el"
-	       :description "Connect to SQL server using tramp syntax"
-	       :type git
-	       :url "git@github.com:renard/db-sql-el.git"
-	       :features (db-sql))
-	(:name ssh-config
-	       :description "Manage both ssh and dsh confguration from emacs"
-	       :type git
-	       :url "git@github.com:renard/ssh-config-el.git"
-	       :features ssh-config)
-	(:name gnus-identities
-	       :description "Change identity when composing a message."
-	       :type git
-	       :url "git@github.com:renard/gnus-identities.git")
-	(:name cw-gtd
-	       :description "My Get the Thing Done files."
-	       :type git
-	       :url  "git@github.com:renard/cw-gtd.git")
-
-	(:name o-blog
-	       :type git
-	       :description "Export org-mode trees to html blog"
-	       :url "git@github.com:renard/o-blog.git")
-	(:name magit-identities
-	       :type git
-	       :description "Use several identities in magit."
-	       :url "git@github.com:renard/magit-identities")
-
-	(:name indirect-region
-	       :type git
-	       :description "Act like indirect buffer for region."
-	       :url "git@github.com:renard/indirect-region.git")
-	(:name terminal-notifier-el
-	       :type git
-	       :description "Emacs interface for terminal-notifier for MacOSX notification center."
-	       :url "git@github.com:renard/terminal-notifier-el.git")
-
-	(:name webjump++
-	       :type git
-	       :description "Easy search web on engines."
-	       :url "git@github.com:renard/webjump-plus-plus.git")
-	))
+     (add-to-list 'el-get-recipe-path
+                  (concat (file-name-as-directory user-emacs-directory)
+                          "cw/recipes"))
+    ;; define el-get sources
      (unless (running-macosxp)
        (add-to-list
 	'el-get-sources

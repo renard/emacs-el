@@ -1,0 +1,4 @@
+(:name o-blog
+       :type git
+       :description "Export org-mode trees to html blog"
+       :url "git@github.com:renard/o-blog.git")

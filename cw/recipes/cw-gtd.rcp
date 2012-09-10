@@ -1,0 +1,4 @@
+(:name cw-gtd
+       :description "My Get the Thing Done files."
+       :type git
+       :url  "git@github.com:renard/cw-gtd.git")
