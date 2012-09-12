@@ -409,9 +409,21 @@ lines starting by \"^>\\s-*\"."
 		  (message "Matching %S" rule)
 		  (eval (cadr rule)))))
 
+     (if (running-macosxp)
+	 (progn
+	   (defun cw:gnus-sum-mode-open-in-mail.app ()
+	     "Open current message in Apple Mail.app"
+	     (interactive)
+	     (let ((id (elt (gnus-summary-article-header) 4)))
+	       (when id
+		 (shell-command (format "open -a Mail \"message://%s\"" id)))))
+	   (define-key gnus-summary-mode-map (kbd "<C-return>")
+	     'cw:gnus-sum-mode-open-in-mail.app))
+       (define-key gnus-summary-mode-map (kbd "<C-return>")
+	 'gnus-article-browse-html-article))
+
      (add-hook 'gnus-summary-prepared-hook 'cw:gnus-sum-mode-threads)
 
-     (define-key gnus-summary-mode-map (kbd "<C-return>") 'gnus-article-browse-html-article)
      (setq
       gnus-user-date-format-alist
       '(
