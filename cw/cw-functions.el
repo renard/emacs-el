@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-08-26 18:27:59
+;; Last changed: 2012-09-20 00:28:30
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -153,7 +153,7 @@ For this to work, simply declare:
   "Connect to erc servers defined in `cw:erc:servers'."
   (interactive)
   (cw:erc:disconnect)
-  (mapcar '(lambda(x)
+  (mapcar #'(lambda(x)
 	     (unless (get-buffer (format "*irc: %s*" (car x)))
 	       (let ((erc-server-connect-function 'erc-open-tls-stream))
 		 (apply 'erc (cdr x))
@@ -165,12 +165,12 @@ For this to work, simply declare:
   "Disonnect from erc servers defined in `cw:erc:servers' and
 kill related buffers."
   (interactive)
-  (mapc '(lambda(x)
+  (mapc #'(lambda(x)
 	     (let ((buffer (format "*irc: %s*" (car x))))
 	       (when (get-buffer buffer)
 		 (kill-buffer buffer))))
 	  cw:erc:servers)
-  (mapcar '(lambda(x)
+  (mapcar #'(lambda(x)
 	     (set-buffer x)
 	     (when (eq major-mode 'erc-mode)
 	       (kill-buffer)))
@@ -179,7 +179,7 @@ kill related buffers."
 (defun cw:erc:list-sorted-buffers ()
   "Sort ERC channel buffer by name."
   (sort (erc-buffer-list nil)
-	'(lambda(x y) (string< (buffer-name x) (buffer-name y)))))
+	#'(lambda(x y) (string< (buffer-name x) (buffer-name y)))))
 
 (defun cw:erc:channel-next-modified()
   "Switch to next modified channel"
