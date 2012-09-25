@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-02 15:35:05
+;; Last changed: 2012-09-20 00:26:32
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -190,6 +190,17 @@ depending on the context."
 		      (functionp 'ad-Orig-dired-find-file))
 		 ad-Orig-dired-find-file
 	       dired-find-file)))))
+
+     (when (running-macosxp)
+       (defun cw:dired-do-shell-mac-open ()
+	 "Open file at point using \"open\" on MacOSX."
+	 (interactive)
+	 (save-window-excursion
+	   (dired-do-async-shell-command
+	    "open" current-prefix-arg
+	    (dired-get-marked-files t current-prefix-arg))))
+       (define-key dired-mode-map (kbd "C-o") 'cw:dired-do-shell-mac-open))
+
 
      (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
