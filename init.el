@@ -226,6 +226,14 @@
 		     (loop for src in el-get-sources
 			   collect (el-get-source-name src))))
 
+       (let ((p-diff (set-difference
+		      (mapcar 'el-get-as-symbol
+			      (el-get-list-package-names-with-status
+			       "installed"  "removed"))
+		      cw:packages)))
+	 (when p-diff
+	   (warn "Following packages are not defined in cw:packages: %s" p-diff)))
+
        (message "running (el-get 'sync '%s)" cw:packages)
        ;; Really do install packages
        (el-get 'sync cw:packages)
