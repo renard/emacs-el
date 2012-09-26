@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-26 10:31:12
+;; Last changed: 2012-09-26 10:56:38
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -160,10 +160,15 @@
 	      color-theme
 	      color-theme-tango
 	      crontab-mode
+	      cw-gtd
+	      db-sql
 	      descbinds-anything
 	      dictionary
+	      dictionary-app
 	      dig
 	      dired-details
+	      dired-sync
+	      dired-toggle-sudo
 	      dirtree
 	      dpans2texi
 	      emacs-http-server
@@ -171,29 +176,36 @@
 	      expand-region
 	      fill-column-indicator
 	      filladapt
+	      git-auto-commit
 	      google-maps
 	      gnus-identities
 	      iedit
+	      indirect-region
 	      keywiz
 	      list-processes+
 	      lua-mode
 	      lusty-explorer
 	      magit
+	      magit-identities
 	      mailq
 	      maxframe
 	      multiple-cursors
 	      muse
 	      nagios-mode
+	      o-blog
 	      offlineimap
+	      org-website
 	      org2blog
 	      ;;pastebin
 	      php-mode-improved
 	      popwin
+	      quick-buffer-switch
 	      rainbow-delimiters
 	      rainbow-mode
 	      rst-mode
 	      smex
 	      srep
+	      ssh-config
 	      switch-window
 	      undo-tree
 	      vcl-mode
@@ -201,6 +213,7 @@
 	      vline
 	      volatile-highlights
 	      hl-tags-mode
+	      webjump++
 	      yasnippet
 	      xml-rpc-el
 	      )))
