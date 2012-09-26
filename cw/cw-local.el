@@ -852,6 +852,35 @@ would be used if applicable ad remove CLEAR tag.
 	("fai" . "~/src/fai-config")
 	("qbs" . "~/.emacs.d/el-get/quick-buffer-switch/")))))
 
+(eval-after-load 'puppet-mode
+  '(progn
+     (defun cw:puppet-mode-align ()
+       "Align paragraph on \"=\" character as defined in puppet
+       best practices style guide."
+       (interactive)
+       (save-excursion
+	 (let ((beg (progn (backward-paragraph 1) (point)))
+	       (end (progn (forward-paragraph 1) (point))))
+	   (indent-region beg end)
+	   (align-regexp beg end "\\(\\s-*\\) =" -1 0 nil))))
+
+     (defun cw:puppet-mode-newline-and-indent ()
+       "Align paragraph using `cw:puppet-mode-align' before newline."
+       (interactive)
+       (cw:puppet-mode-align)
+       (newline-and-indent))
+
+     (defun cw:puppet-mode-indent-for-tab-command (&optional arg)
+       "Align paragraph using `cw:puppet-mode-align' before indenting."
+       (interactive)
+       (cw:puppet-mode-align)
+       (indent-for-tab-command arg))
+
+
+     (define-key puppet-mode-map (kbd "RET") 'cw:puppet-mode-newaline-and-indent)
+     (define-key puppet-mode-map (kbd "TAB") 'cw:puppet-mode-indent-for-tab-command)))
+
+
 
  ;; q
 (eval-after-load 'quail
