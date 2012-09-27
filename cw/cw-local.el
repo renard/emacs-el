@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-27 10:52:43
+;; Last changed: 2012-09-27 10:58:42
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -680,7 +680,8 @@ lines starting by \"^>\\s-*\"."
      (set-face-attribute 'markup-title-4-face nil :height 1.1)
      (set-face-attribute 'markup-title-5-face nil :height 1.0)
      (set-face-attribute 'markup-meta-face nil :height 1.0)
-     (set-face-attribute 'markup-meta-hide-face nil :height 1.0)))
+     (set-face-attribute 'markup-meta-hide-face nil :height 1.0)
+     ))
 
 (eval-after-load 'menu-bar
   '(progn (menu-bar-mode -1)))
