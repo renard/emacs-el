@@ -1,0 +1,4 @@
+(:name dictionary-app
+       :type git
+       :description "Search item to OSX Dictionary.app."
+       :url "git@github.com:renard/dictionary-app.git")
