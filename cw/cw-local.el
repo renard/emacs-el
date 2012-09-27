@@ -1329,9 +1329,6 @@ works and run `anything-other-buffer'."
   (require 'cus-edit nil t)
   (load custom-file)
 
-  (when (and (running-macosxp) ns-initialized
-	     (functionp 'ns-toggle-fullscreen))
-    (ns-toggle-fullscreen))
   (global-set-key (kbd "M-C-SPC") 'er/expand-region)
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -1340,6 +1337,9 @@ works and run `anything-other-buffer'."
   (global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
 
 
+  ;; (when (and (running-macosxp) ns-initialized
+  ;; 	     (functionp 'ns-toggle-fullscreen))
+  ;;   (ns-toggle-fullscreen))
 
   (display-time-mode 1)
 
