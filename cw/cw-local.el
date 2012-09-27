@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-27 10:27:59
+;; Last changed: 2012-09-27 10:31:59
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -1239,9 +1239,6 @@ Based on TWB hack (http://paste.lisp.org/display/90780)."
   (define-key global-map (kbd "M-/") 'hippie-expand)
   ;; ibuffer
   (define-key global-map (kbd "C-x B") 'ibuffer)
-  ;; iedit
-  (define-key global-map (kbd "C-;") 'iedit-mode)
-  (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
   ;; magit
   (global-set-key (kbd "C-x C-z") 'magit-status)
   ;; smex
@@ -1347,6 +1344,17 @@ works and run `anything-other-buffer'."
 
   ;; (when (require 'ace-jump-mode nil t)
   ;;   (global-set-key (kbd "C-x C-PC") 'ace-jump-mode))
+
+
+  (when (require 'expand-region)
+    (global-set-key (kbd "M-C-SPC") 'er/expand-region))
+
+  (when (require 'multiple-cursors)
+    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C-;") 'mc/mark-all-like-this))
+
 
   (when (require 'yasnippet nil t)
     (yas/initialize))
