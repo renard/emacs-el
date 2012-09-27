@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-27 10:31:59
+;; Last changed: 2012-09-27 10:52:43
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -336,9 +336,6 @@ depending on the context."
      (global-set-key (kbd "M-]") 'escreen-goto-next-screen)
      (define-key escreen-map "l" 'escreen-get-active-screen-numbers-with-emphasis)))
 
-(eval-after-load 'expand-region
-  '(prog
-    (global-set-key (kbd "M-C-SPC") 'er/expand-region)))
 
  ;; f
 (eval-after-load 'faces
@@ -714,14 +711,8 @@ lines starting by \"^>\\s-*\"."
      (setq default-keyboard-coding-system nil
 	   default-terminal-coding-system nil)))
 
-(eval-after-load 'multiple-cursors
-  '(progn
-     (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-     (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-     (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-     (global-set-key (kbd "C-;") 'mc/mark-all-like-this)))
 
-(eval-after-load 'multiple-cursors
+(eval-after-load 'multiple-cursors-core
   '(progn
      (define-key mc/keymap (kbd "C-;") 'mc/keyboard-quit)))
 
@@ -975,7 +966,6 @@ would be used if applicable ad remove CLEAR tag.
      (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "#3465a4" :bold t)
      (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "#4e9a06" :bold t)
      (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "#75507b" :bold t)))
-
 
 (eval-after-load 'shr-color
   '(progn
@@ -1342,11 +1332,14 @@ works and run `anything-other-buffer'."
   (when (and (running-macosxp) ns-initialized
 	     (functionp 'ns-toggle-fullscreen))
     (ns-toggle-fullscreen))
-  ;; Region expanding
-  (require 'expand-region)
+  (global-set-key (kbd "M-C-SPC") 'er/expand-region)
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-;") 'mc/mark-all-like-this)
+  (global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
 
-  ;; Multiple editing
-  (require 'multiple-cursors)
+
 
   (display-time-mode 1)
 
