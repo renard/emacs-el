@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-27 10:07:16
+;; Last changed: 2012-09-27 22:50:26
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -92,6 +92,10 @@
     `(progn
        (setq mm-default-directory "~/Downloads/gnus")
        (mkdir mm-default-directory t)))
+
+  (eval-after-load 'multiple-cursors-core
+    `(progn
+       (setq mc/list-file (concat ,tmp-dir ".mc-lists.el"))))
 
   (eval-after-load 'gnus-start
     `(progn
