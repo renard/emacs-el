@@ -336,6 +336,10 @@ depending on the context."
      (global-set-key (kbd "M-]") 'escreen-goto-next-screen)
      (define-key escreen-map "l" 'escreen-get-active-screen-numbers-with-emphasis)))
 
+(eval-after-load 'expand-region
+  '(prog
+    (global-set-key (kbd "M-C-SPC") 'er/expand-region)))
+
  ;; f
 (eval-after-load 'faces
   '(progn
@@ -709,6 +713,17 @@ lines starting by \"^>\\s-*\"."
   '(progn
      (setq default-keyboard-coding-system nil
 	   default-terminal-coding-system nil)))
+
+(eval-after-load 'multiple-cursors
+  '(progn
+     (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+     (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+     (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+     (global-set-key (kbd "C-;") 'mc/mark-all-like-this)))
+
+(eval-after-load 'multiple-cursors
+  '(progn
+     (define-key mc/keymap (kbd "C-;") 'mc/keyboard-quit)))
 
  ;; n
 (eval-after-load 'ns-win
@@ -1327,6 +1342,11 @@ works and run `anything-other-buffer'."
   (when (and (running-macosxp) ns-initialized
 	     (functionp 'ns-toggle-fullscreen))
     (ns-toggle-fullscreen))
+  ;; Region expanding
+  (require 'expand-region)
+
+  ;; Multiple editing
+  (require 'multiple-cursors)
 
   (display-time-mode 1)
 
@@ -1344,17 +1364,6 @@ works and run `anything-other-buffer'."
 
   ;; (when (require 'ace-jump-mode nil t)
   ;;   (global-set-key (kbd "C-x C-PC") 'ace-jump-mode))
-
-
-  (when (require 'expand-region)
-    (global-set-key (kbd "M-C-SPC") 'er/expand-region))
-
-  (when (require 'multiple-cursors)
-    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-    (global-set-key (kbd "C-;") 'mc/mark-all-like-this))
-
 
   (when (require 'yasnippet nil t)
     (yas/initialize))
