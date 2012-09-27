@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-26 10:56:38
+;; Last changed: 2012-09-27 10:07:16
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -153,6 +153,7 @@
 
 	      adoc-mode
 	      anything
+	      applescript-mode
 	      bbdb
 	      browse-kill-ring
 	      buffer-move
@@ -199,6 +200,7 @@
 	      ;;pastebin
 	      php-mode-improved
 	      popwin
+	      puppet-mode
 	      quick-buffer-switch
 	      rainbow-delimiters
 	      rainbow-mode
