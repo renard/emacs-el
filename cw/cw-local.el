@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-20 00:26:32
+;; Last changed: 2012-09-27 10:27:59
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -877,7 +877,7 @@ would be used if applicable ad remove CLEAR tag.
        (indent-for-tab-command arg))
 
 
-     (define-key puppet-mode-map (kbd "RET") 'cw:puppet-mode-newaline-and-indent)
+     (define-key puppet-mode-map (kbd "RET") 'cw:puppet-mode-newline-and-indent)
      (define-key puppet-mode-map (kbd "TAB") 'cw:puppet-mode-indent-for-tab-command)))
 
 
