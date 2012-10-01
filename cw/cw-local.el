@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-27 10:58:42
+;; Last changed: 2012-10-02 01:33:05
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -1132,55 +1132,13 @@ or `mail-envelope-from'."
 
 (eval-after-load 'tramp
   '(progn
-
-     (defadvice tramp-error
-       (around cw:tramp-error activate)
-       "Allow to use sudo on a remote host:
-/sudo:x@y:z ==> /multi:sshx:y:sudo:z@y:z
-
-Based on TWB hack (http://paste.lisp.org/display/90780)."
-       ;;(message (format "TRAMP-ERROR(%s %s)" vec-or-proc signal))
-       (if (and (eq 'file-error signal)
-		(string= "sudo" (tramp-file-name-method vec-or-proc))
-		(boundp 'target-alist))
-	   (progn
-	     ;;(message (format "target-alist: %s" target-alist))
-	     (setq target-alist
-		   (cons (vector "sshx" ""
-				 (tramp-file-name-host vec-or-proc)
-				 "")
-			 (list (vector (tramp-file-name-method vec-or-proc)
-				       (unless (string= "root" (tramp-file-name-user vec-or-proc))
-					 (tramp-file-name-user vec-or-proc))
-				       (tramp-file-name-host vec-or-proc)
-				       (tramp-file-name-localname vec-or-proc))))))
-	 ad-do-it))
-
-
+     ;; Allow to use: /sudo:user@host:/path/to/file
+     (add-to-list 'tramp-default-proxies-alist
+		  '(".*" "\\`.+\\'" "/ssh:%h:"))
      (setq
       tramp-default-method "scp"
       tramp-terminal-type "screen"
       tramp-backup-directory-alist backup-directory-alist)))
-
-(eval-after-load "tramp-sh"
-  '(progn
-     ;; Reload `tramp-compute-multi-hops' to make `cw:tramp-error' advice
-     ;; work. WHY ????"
-     (let ((buffer (find-library "tramp-sh")))
-       (find-function 'tramp-compute-multi-hops)
-       (forward-sexp)
-       (eval-last-sexp nil)
-       (kill-buffer buffer))
-
-     (defadvice tramp-open-connection-setup-interactive-shell
-       (before cw:tramp-open-connection-setup-interactive-shell activate)
-       "Add process-sentinel to tramp-shells. Kill buffer when process died."
-       (set-process-sentinel
-	;; Arg 0 is proc
-	(ad-get-arg 0)
-	(lambda (proc change)
-	  (when (eq (process-status proc) 'exit)
-	    (kill-buffer (process-buffer proc))))))))
 
  ;; u
 
