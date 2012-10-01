@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-27 22:50:26
+;; Last changed: 2012-10-02 00:20:28
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -193,14 +193,17 @@
 	      magit
 	      magit-identities
 	      mailq
+	      markup-faces
 	      maxframe
 	      multiple-cursors
 	      muse
 	      nagios-mode
 	      o-blog
 	      offlineimap
+	      org-redmine
 	      org-website
 	      org2blog
+	      package
 	      ;;pastebin
 	      php-mode-improved
 	      popwin
@@ -211,6 +214,7 @@
 	      rst-mode
 	      smex
 	      srep
+	      string-template
 	      ssh-config
 	      switch-window
 	      undo-tree
@@ -220,6 +224,7 @@
 	      volatile-highlights
 	      hl-tags-mode
 	      webjump++
+	      wikipedia-mode
 	      yasnippet
 	      xml-rpc-el
 	      )))
