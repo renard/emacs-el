@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-10-02 01:33:05
+;; Last changed: 2012-10-02 22:48:57
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -841,6 +841,7 @@ would be used if applicable ad remove CLEAR tag.
 		      ("*Warnings*" :noselect t)
 		      "*magit-edit-log*"
 		      "*magit-process*"
+		      (" *pabbrev suggestions*" :noselect t)
 		      "*Kill Ring*")
 	   do (add-to-list
 	       'popwin:special-display-config
@@ -1287,6 +1288,10 @@ works and run `anything-other-buffer'."
 
   (require 'cus-edit nil t)
   (load custom-file)
+
+  ;; pabbrev mode
+  (require 'pabbrev)
+  (global-pabbrev-mode)
 
   (global-set-key (kbd "M-C-SPC") 'er/expand-region)
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)

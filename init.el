@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-10-02 00:20:28
+;; Last changed: 2012-10-02 22:53:26
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -203,6 +203,7 @@
 	      org-redmine
 	      org-website
 	      org2blog
+	      pabbrev
 	      package
 	      ;;pastebin
 	      php-mode-improved
