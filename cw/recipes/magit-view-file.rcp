@@ -1,0 +1,4 @@
+(:name magit-view-file
+       :type git
+       :description "View git file through history."
+       :url "git@github.com:renard/magit-view-file")
