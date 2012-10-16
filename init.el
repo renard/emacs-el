@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-10-02 22:53:26
+;; Last changed: 2012-10-16 10:00:06
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -175,6 +175,7 @@
 	      dired-sync
 	      dired-toggle-sudo
 	      dirtree
+	      gitconfig-mode
 	      dpans2texi
 	      emacs-http-server
 	      escreen
@@ -192,6 +193,7 @@
 	      lusty-explorer
 	      magit
 	      magit-identities
+	      magit-view-file
 	      mailq
 	      markup-faces
 	      maxframe
