@@ -1114,6 +1114,10 @@ or `mail-envelope-from'."
        (define-key term-mode-map (kbd "C-c C-'")  'cw:term:toggle-line-mode)
        (define-key term-raw-map [mouse-2] 'term-mouse-paste))))
 
+(eval-after-load 'tex
+  '(progn
+     (setq tex-command (executable-find "xelatex"))))
+
 (eval-after-load 'time-stamp
   '(progn
      (setq
