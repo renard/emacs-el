@@ -349,6 +349,7 @@ depending on the context."
 	      ;;"Monaco-14"
 	      "DejaVu Sans Mono-14"
 	    "DejaVu Sans Mono-10"))))
+     (set-fontset-font t 'symbol (font-spec :family "FreeSerif"))
      (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
 
 (eval-after-load 'files
