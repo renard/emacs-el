@@ -33,7 +33,7 @@
   `(when (running-macosxp) ,@body))
 
 (when-running-macosx
- (loop for d in '("/usr/local/bin")
+ (loop for d in '("/usr/local/bin" "/usr/texbin")
        do (progn
             (setenv "PATH" (concat d ":" (getenv "PATH")))
             (add-to-list 'exec-path d))))
