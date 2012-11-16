@@ -259,6 +259,9 @@
       do (add-to-list 'load-path
 		      (concat (file-name-as-directory user-emacs-directory) p)))
 
+(require 'cw-local-prior nil t)
+
+
 (unless noninteractive
   (require 'server)
   (unless (server-running-p)
