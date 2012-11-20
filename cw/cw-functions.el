@@ -599,7 +599,12 @@ CMD is a string used to call the contact. By default it is set to:
 using `tex-command' ROUNDS times.
 
 If run using `prefix-argument' the document will be processed 3
-time."
+time.
+
+`process-environment' can be changed using lines such as:
+
+  %+ENV: VAR=VAL
+"
   (interactive
    (list
     (or
@@ -608,6 +613,17 @@ time."
     (if current-prefix-arg 3 1)))
 
   (let* ((file (expand-file-name file))
+	 (process-environment
+	  (append process-environment
+		  (with-temp-buffer
+		    (insert-file-contents file)
+		    	 (goto-char (point-min))
+			 (save-match-data
+			   (loop for m = (search-forward-regexp
+					  "^\\s-*%\\+ENV:\\s-*\\(.+\\)$"
+					  nil t)
+				 while m
+				 collect (match-string 1))))))
 	 (default-directory (file-name-directory file))
 	 (cmd-line (list
 		    tex-command "-interaction" "nonstopmode"
