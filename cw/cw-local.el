@@ -1170,7 +1170,7 @@ or `mail-envelope-from'."
      (setq yas/trigger-key "M-TAB"
      (define-key global-map (kbd "<C-tab>") 'yas/expand)
 	   yas/prompt-functions '(yas/completing-prompt))
-     (setq yas/snippet-dirs "~/.emacs.d/templates")
+     (add-to-list 'yas/snippet-dirs "~/.emacs.d/templates")
      (yas/reload-all)
      (add-hook 'yas/minor-mode-hook 'cw:yasnippet:insert-snippet-new-file)))
 
