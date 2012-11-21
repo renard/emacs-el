@@ -1168,6 +1168,7 @@ or `mail-envelope-from'."
 
      (setq-default yas/dont-activate 'cw:yasnippet:do-activatep)
      (setq yas/trigger-key "M-TAB"
+     (define-key global-map (kbd "<C-tab>") 'yas/expand)
 	   yas/prompt-functions '(yas/completing-prompt))
      (setq yas/snippet-dirs "~/.emacs.d/templates")
      (yas/reload-all)
