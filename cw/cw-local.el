@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-10-29 11:58:01
+;; Last changed: 2012-11-22 23:16:25
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -1245,6 +1245,7 @@ or `mail-envelope-from'."
   (define-key global-map (kbd "C-=") 'cw:open-shell)
 
   (when (running-macosxp)
+    (setq ns-pop-up-frames nil)
     (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
     (global-set-key (kbd "M-v") 'yank))
 
