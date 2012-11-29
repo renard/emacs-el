@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-09-20 00:28:30
+;; Last changed: 2012-11-29 10:50:28
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -29,9 +29,11 @@
 ;;;###autoload
 (defun cw:new-empty-filep ()
   "Return true if `current-buffer' is opening a new empty file."
-  (and (buffer-file-name)
-       (not (file-exists-p (buffer-file-name)))
-       (= (point-max) 1)))
+  (and
+   (not (member major-mode '(message-mode)))
+   (buffer-file-name)
+   (not (file-exists-p (buffer-file-name)))
+   (= (point-max) 1)))
 
 ;;;###autoload
 (defun cw:adoc-mode:compile ()
