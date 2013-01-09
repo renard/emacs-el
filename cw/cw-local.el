@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-11-22 23:16:25
+;; Last changed: 2013-01-09 11:03:06
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -174,6 +174,11 @@ etc. settings that were in effect before the change"
      	 (kill-buffer orig)))
      ;;(ad-unadvise 'dired-up-directory)
 
+     (defadvice dired-toggle-read-only (around cw:dired-toggle-read-only activate)
+       "Keep activated region if defined."
+       (let (deactivate-mark)
+	 ad-do-it))
+
      (defun cw:dired-find-file-maybe ()
        "run `dired-find-file' or `dired-maybe-insert-subdir'
 depending on the context."
@@ -192,6 +197,13 @@ depending on the context."
 	       dired-find-file)))))
 
      (when (running-macosxp)
+       (defun cw:dired-do-open-dir-in-finder ()
+	 "Open buffer directory  \"open\" on MacOSX."
+	 (interactive)
+	 (save-window-excursion
+	   (dired-do-async-shell-command
+	    "open" current-prefix-arg (list (dired-current-directory)))))
+       (define-key dired-mode-map (kbd "C-c C-f") 'cw:dired-do-open-dir-in-finder)
        (defun cw:dired-do-shell-mac-open ()
 	 "Open file at point using \"open\" on MacOSX."
 	 (interactive)
@@ -1184,6 +1196,17 @@ or `mail-envelope-from'."
      (set-face-attribute 'vline nil :background "#32383a")))
 
  ;; w
+(eval-after-load 'wdired
+  '(progn
+
+     (defadvice wdired-exit (around cw:wdired-exit activate)
+       "Keep activated region if defined."
+       (let (deactivate-mark)
+	 ad-do-it))
+
+
+    (define-key wdired-mode-map (kbd "C-o") 'cw:dired-do-shell-mac-open)))
+
 (eval-after-load 'windmove
   '(progn
      (windmove-default-keybindings)
