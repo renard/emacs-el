@@ -628,9 +628,8 @@ time.
 				 collect (match-string 1))))))
 	 (default-directory (file-name-directory file))
 	 (cmd-line (list
-		    tex-command "-interaction" "nonstopmode"
-		    "-shell-escape" "-output-directory" "."
-		    file))
+		    (executable-find "xelatex") "-interaction" "nonstopmode"
+		    "-shell-escape" "-output-directory" "." file))
 	 (cmd-buf-name (format "*Building %s*"
 			       (file-name-nondirectory file)))
 	 (cmd-buf (get-buffer-create cmd-buf-name))
