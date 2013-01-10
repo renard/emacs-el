@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2013-01-09 11:03:06
+;; Last changed: 2013-01-10 16:23:09
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -362,7 +362,8 @@ depending on the context."
 	      "DejaVu Sans Mono-14"
 	    "DejaVu Sans Mono-10"))))
      (set-fontset-font t 'symbol (font-spec :family "FreeSerif"))
-     (set-face-attribute 'nobreak-space nil :foreground "#fce94f")))
+     (set-face-attribute 'nobreak-space nil :foreground "#fce94f")
+     (set-face-attribute 'highlight nil :background "#2f3537")))
 
 (eval-after-load 'files
   '(progn
@@ -558,6 +559,9 @@ lines starting by \"^>\\s-*\"."
 	     try-complete-lisp-symbol-partially
 	     try-complete-lisp-symbol))))
 
+(eval-after-load 'hl-line-mode
+  '(progn
+     (set-face-attribute 'hl-line nil :background "#2e4436")))
 
 (eval-after-load 'hl-tags-mode
   '(progn
