@@ -1366,7 +1366,9 @@ works and run `anything-other-buffer'."
 	(completing-read-default prompt choices predicate require-match
 				 initial-input hist def inherit-input-method)))
 
-    (setq completing-read-function 'ido-completing-read*)))
+    (setq
+     completing-read-function 'ido-completing-read*
+     read-file-name-function 'ido-read-file-name )))
 
 (unless noninteractive (cw:init))
 
