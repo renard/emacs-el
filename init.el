@@ -5,7 +5,7 @@
 ;; Author: Sebastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, configuration
 ;; Created: 2010-12-09
-;; Last changed: 2012-10-29 11:59:00
+;; Last changed: 2013-01-10 01:00:32
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -152,11 +152,12 @@
 	    `(
 	      ;; nognus should be first item to be loaded otherwise emacs'
 	      ;; version of gnus-util is loaded instead.
-	      nognus
+	      gnus
 	      org-mode
 
 	      adoc-mode
 	      anything
+	      auctex
 	      applescript-mode
 	      bbdb
 	      browse-kill-ring
@@ -165,6 +166,7 @@
 	      color-theme
 	      color-theme-tango
 	      crontab-mode
+	      csv-mode
 	      cw-gtd
 	      db-sql
 	      descbinds-anything
@@ -175,8 +177,9 @@
 	      dired-sync
 	      dired-toggle-sudo
 	      dirtree
-	      gitconfig-mode
 	      dpans2texi
+	      elisp-slime-nav
+	      ;;el-get
 	      emacs-http-server
 	      escreen
 	      expand-region
@@ -195,18 +198,22 @@
 	      magit-identities
 	      magit-view-file
 	      mailq
+	      markdown-mode
 	      markup-faces
 	      maxframe
+	      mdfind-dired
 	      multiple-cursors
 	      muse
 	      nagios-mode
-	      o-blog
+	      ;;o-blog
 	      offlineimap
 	      org-redmine
 	      org-website
 	      org2blog
+	      osx-plist
 	      package
 	      ;;pastebin
+	      pandoc-mode
 	      php-mode-improved
 	      popwin
 	      puppet-mode
@@ -215,6 +222,7 @@
 	      rainbow-mode
 	      rst-mode
 	      smex
+	      spotlight-comment
 	      srep
 	      string-template
 	      ssh-config
@@ -227,6 +235,7 @@
 	      hl-tags-mode
 	      webjump++
 	      wikipedia-mode
+	      yaml-mode
 	      yasnippet
 	      xml-rpc-el
 	      )))
