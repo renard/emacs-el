@@ -1,0 +1,4 @@
+(:name dired-xattr
+       :type git
+       :description "Handle MacOSX Finder color label in dired."
+       :url "git@github.com:renard/dired-xattr.git")

@@ -1,0 +1,5 @@
+(:name org-website
+       :type git
+       :description "Generate multi-level website from org"
+       :depends string-template
+       :url "git@github.com:renard/org-website.git")

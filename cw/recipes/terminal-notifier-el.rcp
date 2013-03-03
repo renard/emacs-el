@@ -1,0 +1,4 @@
+(:name terminal-notifier-el
+       :type git
+       :description "Emacs interface for terminal-notifier for MacOSX notification center."
+       :url "git@github.com:renard/terminal-notifier-el.git")

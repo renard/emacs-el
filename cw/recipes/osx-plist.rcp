@@ -1,0 +1,5 @@
+(:name osx-plist
+       :type http
+       :website "http://edward.oconnor.cx/elisp"
+       :description "Apple plist file parse"
+       :url "http://edward.oconnor.cx/elisp/osx-plist.el")
