@@ -1,4 +1,5 @@
 (setq
+ el-get-recipe-path-emacswiki (concat cw:tmp-dir "emacswiki")
  el-get-is-lazy t)
 
 (add-to-list 'el-get-recipe-path
