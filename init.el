@@ -16,6 +16,15 @@
   (file-name-as-directory
    (concat (file-name-as-directory user-emacs-directory) ".tmp")))
 
+;; Macro definition
+(defun running-macosxp ()
+  "Return T if running under Mac OS X."
+  (string-match "apple-darwin" system-configuration))
+
+(defmacro when-running-macosx (&rest body)
+  "eval body only when running under MacOSX"
+  `(when (running-macosxp) ,@body))
+
 (loop for dir in (list cw:packages-config-dir cw:tmp-dir)
       unless (file-directory-p dir)
       do (mkdir dir t))
@@ -28,14 +37,6 @@
 	   (eval-after-load (match-string-no-properties 1 file)
 	     `(load ,(concat cw:packages-config-dir file)))))
 
-;; Macro definition
-(defun running-macosxp ()
-  "Return T if running under Mac OS X."
-  (string-match "apple-darwin" system-configuration))
-
-(defmacro when-running-macosx (&rest body)
-  "eval body only when running under MacOSX"
-  `(when (running-macosxp) ,@body))
 
 (when-running-macosx
  (loop for d in '("/usr/local/bin" "/usr/texbin")
