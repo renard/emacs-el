@@ -8,6 +8,8 @@
   ;; Key bindings
   ;;
 
+  ;; hippie-exp
+  (define-key global-map (kbd "M-/") 'hippie-expand)
   ;; magit
   (global-set-key (kbd "C-x C-z") 'magit-status)
   ;; smex
