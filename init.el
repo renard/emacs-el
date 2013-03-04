@@ -64,6 +64,19 @@
 	  'load-path
 	  (concat (file-name-as-directory user-emacs-directory) p)))
 
+(unless noninteractive
+  (let ((pass-file (concat
+		    cw:private-home-dir "cw-pass.el.gpg")))
+    (require 'epg-config)
+    (when (and
+	   (file-readable-p pass-file)
+	   (boundp 'epg-gpg-program))
+      (let (emacs-lisp-mode-hook)
+	(with-current-buffer
+	    (find-file pass-file)
+	  (eval-buffer)
+	  (kill-buffer))))))
+
 ;; Load el-get as defined on el-get home page.
 (unless (require 'el-get nil t)
   (url-retrieve
