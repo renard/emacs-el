@@ -1,6 +1,6 @@
 ;; Init
 
-(let ((generated-autoload-file (concat cw:tmp-dir "autoload")))
+(let ((generated-autoload-file (concat cw:tmp-dir "autoloads")))
   (unless noninteractive
     (update-autoloads-from-directories
      cw:home-dir cw:packages-config-dir
