@@ -1,4 +1,14 @@
 ;; Init
+
+(let ((generated-autoload-file (concat cw:tmp-dir "autoload")))
+  (unless noninteractive
+    (update-autoloads-from-directories
+     cw:home-dir cw:packages-config-dir
+     cw:private-home-dir cw:private-packages-config-dir))
+  (when (file-exists-p generated-autoload-file)
+    (load generated-autoload-file)))
+
+
 (defun cw:init()
   "Initialize all settings"
   (color-theme-tango)
