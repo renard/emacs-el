@@ -1,1 +1,1 @@
-(setq el-get-dir (concat cw:tmp-dir "elpa"))
+(setq package-user-dir (concat cw:tmp-dir "elpa"))
