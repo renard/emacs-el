@@ -12,6 +12,14 @@
   (file-name-as-directory
    (concat cw:home-dir "packages.d")))
 
+(defvar cw:private-home-dir
+  (file-name-as-directory
+   (concat (file-name-as-directory user-emacs-directory) "cw-private")))
+
+(defvar cw:private-packages-config-dir
+  (file-name-as-directory
+   (concat cw:private-home-dir "packages.d")))
+
 (defvar cw:tmp-dir
   (file-name-as-directory
    (concat (file-name-as-directory user-emacs-directory) ".tmp")))
@@ -29,14 +37,20 @@
       unless (file-directory-p dir)
       do (mkdir dir t))
 
-(loop for file in (directory-files cw:packages-config-dir)
-      when (string-match (format "^\\(.+\\)\\.preload\\.el$") file)
-      do (load (concat cw:packages-config-dir file))
-      when (string-match (format "^\\(.+\\)\\.load\\.el$") file)
+(loop for file in
+      (nconc (when (file-directory-p cw:packages-config-dir)
+	       (directory-files cw:packages-config-dir t))
+	     (when (file-directory-p cw:private-packages-config-dir)
+	       (directory-files cw:private-packages-config-dir t)))
+      when (and (string-match (format "^.*/\\([^/]+\\)\\.preload\\.el$") file)
+		(file-exists-p file))
+      do (load file)
+      when (and
+	    (string-match (format "^.*/\\([^/]+\\)\\.load\\.el$") file)
+	    (file-exists-p file))
       do (progn
 	   (eval-after-load (match-string-no-properties 1 file)
-	     `(load ,(concat cw:packages-config-dir file)))))
-
+	     `(load ,file))))
 
 (when-running-macosx
  (loop for d in '("/usr/local/bin" "/usr/texbin")
@@ -45,7 +59,7 @@
             (add-to-list 'exec-path d))))
 
 ;; Add some definitions
-(loop for p in '("cw" "el-get/el-get")
+(loop for p in '("cw-private" "cw" "el-get/el-get")
       do (add-to-list
 	  'load-path
 	  (concat (file-name-as-directory user-emacs-directory) p)))
