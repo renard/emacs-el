@@ -50,7 +50,9 @@
   (savehist-mode 1)
   (ido-mode t)
   (show-paren-mode t)
+  (global-hl-line-mode)
 
+  (setq display-buffer-function 'popwin:display-buffer)
   (qbs-init)
 
 
