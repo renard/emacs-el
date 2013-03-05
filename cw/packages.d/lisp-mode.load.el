@@ -11,3 +11,5 @@
 (add-hook 'emacs-lisp-mode-hook 'cw:emacs-lisp-mode-setup)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'lisp-mode-hook 'cw:emacs-lisp-mode-setup)
+(define-key emacs-lisp-mode-map (kbd "RET") 'newline-and-indent)
+(define-key lisp-mode-map (kbd "RET") 'newline-and-indent)
