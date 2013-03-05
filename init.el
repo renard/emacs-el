@@ -24,6 +24,9 @@
   (file-name-as-directory
    (concat (file-name-as-directory user-emacs-directory) ".tmp")))
 
+(defvar cw:byte-compile-config nil
+  "Byte compile configuration files.")
+
 ;; Macro definition
 (defun running-macosxp ()
   "Return T if running under Mac OS X."
@@ -44,13 +47,13 @@
 	       (directory-files cw:private-packages-config-dir t)))
       when (and (string-match (format "^.*/\\([^/]+\\)\\.preload\\.el$") file)
 		(file-exists-p file))
-      do (load file)
+      do (load (file-name-sans-extension file))
       when (and
 	    (string-match (format "^.*/\\([^/]+\\)\\.load\\.el$") file)
 	    (file-exists-p file))
       do (progn
 	   (eval-after-load (match-string-no-properties 1 file)
-	     `(load ,file))))
+	     `(load ,(file-name-sans-extension file)))))
 
 (when-running-macosx
  (loop for d in '("/usr/local/bin" "/usr/texbin")

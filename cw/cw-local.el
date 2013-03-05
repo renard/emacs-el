@@ -2,12 +2,14 @@
 
 (let ((generated-autoload-file (concat cw:tmp-dir "autoloads")))
   (unless noninteractive
-    (update-autoloads-from-directories
+    (update-directory-autoloads
      cw:home-dir cw:packages-config-dir
      cw:private-home-dir cw:private-packages-config-dir))
+  (when cw:byte-compile-config
+    (loop for d in (list cw:home-dir cw:private-home-dir)
+	  do (byte-recompile-directory d 0)))
   (when (file-exists-p generated-autoload-file)
     (load generated-autoload-file)))
-
 
 (defun cw:init()
   "Initialize all settings"
