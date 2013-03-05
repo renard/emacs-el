@@ -20,6 +20,9 @@
   ;; Key bindings
   ;;
 
+  ;; cw-functions
+  (global-set-key (kbd "C-%") 'goto-match-paren)
+
   ;; descbinds-anything
   (global-set-key (kbd "C-h b") 'descbinds-anything)
   ;; dired
