@@ -26,7 +26,7 @@
   ;; descbinds-anything
   (global-set-key (kbd "C-h b") 'descbinds-anything)
   ;; dired
-  (define-key global-map (kbd "C-x C-d") 'dired)
+  (define-key global-map (kbd "C-x C-d") 'cw:dired)
   ;; frame
   (global-set-key (kbd "C-x K") 'delete-frame)
   ;; hippie-exp
