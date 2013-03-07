@@ -26,3 +26,7 @@ file modes."
 
 (add-hook 'after-save-hook 'cw:files:make-buffer-file-executable-if-script-p)
 (add-hook 'before-save-hook 'time-stamp)
+(add-hook 'find-file-hook
+	  (lambda()
+	    (when (functionp 'cw:yasnippet:insert-maybe)
+	      (cw:yasnippet:insert-maybe))))

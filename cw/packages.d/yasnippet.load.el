@@ -1,18 +1,29 @@
-(defvar cw:yasnippet:in-expansionp nil
-  "Define if snippet is in expansion phase or not.")
-(make-local-variable 'cw:yasnippet:in-expansionp)
+;;;###autoload
+(defun cw:yasnippet:insert-maybe ()
+  ""
+  (interactive)
+  (when
+      (and
+       (not noninteractive)
+       (buffer-file-name)
+       (not (file-exists-p (buffer-file-name)))
+       (= (point-max) 1))
+    (let ((mode (symbol-name major-mode)))
+      (loop for d in yas-snippet-dirs
+	    when (file-exists-p
+		  (format "%s/%s/new-file-tpl.yasnippet" d mode))
+	    do (progn
+		 ;;(message "Found: %s/%s/new-file-tpl.yasnippet" d mode)
+		 (insert "new-file-tpl")
+		 ;; reload templates before expansion
+		 (yas-reload-all)
+		 (yas-expand))
+	  and return t))))
 
-(defun cw:yasnippet:toggle-expansion-semaphore ()
-  "Toggles `cw:yasnippet:in-expansionp'."
-  (setq cw:yasnippet:in-expansionp (not cw:yasnippet:in-expansionp)))
+(setq yas-snippet-dirs
+      (list (concat user-emacs-directory "templates")
+	    (when yas--load-file-name
+	      (concat (file-name-directory yas--load-file-name) "snippets"))))
 
-(add-hook 'yas/after-exit-snippet-hook 'cw:yasnippet:toggle-expansion-semaphore)
-(add-hook 'yas/before-expand-snippet-hook 'cw:yasnippet:toggle-expansion-semaphore)
 
-(setq-default yas/dont-activate 'cw:yasnippet:do-activatep)
-(setq yas/trigger-key "M-TAB")
-(define-key global-map (kbd "<C-tab>") 'yas/expand)
-;;yas/prompt-functions '(yas/completing-prompt))
-(add-to-list 'yas/snippet-dirs "~/.emacs.d/templates")
-(yas/reload-all)
-(add-hook 'yas/minor-mode-hook 'cw:yasnippet:insert-snippet-new-file)
+
