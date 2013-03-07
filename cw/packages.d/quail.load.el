@@ -46,6 +46,7 @@
  (":" [" :"])       ("::" [":"])
  )
 
+;;;###autoload
 (defun cw:toggle-input-method ()
   "Toggle between `french-cw-postfix' method  and nil"
   (interactive)
