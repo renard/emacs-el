@@ -27,6 +27,9 @@
   (global-set-key (kbd "C-h b") 'descbinds-anything)
   ;; dired
   (define-key global-map (kbd "C-x C-d") 'cw:dired)
+  ;;
+  (global-set-key (kbd (if (running-macosxp) "<M-f2>" "<C-f2>"))
+		  'cw:erc:switch-to-screen)
   ;; frame
   (global-set-key (kbd "C-x K") 'delete-frame)
   ;; hippie-exp
@@ -42,6 +45,8 @@
   (global-set-key (kbd "ESC M-x") 'execute-extended-command)
 
 
+
+
   (when (running-macosxp)
     (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
     (global-set-key (kbd "M-v") 'yank))
@@ -53,10 +58,10 @@
   (global-hl-line-mode)
 
   (setq display-buffer-function 'popwin:display-buffer)
-  (qbs-init)
 
-
-
+  (loop for func in '(qbs-init escreen-install)
+	when (functionp func)
+	do (funcall func))
 )
 
 (unless noninteractive (cw:init))
