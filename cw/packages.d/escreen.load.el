@@ -16,25 +16,16 @@
 		    " ")))
     (message "escreen: active screens: %s" emphased)))
 
-(defadvice escreen-goto-last-screen
-  (after cw:goto-last-screen activate)
-  "Show the escreen list each time we go to last screen."
-  (escreen-get-active-screen-numbers-with-emphasis))
 
-(defadvice escreen-goto-prev-screen
-  (after cw:goto-prev-screen activate)
-  "Show the escreen list each time we go to previous screen."
-  (escreen-get-active-screen-numbers-with-emphasis))
+(defun cw:escreen:check-recursion()
+  "Check `recursion-depth'. Prevent from changing screen if
+greater that 0."
+  (when (> (recursion-depth) 0)
+    (error "Recursive edit detected. Quit with C-] before changing escreen.")))
 
-(defadvice escreen-goto-next-screen
-  (after cw:goto-next-screen activate)
-  "Show the escreen list each time we go to next screen."
-  (escreen-get-active-screen-numbers-with-emphasis))
-
-(defadvice escreen-create-screen
-  (after cw:create-screen activate)
-  "Show the escreen list each time we create a new screen."
-  (escreen-get-active-screen-numbers-with-emphasis))
+(add-hook 'escreen-goto-screen-before-hook 'cw:escreen:check-recursion)
+(add-hook 'escreen-goto-screen-hook
+	  'escreen-get-active-screen-numbers-with-emphasis)
 
 (global-set-key (kbd "M-[") 'escreen-goto-prev-screen)
 (global-set-key (kbd "M-]") 'escreen-goto-next-screen)
