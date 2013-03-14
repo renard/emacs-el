@@ -71,7 +71,6 @@ kill related buffers."
     (escreen-create-screen))
   (escreen-goto-screen 1)
   (delete-other-windows)
-  (split-window-horizontally)
 
   (when
       (or
@@ -89,13 +88,11 @@ kill related buffers."
   (let* ((bl (erc-buffer-list))
 	 (b1 (car bl))
 	 (b2 (cadr bl)))
-    (switch-window)
     (switch-to-buffer b1)
-    (switch-window)
+    (select-window (split-window-horizontally))
     (switch-to-buffer b2)))
 
-
-(unless (facep 'erc-notice-face)
+(unless (featurep 'erc)
   (require 'erc nil t))
 
 (setq

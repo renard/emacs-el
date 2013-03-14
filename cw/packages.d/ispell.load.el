@@ -2,3 +2,5 @@
       (or
        (locate-file "ispell"   exec-path exec-suffixes 'file-executable-p)
        (locate-file "aspell"   exec-path exec-suffixes 'file-executable-p)))
+
+(setq ispell-extra-args '("--sug-mode=ultra"))

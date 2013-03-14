@@ -27,11 +27,14 @@
   (global-set-key (kbd "C-h b") 'descbinds-anything)
   ;; dired
   (define-key global-map (kbd "C-x C-d") 'cw:dired)
-  ;;
+  ;; erc
   (global-set-key (kbd (if (running-macosxp) "<M-f2>" "<C-f2>"))
 		  'cw:erc:switch-to-screen)
   ;; frame
   (global-set-key (kbd "C-x K") 'delete-frame)
+  ;; gnus
+  (global-set-key (kbd (if (running-macosxp) "<M-f1>" "<C-f1>"))
+		  'gnus)
   ;; hippie-exp
   (define-key global-map (kbd "M-/") 'hippie-expand)
   ;; ido
