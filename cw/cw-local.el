@@ -25,6 +25,11 @@
 
   ;; descbinds-anything
   (global-set-key (kbd "C-h b") 'descbinds-anything)
+
+  ;; dictionary-app-search
+  (when (running-macosxp)
+    (global-set-key (kbd "C-c ?") 'dictionary-app-search))
+
   ;; dired
   (define-key global-map (kbd "C-x C-d") 'cw:dired)
   ;; erc
