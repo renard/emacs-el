@@ -66,18 +66,21 @@
     (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
     (global-set-key (kbd "M-v") 'yank))
 
-  (desktop-save-mode 1)
-  (savehist-mode 1)
-  (ido-mode t)
-  (show-paren-mode t)
-  (global-hl-line-mode)
+  ;; Additional modes to activate
+  (loop for m in '(display-time-mode
+		   desktop-save-mode
+		   savehist-mode
+		   ido-mode
+		   show-paren-mode
+		   global-hl-line-mode)
+	do (funcall m 1))
 
   (setq display-buffer-function 'popwin:display-buffer)
 
+  ;; Other packages that require special initialization
   (loop for func in '(qbs-init escreen-install)
 	when (functionp func)
-	do (funcall func))
-)
+	do (funcall func)))
 
 (unless noninteractive (cw:init))
 
