@@ -65,6 +65,10 @@
     (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
     (global-set-key (kbd "M-v") 'yank))
 
+  ;; Require some libraries.
+  (loop for l in '(descbinds-anything)
+	do (require l nil t))
+
   ;; Additional modes to activate
   (loop for m in '(display-time-mode
 		   desktop-save-mode
