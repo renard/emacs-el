@@ -14,7 +14,6 @@
 (defun cw:init()
   "Initialize all settings"
   (color-theme-tango)
-  (windmove-default-keybindings)
 
   ;;
   ;; Key bindings
@@ -78,7 +77,9 @@
   (setq display-buffer-function 'popwin:display-buffer)
 
   ;; Other packages that require special initialization
-  (loop for func in '(qbs-init escreen-install)
+  (loop for func in '(qbs-init
+		      windmove-default-keybindings
+		      escreen-install)
 	when (functionp func)
 	do (funcall func)))
 
