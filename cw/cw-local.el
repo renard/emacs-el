@@ -32,6 +32,8 @@
 
   ;; dired
   (define-key global-map (kbd "C-x C-d") 'cw:dired)
+  ;; er/expand-region
+  (global-set-key (kbd "M-C-SPC") 'er/expand-region)
   ;; erc
   (global-set-key (kbd (if (running-macosxp) "<M-f2>" "<C-f2>"))
 		  'cw:erc:switch-to-screen)
