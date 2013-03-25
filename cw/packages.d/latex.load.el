@@ -64,7 +64,9 @@ time.
 		      (shell-command (format "open \"%s.pdf\"" f)))
 		    (message  "Built %s" file))))))))
 
-    (message "Running: %S" cmd-line)
+    (message "Running: %S"
+	     (mapconcat 'shell-quote-argument
+			cmd-line " "))
     (process-put proc :file file)
     (process-put proc :rounds rounds)
     (set-process-sentinel proc proc-sentinel)
