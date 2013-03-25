@@ -49,13 +49,18 @@
   (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
   ;; magit
   (global-set-key (kbd "C-x C-z") 'magit-status)
+  ;; multiple-cursors
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-;") 'mc/mark-all-like-this)
+  (global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
   ;; smex
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "ESC M-x") 'execute-extended-command)
-
-
-
+  ;; webjump++
+  (global-set-key (kbd "C-c C-/") 'webjump++)
 
   (when (running-macosxp)
     (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
