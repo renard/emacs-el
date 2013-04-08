@@ -7,6 +7,7 @@
 	 ;;"Monaco-14"
 	 "DejaVu Sans Mono-14"
        "DejaVu Sans Mono-10"))))
+;; Use Free Font to display Unicode Symbols
 (set-fontset-font t 'symbol (font-spec :family "FreeSerif"))
 (set-face-attribute 'nobreak-space nil :foreground "#fce94f")
 (set-face-attribute 'highlight nil :background "#2f3537")
