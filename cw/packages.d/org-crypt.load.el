@@ -1,3 +1,6 @@
+(unless (featurep 'org-crypt)
+  (require 'org-crypt))
+
 (defadvice org-encrypt-entry (around cw:org-encrypt-entry activate)
   "Go to CRYPTKEY property node make sure that a GPG key
 would be used if applicable ad remove CLEAR tag.
