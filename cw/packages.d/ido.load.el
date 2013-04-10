@@ -20,5 +20,6 @@
 
 (defun cw:ido-init-keys ()
   "Add some usefull ido bindings."
-  (define-key ido-common-completion-map (kbd "?") 'cw:ido-completion-help-orig))
+  (define-key ido-common-completion-map (kbd "?") 'cw:ido-completion-help-orig)
+  (define-key ido-common-completion-map (kbd "C-x C-f") 'ido-fallback-command))
 (add-hook 'ido-setup-hook 'cw:ido-init-keys)
