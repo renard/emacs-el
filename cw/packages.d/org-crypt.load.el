@@ -25,3 +25,16 @@ would be used if applicable ad remove CLEAR tag.
 	(show-children 3)))
     (set-buffer-modified-p modified-flag))
   (setq org-crypt-disable-auto-save t))
+
+;;;###autoload
+(defun cw:org:toggle-encryption()
+  "Toggle encryption in for current entry."
+  (interactive)
+  (org-crypt-use-before-save-magic)
+  (save-excursion
+    (org-back-to-heading t)
+    (org-show-entry)
+    (next-line)
+    (if (looking-at "-----BEGIN PGP MESSAGE-----")
+	(org-decrypt-entry)
+      (org-encrypt-entry))))
