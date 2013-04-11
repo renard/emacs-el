@@ -1,8 +1,14 @@
 (setq
  magit-commit-signoff t
  magit-save-some-buffers nil)
+
 (define-key magit-mode-map "G" 'magit-grep)
+(define-key magit-log-edit-mode-map (kbd "C-c C-p") 'magit-identities-change)
+
 (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
+(add-hook 'magit-log-edit-mode-hook 'magit-identities-set-id)
+
+
 (set-face-attribute 'magit-item-highlight nil :background nil)
 (set-face-attribute 'magit-diff-file-header nil :background nil)
 (set-face-attribute 'magit-branch nil :foreground "#729fcf")
