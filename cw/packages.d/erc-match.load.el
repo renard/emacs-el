@@ -2,12 +2,13 @@
 
 (defun erc-global-notify (match-type nick message)
   "Notify when a message is recieved."
+  ;;(message (format "MT: %S N: %S M: %S" match-type nick message))
   (unless (or
 	   (string-match-p "^Server:" nick)
 	   (string-match-p "^root" nick)
+	   (string-match-p "^\\*status" nick)
 	   (string-match-p "^localhost$" nick)
 	   (string= "ERC Keywords" (buffer-name)))
-    ;;(message (format "MT: %S N: %S M: %S" match-type nick message))
     (unless (or
 	     (eq match-type 'current-nick)
 	     (member nick cw:erc-match:extra-nicks))
