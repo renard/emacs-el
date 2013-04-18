@@ -96,7 +96,7 @@ kill related buffers."
   (require 'erc nil t))
 
 (setq
- erc-server-auto-reconnect t
+ erc-server-auto-reconnect nil
  erc-kill-server-buffer-on-quit t)
 (set-face-attribute 'erc-notice-face nil :foreground "#ad7fa8")
 (set-face-attribute 'erc-input-face nil :foreground "#babdb6")
