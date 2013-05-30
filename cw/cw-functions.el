@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, 
 ;; Created: 2013-03-05
-;; Last changed: 2013-03-05 01:18:57
+;; Last changed: 2013-05-30 19:28:50
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -96,6 +96,23 @@ For example:
     (interactive "*")
     (uniquify-all-lines-region (point-min) (point-max)))
 
+;;;###autoload
+(defun sort-lines-by-length (beg end)
+  "Sort lines by length in region starting at BEG ending at END."
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (let ((items (sort
+		    (split-string
+		     (buffer-substring (point-min) (point-max))
+		     "[\n]")
+		    (lambda(x y) (< (length x) (length y))))))
+	(delete-region (point-min) (point-max))
+	(goto-char (point-min))
+	(insert (apply 'concat
+		       (map 'list
+			    (lambda (x) (format "%s\n" x)) items)))))))
 
 
 (provide 'cw-functions)
