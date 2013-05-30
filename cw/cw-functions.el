@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, 
 ;; Created: 2013-03-05
-;; Last changed: 2013-05-30 19:28:50
+;; Last changed: 2013-05-30 19:37:49
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -68,14 +68,11 @@ For example:
 	finally return (mapconcat 'identity ret "")))
 
 ;;;###autoload
-(defun %time (fn)
-  (let* ((t0 (current-time)))
-    (funcall fn)
-    (time-to-seconds (time-subtract (current-time) t0))))
-
-;;;###autoload
 (defmacro time (form)
-  `(%time (lambda () ,form)))
+  "Evaluate FORM and return its execution time in seconds."
+  `(let ((t0 (current-time)))
+     ,form
+     (time-to-seconds (time-subtract (current-time) t0))))
 
 ;;;###autoload
 (defun uniquify-all-lines-region (start end)
