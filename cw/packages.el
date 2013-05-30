@@ -162,7 +162,7 @@ naquadah-theme
 	  ;;geiser
 	  xcscope multiple-cursors
 	  anything descbinds-anything pcmpl-git magit-view-file
-	  emacs-goodies-el sicp auto-dictionnary keywiz pandoc-mode
+	  emacs-goodies-el sicp keywiz pandoc-mode
 	  pgsql-linum-format psvn rect-mark crontab-mode icomplete+
 	  php-mode-improved rainbow-delimiters muse deft dpans2texi
 	  markdown-mode color-theme-solarized protobuf-mode paredit
