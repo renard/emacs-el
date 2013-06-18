@@ -3,13 +3,14 @@
   "Connect to erc servers defined in `cw:erc:servers'."
   (interactive)
   (cw:erc:disconnect)
-  (mapcar #'(lambda(x)
-	      (unless (get-buffer (format "*irc: %s*" (car x)))
+  (let (default-directory "~")
+    (mapcar #'(lambda(x)
+		(unless (get-buffer (format "*irc: %s*" (car x)))
 		(let ((erc-server-connect-function 'erc-open-tls-stream))
 		  (apply 'erc (cdr x))
 		  ;; (let ((major-mode 'fundamental-mode))
-		  (rename-buffer (format "*irc: %s*" (car x))))))
-	  cw:erc:servers))
+		  (rename-buffer (format "*irc: %s*" (car x)))))))
+    cw:erc:servers))
 
 (defun cw:erc:disconnect()
   "Disonnect from erc servers defined in `cw:erc:servers' and
