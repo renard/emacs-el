@@ -3,7 +3,7 @@
   "Connect to erc servers defined in `cw:erc:servers'."
   (interactive)
   (cw:erc:disconnect)
-  (let (default-directory "~")
+  (let ((default-directory "~"))
     (mapcar #'(lambda(x)
 		(unless (get-buffer (format "*irc: %s*" (car x)))
 		(let ((erc-server-connect-function 'erc-open-tls-stream))
