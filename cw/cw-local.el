@@ -29,8 +29,6 @@
   (when (running-macosxp)
     (global-set-key (kbd "C-c ?") 'dictionary-app-search))
 
-  ;; dired
-  (define-key global-map (kbd "C-x C-d") 'cw:dired)
   ;; er/expand-region
   (global-set-key (kbd "M-C-SPC") 'er/expand-region)
   ;; erc

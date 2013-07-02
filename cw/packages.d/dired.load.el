@@ -1,9 +1,3 @@
-;;;###autoload
-(defun cw:dired ()
-  "Open `default-directory' in `dired' without confirmation."
-  (interactive)
-  (dired default-directory))
-
 (defadvice dired-find-file (around cw:dired-find-file activate)
   "Replace current buffer if file is a directory."
   (interactive)
