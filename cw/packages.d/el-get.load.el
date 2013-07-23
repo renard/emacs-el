@@ -14,7 +14,10 @@
 			    "installed"  "removed")))
        (p-diff (set-difference installed packages)))
 
-  (message "%s" p-diff)
+  (when p-diff
+    (message
+     "Following packages are not defined in cw:packages: %s"
+     p-diff))
 
   ;; (if installed
   ;;     (el-get nil (when p-diff packages))
