@@ -92,15 +92,7 @@
 	 (replace-string
 	  "http://github.com/dimitri/el-get.git"
 	  cw:el-get-repository
-	  nil (point-min) (point-max))
-	 (goto-char (point-max))
-	 (search-backward "(unless (zerop status)")
-	 (forward-sexp)
-	 (insert
-	  "(cd package)"
-	  "(call-process git nil `(,buf t) t \"--no-pager\""
-	  "\"remote\" \"add\" \"--fetch\"  \"upstream\""
-	  "\"git://github.com/dimitri/el-get.git\")"))
+	  nil (point-min) (point-max)))
        (goto-char (point-max))
        (eval-print-last-sexp)))))
 

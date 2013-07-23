@@ -3,5 +3,8 @@
        :description "Manage the external elisp bits and pieces you depend upon."
        :type github
        :pkgname "renard/el-get"
+       :compile nil
        :info    "."
-       :load    "el-get.el")
+       :load    "el-get.el"
+       :build '(("git"  "--no-pager" "remote" "add" "--fetch"
+		 "upstream" "git://github.com/dimitri/el-get.git")))
