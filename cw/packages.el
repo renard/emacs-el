@@ -81,7 +81,7 @@
 	      offlineimap
 	      org-redmine
 	      org-website
-	      org2blog
+	      ;;org2blog
 	      osx-plist
 	      package
 	      ;;pastebin
@@ -172,4 +172,6 @@ naquadah-theme
  browse-kill-ring
 
 
+twittering-mode planner osx-contacts  oauth2 howm ;;auto-dictionnary
+ 
  )
