@@ -1,0 +1,5 @@
+(:name nnir-spotlight
+       :type git
+       :compile nil
+       :description "Use MacOSX sportlight as nnir backend."
+       :url "git@github.com:renard/nnir-spotlight.git")
