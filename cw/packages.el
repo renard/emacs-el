@@ -23,7 +23,7 @@
  string-template
  terminal-notifier-el
  webjump++
-
+ nnir-spotlight
 
 
 
