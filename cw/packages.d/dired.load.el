@@ -27,6 +27,8 @@
 
 (when (running-macosxp)
 
+  (require 'spotlight-comment nil t)
+  
   (defun cw:dired-do-open-dir-in-finder ()
     "Open buffer directory  \"open\" on MacOSX."
     (interactive)
