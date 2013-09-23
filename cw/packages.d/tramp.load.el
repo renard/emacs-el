@@ -41,14 +41,25 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
      (message "host:              %s" host)
      (message "default-directory: %s" default-directory))))
 
+
+;; Make sure you have that line in /etc/hosts:
+;;   127.0.0.1 HOSTNAME
+;;
+;; Where HOSTNAME is the result of `system-name'
+;;
 ;; Remote sudo root: /sudo:host:
 ;; Remote sudo user: /sudo:user@host:
 ;; Local  sudo root: /sudo::
 ;; Local  sudo user: /sudo:user@:
 ;; remote          : /host:
 ;; remote user     : /ssh:user@host:
+;;
+;; Unfortunately you cannot connect to a host using a specific user name to
+;; a remote host using its IP adress: "/ssh:user@10.1.2.3:" does not work.
+
+
 (add-to-list 'tramp-default-proxies-alist
-	     '(".*" "\\`.+\\'" "/ssh:%h:"))
+ 	     '(".*" "\\`.+\\'" "/ssh:%h:"))
 (setq
  tramp-default-method "scp"
  tramp-terminal-type "screen"
