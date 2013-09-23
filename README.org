@@ -1,0 +1,67 @@
+#+TITLE: My emacs settings
+#+DESCRIPTION: 
+#+DATE: 2012-02-14 21:40:21
+
+An ever-changing set of emacs settings. This is optimized for my laptop
+running [[http://debian.org][Debian stable]].
+
+I also do use [[http://emacs.naquadah.org][emacs-snapshot]].
+
+* Setup
+
+** Extra packages
+
+You might need some extra packages such as:
+
+  - autoconf
+  - bzr
+  - cvs
+  - emacs-goodies-el
+  - git
+  - git-svn
+  - texinfo
+
+To install them:
+
+#+begin_src sh
+apt-get install autoconf bzr cvs emacs-goodies-el git git-svn texinfo
+#+end_src
+
+** Emacs configuration
+
+You might want to clone my configuration files into your home directory:
+
+#+begin_src sh
+git clone git://github.com/renard/emacs-el.git .emacs.d
+#+end_src
+
+** Private configuration
+
+I do use a private configuration part which is under =cw-private=. Basically
+this is a bunch of connection setup I use for =erc= or some private stuff
+like my mail posting personalities. This is nothing really mandatory for
+that configuration to work out-of-the-box.
+
+* Configuration
+
+** How it works
+
+Every package is configured in an =eval-after-load= definition to speed-up
+emacs startup.
+
+You might have a look at
+http://www.emacswiki.org/emacs/OptimizingEmacsStartup.
+
+Some parts which are not very useful in a batch mode are ignored in
+=noninteractive= mode.
+
+** Management
+
+I do use [[https://github.com/dimitri/el-get][el-get]] to manage my emacs add-ons. Default [[https://github.com/dimitri/el-get/raw/master/el-get-install.el][el-get installer]] is
+perfect but I want to use my own el-get repository. If you want to use
+official one or your own simply change the value of =cw:el-get-repository=
+in =init.el=.
+
+** temporary file
+
+I try to keep all emacs package related files under =~/.emacs.d/.tmp/=.
