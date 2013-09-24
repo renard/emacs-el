@@ -124,8 +124,6 @@ kill related buffers."
   ;; Return nil to continue processing by ERC
   nil)
 
-(add-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG)
-
 (define-erc-module cw:page-me nil "page me on private message"
   ((add-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG))
   ((remove-hook 'erc-server-PRIVMSG-functions 'cw:erc-page-me-PRIVMSG)))
