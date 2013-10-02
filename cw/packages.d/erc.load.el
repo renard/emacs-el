@@ -10,7 +10,9 @@
 		  (apply 'erc (cdr x))
 		  ;; (let ((major-mode 'fundamental-mode))
 		  (rename-buffer (format "*irc: %s*" (car x))))))
-	    cw:erc:servers)))
+	    cw:erc:servers)
+    (loop for b in (erc-buffer-list)
+	  do (with-current-buffer b (erc-cmd-AWAY "")))))
 
 (defun cw:erc:disconnect()
   "Disonnect from erc servers defined in `cw:erc:servers' and
