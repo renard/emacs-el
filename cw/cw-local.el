@@ -66,7 +66,7 @@
     (global-set-key (kbd "M-v") 'yank))
 
   ;; Require some libraries.
-  (loop for l in '(descbinds-anything)
+  (loop for l in '(descbinds-anything uniquify)
 	do (require l nil t))
 
   ;; Additional modes to activate
