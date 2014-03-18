@@ -3,9 +3,13 @@
     (load slime-helper)))
 
 (setq inferior-lisp-program
-      (loop for p in '("/usr/local/bin/ccl64"
-		       "/usr/bin/ccl"
-		       "~/src/ccl/lx86cl64")
+      (loop for (p o) in
+	    '(("/usr/local/bin/sbcl" "")
+	      ("/usr/local/bin/ccl64" " -K utf-8")
+	      ("/usr/bin/ccl" " -K utf-8")
+	      ("~/src/ccl/lx86cl64" " -K utf-8")
+	      ("/usr/local/bin/clisp" " -norc -ansi -q -E utf-8"))
 	    until (file-exists-p p)
-	    finally return (concat p " -K utf-8")))
+	    finally return (concat p o)))
 
+(define-key slime-parent-map (kbd "M-?") 'slime-documentation)
