@@ -4,4 +4,4 @@
 (add-hook 'message-mode-hook 'flyspell-mode)
 (add-hook 'message-mode-hook 'flyspell-buffer)
 
-(define-key message-mode-map (kbd "<tab>") 'bbdb-complete-mail)
+(define-key message-mode-map (kbd "<tab>") 'osx-contacts-complete-address)
