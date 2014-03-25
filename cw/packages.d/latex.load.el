@@ -9,6 +9,9 @@ time.
 `process-environment' can be changed using lines such as:
 
   %+ENV: VAR=VAL
+  %+LATEX: /path/to/tex-processor
+
+xelatex is used as default tex-processor.
 "
   (interactive
    (list
@@ -29,9 +32,17 @@ time.
 					  nil t)
 				 while m
 				 collect (match-string 1))))))
+	 (latex-bin (or (save-excursion
+			  (save-match-data
+			    (goto-char (point-min))
+			    (when
+				(search-forward-regexp
+				 "^\\s-*%\\+LATEX:\\s-*\\(.+\\)$" nil t)
+			      (executable-find (match-string 1)))))
+			(executable-find "xelatex")))
 	 (default-directory (file-name-directory file))
 	 (cmd-line (list
-		    (executable-find "xelatex") "-interaction" "nonstopmode"
+		    latex-bin "-interaction" "nonstopmode"
 		    "-shell-escape" "-output-directory" "." file))
 	 (cmd-buf-name (format "*Building %s*"
 			       (file-name-nondirectory file)))
