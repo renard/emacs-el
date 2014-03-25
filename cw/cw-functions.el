@@ -5,7 +5,7 @@
 ;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Keywords: emacs, 
 ;; Created: 2013-03-05
-;; Last changed: 2013-05-30 19:41:01
+;; Last changed: 2014-03-25 03:29:00
 ;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
@@ -111,6 +111,16 @@ For example:
 	(insert (apply 'concat
 		       (map 'list
 			    (lambda (x) (format "%s\n" x)) items)))))))
+
+(defun cw:note-buffer-create (&optional new)
+  "Create a Note buffer. If NEW (or called with
+`universal-argument', created a new Note buffer."
+  (interactive "P")
+  (let ((buffer-name "*Note*"))
+    (switch-to-buffer
+     (get-buffer-create
+      (if current-prefix-arg (generate-new-buffer-name buffer-name)
+	buffer-name)))))
 
 
 (provide 'cw-functions)

@@ -61,6 +61,9 @@
   ;; webjump++
   (global-set-key (kbd "C-c C-/") 'webjump++)
 
+  ;; Note buffers
+  (global-set-key (kbd "C-x C-n") 'cw:note-buffer-create)
+
   (when (running-macosxp)
     (global-set-key (kbd "<C-M-return>") 'ns-toggle-fullscreen)
     (global-set-key (kbd "M-v") 'yank))
