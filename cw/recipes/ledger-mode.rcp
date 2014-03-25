@@ -1,0 +1,7 @@
+(:name ledger-mode
+       :type github
+       :description "Double-entry accounting system v3"
+       :pkgname "ledger/ledger"
+       :load-path ("lisp")
+       :prepare (progn
+		  (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))))
