@@ -59,7 +59,41 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
 
 
 (add-to-list 'tramp-default-proxies-alist
- 	     '(".*" "\\`.+\\'" "/ssh:%h:"))
+	     '(".*" "\\`.+\\'" "/ssh:%h:"))
+
+
+;; Local  sudo root: /sudo::
+;; Local  sudo user: /sudo:user@:
+;; remote          : /host:
+;; remote user     : /ssh:user@host:
+
+;; (defadvice tramp-error
+;;     (around cw:tramp-error activate)
+;;   "Allow to use sudo on a remote host:
+;; /sudo:x@y:z ==> /multi:sshx:y:sudo:z@y:z
+
+;; Based on TWB hack (http://paste.lisp.org/display/90780)."
+;;   ;;(message (format "TRAMP-ERROR(%s %s)" vec-or-proc signal))
+;;   (if (and (eq 'file-error signal)
+;; 	   (string= "sudo" (tramp-file-name-method vec-or-proc))
+;; 	   (boundp 'target-alist))
+;;       (progn
+;; 	;;(message (format "target-alist: %s" target-alist))
+;; 	(setq target-alist
+;; 	      (cons (vector "sshx" ""
+;; 			    (tramp-file-name-host vec-or-proc)
+;; 			    "")
+;; 		    (list (vector (tramp-file-name-method vec-or-proc)
+;; 				  (unless (string=
+;; 					   "root"
+;; 					   (tramp-file-name-user vec-or-proc))
+;; 				    (tramp-file-name-user vec-or-proc))
+;; 				  (tramp-file-name-host vec-or-proc)
+;; 				  (tramp-file-name-localname vec-or-proc))))))
+;;     ad-do-it))
+;; (ad-deactivate 'tramp-error)
+
+
 (setq
  tramp-default-method "scp"
  tramp-terminal-type "screen"
