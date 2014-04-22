@@ -60,6 +60,34 @@ If SUDO is not nil `method' is set to \"sudo\" and `user' to
 
 (add-to-list 'tramp-default-proxies-alist
 	     '(".*" "\\`.+\\'" "/ssh:%h:"))
+(defadvice tramp-error
+    (around cw:tramp-error activate)
+  "Convert \"/scp:user@remote:\" to \"/ssh:user@remote:\" to
+  connect to remote host using specific login.
+
+This is compatible with `tramp-default-proxies-alist' with
+
+  '((\".*\" \"\\\\`.+\\\\'\" \"/ssh:%h:\"))
+
+Connection can be done using:
+
+Remote sudo root: /sudo:host:
+Remote sudo user: /sudo:user@host:
+Local  sudo root: /sudo::
+Local  sudo user: /sudo:user@:
+remote          : /host:
+remote user     : /user@host:"
+   (let ((url (cadr target-alist)))
+     (if (eq 'file-error signal)
+	 (if (string= "scp" (tramp-file-name-method vec-or-proc))
+	     (setq target-alist
+		   (list (vector
+			  "ssh"
+			  (tramp-file-name-user vec-or-proc)
+			  (tramp-file-name-host vec-or-proc)
+			  (tramp-file-name-localname vec-or-proc)
+			  nil))))
+       ad-do-it)))
 
 
 ;; Local  sudo root: /sudo::
