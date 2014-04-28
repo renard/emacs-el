@@ -73,7 +73,9 @@
     (require 'epg-config)
     (when (and
 	   (file-readable-p pass-file)
-	   (boundp 'epg-gpg-program))
+	   (boundp 'epg-gpg-program)
+	   epg-gpg-program
+	   (file-exists-p epg-gpg-program))
       (let (emacs-lisp-mode-hook)
 	(with-current-buffer
 	    (find-file pass-file)
