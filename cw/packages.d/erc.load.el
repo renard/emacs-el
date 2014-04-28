@@ -9,10 +9,19 @@
 		  (let ((erc-server-connect-function 'erc-open-tls-stream))
 		  (apply 'erc (cdr x))
 		  ;; (let ((major-mode 'fundamental-mode))
+		  (setq erc-away nil)
 		  (rename-buffer (format "*irc: %s*" (car x))))))
-	    cw:erc:servers)
-    (loop for b in (erc-buffer-list)
-	  do (with-current-buffer b (erc-cmd-AWAY "")))))
+	    cw:erc:servers))
+  (run-with-idle-timer 60 nil #'cw:erc:come-back))
+
+
+(defun cw:erc:come-back()
+  "Remove the AWAY status for all erc process."
+  (interactive)
+  (loop for b in (erc-buffer-list)
+	do (let ((p (get-buffer-process b)))
+	     (when p
+	       (erc-process-away p nil)))))
 
 (defun cw:erc:disconnect()
   "Disonnect from erc servers defined in `cw:erc:servers' and
