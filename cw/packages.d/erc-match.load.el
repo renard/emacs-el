@@ -12,13 +12,14 @@
     (unless (or
 	     (eq match-type 'current-nick)
 	     (member nick cw:erc-match:extra-nicks))
-      (if (running-macosxp)
-	  (growl (format "ERC: %s" nick) message)
-	(notifications-notify
-	 :title nick
-	 :body message
-	 :app-icon nil
-	 :urgency 'low)))))
+      (let ((message (substring-no-properties message)))
+	(if (running-macosxp)
+	    (growl (format "ERC: %s" nick) message)
+	  (notifications-notify
+	   :title nick
+	   :body message
+	   :app-icon nil
+	   :urgency 'low))))))
 
 (add-hook 'erc-text-matched-hook 'erc-global-notify)
 (remove-hook 'erc-text-matched-hook 'erc-log-matches)
