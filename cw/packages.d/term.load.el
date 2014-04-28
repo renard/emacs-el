@@ -1,3 +1,4 @@
+(unless (boundp 'term-raw-map) (require 'term nil t))
 (when (require 'escreen nil t)
   (define-key term-raw-map escreen-prefix-char escreen-map)
   (define-key term-raw-map (kbd "M-[") 'escreen-goto-prev-screen)

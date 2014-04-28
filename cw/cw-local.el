@@ -58,6 +58,9 @@
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "ESC M-x") 'execute-extended-command)
+  ;; term
+  (global-set-key (kbd "C-c <C-return>") 'cw:term)
+  (global-set-key (kbd "C-c <S-return>") 'cw:shell)
   ;; webjump++
   (global-set-key (kbd "C-c C-/") 'webjump++)
 
