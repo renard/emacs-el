@@ -15,4 +15,18 @@
       (insert (with-current-buffer buff-out (buffer-string))))))
 
 
+(defun cw:markdown-mode-setup ()
+  "Setup `markdown-mode'."
+  (setq time-stamp-start "^:date: ")
+  (save-match-data
+    (save-excursion
+      (goto-char (point-min))
+      (when (search-forward-regexp "^:lang:*\s-*\\(.+\\)" nil t 1)
+	(let ((lang (match-string 1)))
+	  (flyspell-mode)
+	  (ispell-change-dictionary
+	   (cond
+	    ((string= "fr" lang) "francais")
+	    (t "american"))))))))
 
+(add-hook 'markdown-mode-hook 'cw:markdown-mode-setup)
