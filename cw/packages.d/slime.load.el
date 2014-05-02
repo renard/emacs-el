@@ -12,4 +12,18 @@
 	    until (file-exists-p p)
 	    finally return (concat p o)))
 
+
+(defun slime-sbcl ()
+  "Run sbcl in slime"
+  (interactive)
+  (let ((inferior-lisp-program "/usr/local/bin/sbcl"))
+    (slime)))
+
+(defun slime-ccl64 ()
+  "Run sbcl in slime"
+  (interactive)
+  (let ((inferior-lisp-program "/usr/local/bin/ccl64 -K utf-8"))
+    (slime)))
+
+
 (define-key slime-parent-map (kbd "M-?") 'slime-documentation)
