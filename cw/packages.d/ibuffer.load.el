@@ -1,7 +1,17 @@
-(setq
-      ibuffer-saved-filter-groups
+(setq ibuffer-saved-filter-groups
       '(("default"
-	 ("dired" (mode . dired-mode))
+	 ("dired remote" (predicate . (and
+				       (eq major-mode 'dired-mode)
+				       (string-match "^/scp:" dired-directory))))
+	 ("tramp remote" (predicate . (and
+				       (string-match "^\\*tramp/scp " (buffer-name)))))
+
+	 ("dired" (predicate . (and
+				(eq major-mode 'dired-mode)
+				(not (string-match "^/scp:" dired-directory)))))
+	 ("tramp" (predicate . (and
+				(string-match "^\\*tramp " (buffer-name)))))
+
 	 ("erc" (mode . erc-mode))
 	 ("emacs" (or
 		   (name . "^\\*scratch\\*$")
@@ -21,13 +31,8 @@
 		  (name . "^\\*nnimap ")
 		  (name . "^\\*imap log\\*")))
 	 ("org" (mode . org-mode))
-	 ("emms" (or
-		  (mode . emms)))
 	 ("adoc" (or
 		  (mode . adoc-mode)))
-
-	 ("tramp" (or
-		   (name . "^\\*tramp")))
 	 ("term" (or
 		  (mode . term-mode)
 		  (mode . shell-mode)))
