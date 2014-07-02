@@ -47,6 +47,7 @@ file modes."
 	    and return t))))
 
 (setq
+ require-final-newline t
  backup-directory-alist `((".*" . ,(concat cw:tmp-dir "backup"))))
 
 (add-to-list 'auto-mode-alist '("\\.[1-9]\\.txt$" . adoc-mode))
