@@ -16,8 +16,16 @@
 
 (defadvice dired-up-directory (around cw:dired-up-directory activate)
   "Replace current buffer with parent dir."
-  (let* ((orig (current-buffer)))
-    (when ad-do-it
+  (let* ((orig (current-buffer))
+	 (parent-dir (file-name-directory
+		      (directory-file-name (dired-current-directory)))))
+    (when (or
+	   (loop for b in (buffer-list)
+		 when (with-current-buffer b
+			(and (eq major-mode 'dired-mode)
+			     (string=  (dired-current-directory) parent-dir)))
+		 collect (switch-to-buffer b))
+	   ad-do-it)
       (kill-buffer orig))))
 
 (defadvice dired-toggle-read-only (around cw:dired-toggle-read-only activate)
