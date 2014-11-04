@@ -126,3 +126,11 @@ remote user     : /user@host:"
  tramp-default-method "scp"
  tramp-terminal-type "screen"
  tramp-backup-directory-alist backup-directory-alist)
+
+
+(add-to-list 'tramp-methods
+	     '("vcsh"
+	       (tramp-login-program "vcsh")
+	       (tramp-login-args (("enter") ("%h")))
+	       (tramp-remote-shell "/bin/sh")
+	       (tramp-remote-shell-args ("-c"))))
