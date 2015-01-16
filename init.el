@@ -56,7 +56,7 @@
 	     `(load ,(file-name-sans-extension file)))))
 
 (when-running-macosx
- (loop for d in '("/usr/local/bin" "/usr/texbin")
+ (loop for d in `(,(expand-file-name "~/bin") "/usr/local/bin" "/usr/texbin")
        do (progn
             (setenv "PATH" (concat d ":" (getenv "PATH")))
             (add-to-list 'exec-path d))))
