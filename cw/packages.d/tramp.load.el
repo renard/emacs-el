@@ -128,9 +128,28 @@ remote user     : /user@host:"
  tramp-backup-directory-alist backup-directory-alist)
 
 
+;; http://lists.madduck.net/pipermail/vcs-home/2013-August/000880.html
 (add-to-list 'tramp-methods
 	     '("vcsh"
 	       (tramp-login-program "vcsh")
 	       (tramp-login-args (("enter") ("%h")))
 	       (tramp-remote-shell "/bin/sh")
 	       (tramp-remote-shell-args ("-c"))))
+
+(setq tramp-methods (delq (assoc "sudo" tramp-methods) tramp-methods))
+(add-to-list 'tramp-methods
+	     '("sudo"
+	       (tramp-login-program "sudo")
+	       (tramp-login-args
+		(("-u" "%u")
+		 ("-s")
+		 ("-H")
+		 ("-E")
+		 ("-p" "Password:")))
+	       (tramp-login-env
+		(("SHELL")
+		 ("/bin/sh")))
+	       (tramp-remote-shell "/bin/sh")
+	       (tramp-remote-shell-args
+		("-c"))
+	       (tramp-connection-timeout 10)))
