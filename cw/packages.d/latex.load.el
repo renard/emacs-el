@@ -1,5 +1,5 @@
 ;;;###autoload
-(defun cw:build-latex(&optional file rounds)
+(defun cw:build-latex(&optional rounds file)
   "Compile FILE or local buffer or an asked file asynchronously
 using `tex-command' ROUNDS times.
 
@@ -13,14 +13,18 @@ time.
 
 xelatex is used as default tex-processor.
 "
-  (interactive
-   (list
-    (or
-     (when (eq major-mode 'latex-mode) (buffer-file-name))
-     (read-file-name "Publish LaTeX from: " nil nil t))
-    (if current-prefix-arg 3 1)))
-
-  (let* ((file (expand-file-name file))
+  (interactive "P")
+  (let* ((file (expand-file-name
+		(or
+		 file
+		 (when (eq major-mode 'latex-mode) (buffer-file-name))
+		 (read-file-name "Publish LaTeX from: " nil nil t))))
+	 (rounds (cond
+		  ((equal '(4) rounds) 2)
+		  ((equal '(16) rounds) 3)
+		  ((member rounds '(1 2 3)) rounds)
+		  (t 1)))
+	 (exec-path (append '("/Users/renard/bin") exec-path))
 	 (process-environment
 	  (append process-environment
 		  (with-temp-buffer
@@ -57,7 +61,7 @@ xelatex is used as default tex-processor.
 		    (proc-buf (process-buffer proc))
 		    (file (process-get proc :file))
 		    (rounds (1- (process-get proc :rounds))))
-
+		(message "Status: %S" status)
 		(if (not (eq 0 status))
 		    (progn
 		      (when proc-buf
@@ -66,7 +70,7 @@ xelatex is used as default tex-processor.
 
 		  (when proc-buf (kill-buffer proc-buf))
 		  (if (> rounds 0)
-		      (cw:build-latex file rounds)
+		      (cw:build-latex rounds file)
 		    (let ((f (file-name-sans-extension file)))
 		      (loop for e in '("aux" "log" "nav" "out" "pyg" "snm" "toc")
 			    for fe = (format "%s.%s" f e)
