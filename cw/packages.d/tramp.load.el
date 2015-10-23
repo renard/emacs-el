@@ -136,6 +136,14 @@ remote user     : /user@host:"
 	       (tramp-remote-shell "/bin/sh")
 	       (tramp-remote-shell-args ("-c"))))
 
+(defun cw:tramp-parse-vcsh(&optional file)
+  (mapcar
+   #'(lambda (x) (list nil x))
+   (split-string (shell-command-to-string "vcsh list") "\n" t)))
+
+(add-to-list 'tramp-completion-function-alist
+	     '("vcsh" (cw:tramp-parse-vcsh "vcsh")))
+
 (setq tramp-methods (delq (assoc "sudo" tramp-methods) tramp-methods))
 (add-to-list 'tramp-methods
 	     '("sudo"
