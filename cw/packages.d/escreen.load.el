@@ -26,7 +26,3 @@ greater that 0."
 (add-hook 'escreen-goto-screen-before-hook 'cw:escreen:check-recursion)
 (add-hook 'escreen-goto-screen-hook
 	  'escreen-get-active-screen-numbers-with-emphasis)
-
-(global-set-key (kbd "M-[") 'escreen-goto-prev-screen)
-(global-set-key (kbd "M-]") 'escreen-goto-next-screen)
-(define-key escreen-map "l" 'escreen-get-active-screen-numbers-with-emphasis)
