@@ -2,7 +2,9 @@
 (defun cw:dired ()
   "Open `default-directory' in `dired' without confirmation."
   (interactive)
-  (dired default-directory))
+  (let ((file-name (buffer-file-name)))
+    (dired default-directory)
+    (when file-name (dired-goto-file file-name))))
 
 (defadvice dired-find-file (around cw:dired-find-file activate)
   "Replace current buffer if file is a directory."
